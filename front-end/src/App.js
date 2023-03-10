@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import React from 'react';
-import Cv from './Pages/student/cv-version-1';
+// import Cv from './Pages/student/cv-version-1';
 
 
 

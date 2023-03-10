@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './cv-version-1.css'
+import '../student/css/cv-version-1.css'
 
 
 export default function Cv() {
@@ -10,7 +10,7 @@ export default function Cv() {
             <div className="resume_wrapper">
                 <div className="resume_left">
                     <div className="resume_image">
-                        {/* <Image src="pic.jpg" alt="Resume_image" /> */}
+                        <img src="/images/pic.jpg" alt="Resume_image" />
                     </div>
                     <div className="resume_bottom">
                         <div className="resume_item resume_namerole">
