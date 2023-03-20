@@ -6,12 +6,15 @@ import Cv1 from './Pages/student/cv-version-1'
 import Cv2 from './Pages/student/cv-version-2'
 import reportWebVitals from './reportWebVitals';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <Cv1 /> */}
+
     <Cv2 />
+
   </React.StrictMode>
 );
 
