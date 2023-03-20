@@ -1,6 +1,14 @@
 from django.db import models
 
 # Create your models here.
+
+class Account(models.Model):
+    email = models.EmailField(max_length = 254)
+    pwd = models.CharField(max_length=20)
+    status = models.CharField(max_length=1)
+
+
+    
 class CV(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()

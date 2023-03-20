@@ -9,3 +9,8 @@ def student_CV_UI1(request):
 
 def student_CV_UI2(request):
     return render(request, 'student/cv-version-2.html', {'nav':'student'})
+
+def student_Profile(request):
+    return render(request, 'student/profile.html', {'nav':'student'})
+
+

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/server/static/css/dynamic-fields.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+
+</head>
+
+
+<body>
+
+    <div class="row">
+
+        <div class="col-md-8 order-md-1" style="
+            margin: 0 auto;
+            width:250px;">
+            <h4 class="mb-3">Personal Information</h4>
+            <form class="needs-validation" novalidate="">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="First Name" value="" required="">
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" value="" required="">
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">Nick Name</label>
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" id="nickName" placeholder="Nick Name" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">Phone number</label>
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" id="nickName" placeholder="Phone number" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">Email</label>
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" id="nickName" placeholder="Email" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-group">
+                        <b> <label for="exampleFormControlTextarea1">Education 1</label></b>
+                        <div id="inputBox_options">
+
+                        </div>
+                        <div id="add_experience-1">
+
+                            <input type="text" class="survey_options skillBox" size="50" placeholder="School Name">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Start date</label>
+                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">End date</label>
+                                    <input type="date" class="form-control" id="date" name="date">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <b><label for="exampleFormControlTextarea1">Education 2</label></b>
+                        <div id="add_experience-2">
+
+                            <input type="text" class="survey_options skillBox" size="50" placeholder="School Name">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Start date</label>
+                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">End date</label>
+                                    <input type="date" class="form-control" id="date" name="date">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <b> <label for="exampleFormControlTextarea1">Education 3</label></b>
+                        <div id="add_experience-3">
+
+                            <input type="text" class="survey_options skillBox" size="50" placeholder="School Name">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Start date</label>
+                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">End date</label>
+                                    <input type="date" class="form-control" id="date" name="date">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-group">
+                        <b> <label for="exampleFormControlTextarea1">Experience1</label></b>
+                        <div id="inputBox_options">
+
+                        </div>
+                        <div id="add_experience-1">
+
+                            <input type="text" class="survey_options skillBox" size="50" placeholder="Company Name">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Start date</label>
+                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">End date</label>
+                                    <input type="date" class="form-control" id="date" name="date">
+
+                                </div>
+                            </div>
+                            <textarea type="text" class="form-control skillBox" id="exampleFormControlTextarea1" rows="5" placeholder="Description"></textarea>
+                        </div>
+
+                        <b><label for="exampleFormControlTextarea1">Experience 2</label></b>
+                        <div id="add_experience-2">
+
+                            <input type="text" class="survey_options skillBox" size="50" placeholder="Company Name">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Start date</label>
+                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">End date</label>
+                                    <input type="date" class="form-control" id="date" name="date">
+
+                                </div>
+                            </div>
+                            <textarea type="text" class="form-control skillBox" id="exampleFormControlTextarea1" rows="5" placeholder="Description"></textarea>
+                        </div>
+
+                        <b> <label for="exampleFormControlTextarea1">Experience 3</label></b>
+                        <div id="add_experience-3">
+
+                            <input type="text" class="survey_options skillBox" size="50" placeholder="Company Name">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Start date</label>
+                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">End date</label>
+                                    <input type="date" class="form-control" id="date" name="date">
+
+                                </div>
+                            </div>
+                            <textarea type="text" class="form-control skillBox" id="exampleFormControlTextarea1" rows="5" placeholder="Description"></textarea>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address">Language</label>
+                    <!-- <h1>Dynamic Fields Javascript</h1> -->
+                    <!-- <div class="wrapper"> -->
+                    <div id="survey_options">
+                        <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
+
+                    </div>
+                    <div class="controls">
+                        <button type="button" id="add_more_fields" class="btn btn-primary">Add More</button>
+                        <button type="button" id="remove_fields" class="btn btn-danger">Delete</button>
+                        <!-- <a href="#" id="add_more_fields"><i class="fa fa-plus"></i>Add More</a> -->
+                        <!-- <a href="#" id="remove_fields"><i class="fa fa-plus"></i>Remove Field</a> -->
+                    </div>
+                    <!-- </div> -->
+                </div>
+
+
+
+
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+            </form>
+        </div>
+    </div>
+
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    var survey_options = document.getElementById('survey_options');
+    var add_more_fields = document.getElementById('add_more_fields');
+    var remove_fields = document.getElementById('remove_fields');
+
+    add_more_fields.onclick = function() {
+        var newField = document.createElement('input');
+        newField.setAttribute('type', 'text');
+        newField.setAttribute('name', 'survey_options[]');
+        newField.setAttribute('class', 'survey_options skillBox');
+        newField.setAttribute('siz', 50);
+        newField.setAttribute('placeholder', 'language');
+        survey_options.appendChild(newField);
+    }
+
+    remove_fields.onclick = function() {
+        var input_tags = survey_options.getElementsByTagName('input');
+        if (input_tags.length > 1) {
+            survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+        }
+    }
+</script>
+
+</html>
