@@ -6,12 +6,13 @@
     <title>Responsive Resume UI Design in HTML and CSS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../../../static/css/cv-version-1.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
 <body>
 
-    <div class="resume_wrapper">
+    <div class="resume_wrapper" id="cv">
         <div class="resume_left">
             <div class="resume_image">
                 <img src="../../../static/images/pic.jpg" alt="Resume_image">
@@ -184,7 +185,41 @@
             </div>
         </div>
     </div>
-
+    <button id="download" class="btn btn-dark" role="button" style="display: block;margin-left: auto;margin-right: auto;" data-toggle="modal" data-target="#exampleModal">dowload</button>
 </body>
+
+<script>
+    window.onload = function() {
+        document.getElementById("download")
+
+        .addEventListener("click", () => {
+            const cv = this.document.getElementById("cv");
+            console.log(cv);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'myfile.pdf',
+
+                html2canvas: {
+                    scale: 1
+                },
+                jsPDF: {
+                    // unit: 'in',
+                    // format: 'letter',
+                    // orientation: 'landscape',
+                    // orientation: 'p',
+                    // unit: 'in',
+                    format: 'a4',
+
+                }
+            };
+            html2pdf().from(cv).set(opt).save();
+
+        })
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </html>
