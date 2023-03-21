@@ -1,6 +1,7 @@
 <html>
   <head>
     {% include 'include.html' %}
+    {% block header %}{% endblock %}
   </head>
   <style>
     {% comment %} global {% endcomment %}
@@ -19,6 +20,7 @@
     .custom-toggler.navbar-toggler {
       border-color: rgb(255,102,203);
     } 
+
   </style>
   <body class="bg-light">
     {% if nav == 'student' %}

@@ -1,0 +1,19 @@
+.cv-card-item .card-img-top{
+    cursor: pointer;
+    transition: all .2s;
+}
+.cv-card-item .use-this-template-btn{
+    position: absolute;
+    display: none;
+    z-index: 1;
+}
+
+.cv-card-item:hover .use-this-template-btn{
+    position: absolute;
+    display: block;
+    z-index: 1;
+}
+
+.cv-card-item:hover img{
+    filter: blur(5px);
+}
