@@ -7,28 +7,33 @@
         <div class="card" style="margin-bottom: 100px; min-width: 300px">
             <div class="card-body">
                 <h4 class="mb-4">HKBU Login</h4>
-
-                <!-- <form method="post"> -->
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                {% if login_failed %}
+                <div class="alert alert-danger" role="alert">
+                    Your email or password is incorrect !
                 </div>
+                {% endif %}
+                <form method="POST" action="/login">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                    </div>
 
-                <div class="mb-4">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="your password">
-                </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="your password">
+                    </div>
 
-                <div class="mb-5">
-                    <input type="submit" class="btn btn-dark w-100" value="Login" onclick="login()">
-                </div>
-                <!-- </form> -->
+                    <div class="mb-5">
+                        <input type="submit" class="btn btn-dark w-100" value="Login">
+                    </div>
+                </form>
                 <div class="mb-3">
                     <center>
                         <p>Forgot password? <a href="#">Find your password</a></p>
                     </center>
                 </div>
+
             </div>
         </div>
     </div>
