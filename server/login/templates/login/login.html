@@ -7,8 +7,8 @@
         <div class="card" style="margin-bottom: 100px; min-width: 300px">
             <div class="card-body">
                 <h4 class="mb-4">HKBU Login</h4>
-                {% comment %} <form method="POST" action="/login"> {% endcomment %}
-                    {% csrf_token %}
+                {% comment %}
+                <form method="POST" action="/login"> {% endcomment %} {% csrf_token %}
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
                         <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
@@ -22,7 +22,7 @@
                     <div class="mb-5">
                         <input type="submit" class="btn btn-dark w-100" value="Login" onclick="login()">
                     </div>
-                {% comment %} </form> {% endcomment %}
+                    {% comment %} </form> {% endcomment %}
                 <div class="mb-3">
                     <center>
                         <p>Forgot password? <a href="#">Find your password</a></p>
@@ -34,6 +34,7 @@
     </div>
 
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
     function login() {
@@ -53,11 +54,27 @@
                 //On success
                 console.log(result)
                 console.log(result.status)
-                if(result.status){
-                    $("#Profilebody").html("Update Profile Successful");
+                if (result.status) {
+                    Swal.fire({
+                        title: 'Login',
+                        text: 'Success',
+                        icon: 'success',
+                        showCancelButton: true,
+                        showDenyButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'OK'
+                    })
                     console.log('Successful')
-                }else{
-                    $("#Profilebody").html("Update Profile Fail");
+                } else {
+                    Swal.fire({
+                        title: 'Login',
+                        text: 'Fail!',
+                        icon: 'error',
+                        showCancelButton: true,
+                        showDenyButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'OK'
+                    })
                     console.log('Fail');
                 }
             },
