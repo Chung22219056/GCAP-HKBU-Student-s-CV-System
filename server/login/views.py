@@ -19,10 +19,9 @@ def login(request):
         password = request.POST.get('password')
 
         user = User.objects.get(email=email)
-        if user:
-            if user.check_password(password):
-                auth_login(request, user)
-                return HttpResponse("200 ok")
+        if user and user.check_password(password):
+            auth_login(request, user)
+            return HttpResponse("200 ok")
         else:
             return render(request,'login/login.html',{"login_failed":True})
 
