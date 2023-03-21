@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -18,12 +19,17 @@ def login(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = User.objects.get(email=email)
-        if user and user.check_password(password):
-            auth_login(request, user)
-            return HttpResponse("200 ok")
-        else:
-            return render(request,'login/login.html',{"login_failed":True})
+        try:
+            user = User.objects.get(email=email)
+            if user and user.check_password(password):
+                auth_login(request, user)
+                return JsonResponse({"status":True})
+            else:
+                #return render(request,'login/login.html',{"login_failed":True})
+                return JsonResponse({"status":False})
+        except User.DoesNotExist:
+            #return render(request,'login/login.html',{"login_failed":True})
+            return JsonResponse({"status":False})
 
     return render (request,'login/login.html')
     

@@ -7,12 +7,7 @@
         <div class="card" style="margin-bottom: 100px; min-width: 300px">
             <div class="card-body">
                 <h4 class="mb-4">HKBU Login</h4>
-                {% if login_failed %}
-                <div class="alert alert-danger" role="alert">
-                    Your email or password is incorrect !
-                </div>
-                {% endif %}
-                <form method="POST" action="/login">
+                {% comment %} <form method="POST" action="/login"> {% endcomment %}
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
@@ -25,9 +20,9 @@
                     </div>
 
                     <div class="mb-5">
-                        <input type="submit" class="btn btn-dark w-100" value="Login">
+                        <input type="submit" class="btn btn-dark w-100" value="Login" onclick="login()">
                     </div>
-                </form>
+                {% comment %} </form> {% endcomment %}
                 <div class="mb-3">
                     <center>
                         <p>Forgot password? <a href="#">Find your password</a></p>
@@ -44,7 +39,7 @@
     function login() {
         var login_object = {
             email: $("#email").val(),
-            pwd: $("#password").val(),
+            password: $("#password").val(),
         };
 
         console.log(login_object);
@@ -56,21 +51,15 @@
             datatype: 'html',
             success: function(result) {
                 //On success
-                console.log(result);
-
-                // console.log(result.length);
-
-
-                if (result == "yes") {
+                console.log(result)
+                console.log(result.status)
+                if(result.status){
                     $("#Profilebody").html("Update Profile Successful");
                     console.log('Successful')
-
-                } else if (result == "no") {
+                }else{
                     $("#Profilebody").html("Update Profile Fail");
                     console.log('Fail');
-                    // delayURL('profile.php');
                 }
-
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert(xhr.responseText);
