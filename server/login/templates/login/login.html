@@ -8,22 +8,22 @@
             <div class="card-body">
                 <h4 class="mb-4">HKBU Login</h4>
 
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" placeholder="name@example.com">
-                    </div>
+                <!-- <form method="post"> -->
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                </div>
 
-                    <div class="mb-4">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="your password">
-                    </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="your password">
+                </div>
 
-                    <div class="mb-5">
-                        <input type="submit" class="btn btn-dark w-100" value="Login">
-                    </div>
-                </form>
+                <div class="mb-5">
+                    <input type="submit" class="btn btn-dark w-100" value="Login" onclick="login()">
+                </div>
+                <!-- </form> -->
                 <div class="mb-3">
                     <center>
                         <p>Forgot password? <a href="#">Find your password</a></p>
@@ -34,4 +34,44 @@
     </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    function login() {
+        var login_object = {
+            email: $("#email").val(),
+            pwd: $("#password").val(),
+        };
+
+        console.log(login_object);
+
+        $.ajax({
+            url: "/login",
+            type: 'POST',
+            data: login_object,
+            datatype: 'html',
+            success: function(result) {
+                //On success
+                console.log(result);
+
+                // console.log(result.length);
+
+
+                if (result == "yes") {
+                    $("#Profilebody").html("Update Profile Successful");
+                    console.log('Successful')
+
+                } else if (result == "no") {
+                    $("#Profilebody").html("Update Profile Fail");
+                    console.log('Fail');
+                    // delayURL('profile.php');
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(xhr.responseText);
+            }
+
+        })
+    }
+</script>
 {% endblock %}
