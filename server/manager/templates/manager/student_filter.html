@@ -23,35 +23,25 @@
                     </tr>
 
                 </thead>
-                {{ studentLan }}
+                {{ students }}
                 <tbody>
 
 
+                    {% for student in students %}
 
                     <tr class="body" style="background-color: transparent;">
                         <td><input type="checkbox" class="check" id="checkAll"> Check</td>
-                        <td>123456</td>
-
-                        <td>jack</td>
-
-
-                        <td>{% for lan in studentLan %} {{ lan }} {% endfor %}</td>
-
-
-                        <td> <button class="btn btn-dark" role="button" data-toggle="modal" data-target="#exampleModal">Send</button></td>
-
-
-                    </tr>
-
-                    <tr class="body" style="background-color: transparent;">
-                        <td><input type="checkbox" class="check" id="checkAll"> Check</td>
-                        <td>654321</td>
-                        <td>alan</td>
-                        <td>C#,flutter</td>
+                        <td>{{student.student_id}}</td>
+                        <td>{{student.student_name}}</td>
+                        <td>
+                            {% for lan in student.language %}
+                                {{lan}},
+                            {% endfor %}
+                        </td>
 
                         <td> <button class="btn btn-dark" role="button" data-toggle="modal" data-target="#exampleModal">Send</button></td>
                     </tr>
-
+                    {% endfor %}
                 </tbody>
 
                 <!--for demo wrap-->

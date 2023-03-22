@@ -8,6 +8,16 @@ class Student(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     student_id = models.CharField(max_length=8, primary_key=True) # 8 digital numbers example 22221111 
     status = models.BooleanField()
+
+    def toDict(self):
+        return {
+            'student_id': self.student_id,
+            'student_name': self.user_id.first_name,
+            'email': self.user_id.email
+        }
+    
+    def getName(self):
+        return self.user_id.username
     
 class CvInfoBase(models.Model):
     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -40,6 +50,7 @@ class Education(models.Model):
 class EducationType(models.Model):
     type = models.CharField(max_length=255)
     education = models.ForeignKey(Education, on_delete=models.CASCADE)
+
 
 
 class Skill(models.Model):
