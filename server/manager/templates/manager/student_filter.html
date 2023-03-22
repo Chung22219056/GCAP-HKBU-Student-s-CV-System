@@ -23,6 +23,7 @@
                     </tr>
 
                 </thead>
+                {{ studentLan }}
                 <tbody>
 
 
@@ -30,8 +31,12 @@
                     <tr class="body" style="background-color: transparent;">
                         <td><input type="checkbox" class="check" id="checkAll"> Check</td>
                         <td>123456</td>
+
                         <td>jack</td>
-                        <td>java,python</td>
+
+
+                        <td>{% for lan in studentLan %} {{ lan }} {% endfor %}</td>
+
 
                         <td> <button class="btn btn-dark" role="button" data-toggle="modal" data-target="#exampleModal">Send</button></td>
 
