@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-
+from .models import *
 # Create your views here.
 
 cv_list = [
@@ -25,6 +25,8 @@ def student_cvProfile(request):
     return render(request, 'student/cvProfile.html', {'nav':'student'})
 
 def student_cvRecord(request):
-    return render(request, 'student/cvRecord.html', {'nav':'student'})
+    student = Student.objects.get(user_id=request.user)
+    cv_list = CvInfoBase.objects.filter(studentID=student)
+    return render(request, 'student/cvRecord.html', {'nav':'student','cv_list':cv_list})
 
 
