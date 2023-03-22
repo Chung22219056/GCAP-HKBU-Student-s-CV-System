@@ -10,6 +10,7 @@ class Student(models.Model):
     
 class CvInfoBase(models.Model):
     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
+    #name = models.CharField(max_length=255)
     fristName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
     nickName = models.CharField(max_length=255)
@@ -19,41 +20,41 @@ class CvInfoBase(models.Model):
     # github = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.email
     
 
 class Education(models.Model):
     cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
-    studentID =models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
+    studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
     shcoolName = models.CharField(max_length=255)
     major = models.CharField(max_length=255)
     start_date = models.DateField()
     end_date = models.DateField()
+
+    def __str__(self):
+        return self.shcoolName
 
 class EducationType(models.Model):
     type = models.CharField(max_length=255)
     education = models.ForeignKey(Education, on_delete=models.CASCADE)
 
 
-<<<<<<< HEAD
+    
 
-class Language(models.Model):
-    studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
-=======
 class Skill(models.Model):
-    cv = models.ManyToManyField(CV)
+    cv = models.ManyToManyField(CvInfoBase)
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
 
 class Language(models.Model):
-    cv = models.ManyToManyField(CV)
->>>>>>> eb45f165e5ebd02f597812aa255f17194754887d
+    cv = models.ManyToManyField(CvInfoBase)
+    studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.name
+        return "{0} {1}".format(self.studentID.user_id,self.name)
 
 
 class WorkExperience(models.Model):
