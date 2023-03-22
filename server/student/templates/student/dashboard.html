@@ -1,27 +1,22 @@
-{% extends 'base.html'%}
-
-{% block header %}
-<link rel="stylesheet" type="text/css" href="/static/student/dashboard.css">
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html'%} {% block header %}
+<link rel="stylesheet" type="text/css" href="/static/student/dashboard.css"> {% endblock %} {% block content %}
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
             <h5>CV Templates</h5>
             <hr>
-            
+
             <div class="row">
                 {% for cv in cv_list %}
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
                     <div class="card d-flex justify-content-center align-items-center cv-card-item">
                         <a href="#" class="btn btn-dark use-this-template-btn">Use this template</a>
                         <img src="{{cv.thumbnail}}" class="card-img-top" style="object-fit:cover">
-                        
+
                         <div class="card-body">
                             <h6>{{cv.title}}</h6>
                         </div>
-                        
+
                     </div>
                 </div>
                 {% endfor %}
