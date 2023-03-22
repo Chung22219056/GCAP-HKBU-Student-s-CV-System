@@ -18,6 +18,9 @@ class CvInfoBase(models.Model):
     # website = models.URLField(blank=True, null=True)
     # github = models.URLField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+    
 
 class Education(models.Model):
     cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
@@ -27,11 +30,30 @@ class Education(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
 
+class EducationType(models.Model):
+    type = models.CharField(max_length=255)
+    education = models.ForeignKey(Education, on_delete=models.CASCADE)
 
+
+<<<<<<< HEAD
 
 class Language(models.Model):
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
+=======
+class Skill(models.Model):
+    cv = models.ManyToManyField(CV)
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+class Language(models.Model):
+    cv = models.ManyToManyField(CV)
+>>>>>>> eb45f165e5ebd02f597812aa255f17194754887d
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class WorkExperience(models.Model):
