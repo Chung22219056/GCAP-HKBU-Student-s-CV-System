@@ -41,8 +41,8 @@ class Education(models.Model):
     shcoolName = models.CharField(max_length=255)
     major = models.CharField(max_length=255)
     
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
 
     def __str__(self):
         return self.shcoolName
@@ -73,7 +73,7 @@ class WorkExperience(models.Model):
     cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     companyName = models.CharField(max_length=255)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
     description = models.TextField()
 
