@@ -29,17 +29,16 @@
 
 
                     {% for student in students %}
-
                     <tr class="body" style="background-color: transparent;">
                         <td><input type="checkbox" class="check" id="checkAll"> Check</td>
                         <td>{{student.student_id}}</td>
                         <td>{{student.student_name}}</td>
                         <td>
-                            {% for lan in student.language %}
-                                {{lan}},
-                            {% endfor %}
+                            {% for lan in student.language %} {{lan}}, {% endfor %}
                         </td>
-                        <td><button type="button" class="btn btn-primary">View</button></td>
+                        <td><a class="btn btn-primary" href="/student/cvRecord?stu_id={{student.student_id}}">View</a>
+
+                        </td>
                         <td> <button class="btn btn-warning" role="button" data-toggle="modal" data-target="#exampleModal">Send</button></td>
                     </tr>
                     {% endfor %}
@@ -51,10 +50,10 @@
 
 
             </table>
-                <br>
+            <br>
             <button class="btn btn-dark" role="button" style="display: block;margin-left: auto;margin-right: auto;" data-toggle="modal" data-target="#exampleModal">Send email to all student</button>
 
-          
+
 
         </div>
 

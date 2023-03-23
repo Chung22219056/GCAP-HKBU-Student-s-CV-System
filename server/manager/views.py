@@ -7,7 +7,7 @@ import json
 # Create your views here.
 def student_filter(request):
     students = [{'student_id':student.student_id, 'student_name': student.getName(), 'language':[lan.name for lan in Language.objects.filter(studentID=student)]} for student in Student.objects.all()]
-    print(list(students))
+    # print(list(students))
     return render(request, 'manager/student_filter.html', {'nav':'manager','students':students})
 
 @csrf_protect

@@ -30,9 +30,13 @@ def student_cvProfile(request):
     return render(request, 'student/cvProfile.html', {'nav':'student'})
 
 def student_cvRecord(request):
-    student = Student.objects.get(user_id=request.user)
+    stu_id=request.GET.get('stu_id', '')
+    student = Student.objects.get(student_id=stu_id)
+    studentLan = [{'language':[lan.name for lan in Language.objects.filter(studentID=student)]} for student in Student.objects.all()]
     cv_list = CvInfoBase.objects.filter(studentID=student)
-    return render(request, 'student/cvRecord.html', {'nav':'student','cv_list':cv_list})
+   
+    # print(studentLan)
+    return render(request, 'student/cvRecord.html', {'nav':'student','cv_list':cv_list,'studentLan':studentLan})
 
 @csrf_exempt
 @login_required

@@ -37,6 +37,21 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
+    var delay = 1;
+
+    function delayURL(value) {
+        var t = setTimeout("delayURL('" + value + "')", 1500);
+        if (delay > 0) {
+            console.log(delay)
+            delay--;
+        } else {
+            clearTimeout(t);
+            window.location.href = value;
+        }
+    }
+
+
+
     function login() {
         var login_object = {
             email: $("#email").val(),
@@ -64,7 +79,7 @@
                         showCancelButton: false,
                         confirmButtonText: 'OK'
                     })
-                    console.log('Successful')
+                    delayURL("/login")
                 } else {
                     Swal.fire({
                         title: 'Login',
