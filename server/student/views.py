@@ -1,4 +1,6 @@
 from django.shortcuts import render, HttpResponse
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import *
 # Create your views here.
 
@@ -29,4 +31,15 @@ def student_cvRecord(request):
     cv_list = CvInfoBase.objects.filter(studentID=student)
     return render(request, 'student/cvRecord.html', {'nav':'student','cv_list':cv_list})
 
+@csrf_exempt
+def create_cvProfile(request):
+    print("asd")
+    if request.method=='POST':
+        fristName = request.POST.get('fristName')
+        print(fristName)
+        # return JsonResponse({"status":fristName})
+      
+    
+    # return JsonResponse(request.POST.get('fristName'))
+    return render(request, 'student/cvProfile')
 

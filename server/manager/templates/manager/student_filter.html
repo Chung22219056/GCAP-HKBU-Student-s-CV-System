@@ -18,12 +18,13 @@
                         <th>Student ID</th>
                         <th>Student Name</th>
                         <th>Program Language</th>
+                        <th>View CV</th>
                         <th>Send email</th>
 
                     </tr>
 
                 </thead>
-                {{ students }}
+                {% comment %} {{ students }} {% endcomment %}
                 <tbody>
 
 
@@ -38,8 +39,8 @@
                                 {{lan}},
                             {% endfor %}
                         </td>
-
-                        <td> <button class="btn btn-dark" role="button" data-toggle="modal" data-target="#exampleModal">Send</button></td>
+                        <td><button type="button" class="btn btn-primary">View</button></td>
+                        <td> <button class="btn btn-warning" role="button" data-toggle="modal" data-target="#exampleModal">Send</button></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -50,11 +51,11 @@
 
 
             </table>
-
+                <br>
             <button class="btn btn-dark" role="button" style="display: block;margin-left: auto;margin-right: auto;" data-toggle="modal" data-target="#exampleModal">Send email to all student</button>
 
-            <br><br>
-            <button id="download" class="btn btn-dark" role="button" style="display: block;margin-left: auto;margin-right: auto;" data-toggle="modal" data-target="#exampleModal">dowload</button>
+          
+
         </div>
 
 

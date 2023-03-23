@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %} {% block content %}
 
 <head>
     <meta charset="UTF-8">
@@ -17,12 +16,13 @@
     <div class="row">
 
         <div class="col-md-8 order-md-1" style="margin: 0 auto; width:250px;">
+
             <h4 class="mb-3">Personal Information</h4>
             <form class="needs-validation" novalidate="">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="First Name" value="" required="">
+                        <input type="text" class="form-control" id="fristName" placeholder="Frist Name" value="" required="">
                         <div class="invalid-feedback">
                             Valid first name is required.
                         </div>
@@ -40,7 +40,7 @@
                     <label for="username">Nick Name</label>
                     <div class="input-group">
 
-                        <input type="text" class="form-control" id="nickName" placeholder="Nick Name" required="">
+                        <input type="text" class="form-control" id="nickName" placeholder="Nick Name" required>
                         <div class="invalid-feedback" style="width: 100%;">
                             Your username is required.
                         </div>
@@ -51,7 +51,7 @@
                     <label for="username">Phone number</label>
                     <div class="input-group">
 
-                        <input type="text" class="form-control" id="nickName" placeholder="Phone number" required="">
+                        <input type="text" class="form-control" id="phoneNumber" placeholder="Phone number" required="">
                         <div class="invalid-feedback" style="width: 100%;">
                             Your username is required.
                         </div>
@@ -62,7 +62,7 @@
                     <label for="username">Email</label>
                     <div class="input-group">
 
-                        <input type="text" class="form-control" id="nickName" placeholder="Email" required="">
+                        <input type="text" class="form-control" id="email" placeholder="Email" required="">
                         <div class="invalid-feedback" style="width: 100%;">
                             Your username is required.
                         </div>
@@ -70,173 +70,27 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                    <div class="invalid-feedback">
-                        Please enter a valid email address for shipping updates.
+                    <label for="username">About me</label>
+                    <div class="input-group">
+                        <textarea type="text" class="form-control skillBox" id="aboutMe" rows="5" placeholder="Description"></textarea>
+
                     </div>
                 </div>
 
+
+
                 <div class="mb-3">
-                    <div class="form-group">
-                        <b> <label for="exampleFormControlTextarea1">Education 1</label></b>
-                        <div id="inputBox_options">
+                    <div class="form-group" id="edu">
 
-                        </div>
-                        <div id="add_experience-1">
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">School Name</label>
-                                    <input type="text" class="form-control" id="School-Name" placeholder="School Name" value="" required="">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">major</label>
-                                    <input type="text" class="form-control" id="major" placeholder="Major" value="" required="">
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Start date</label>
-                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">End date</label>
-                                    <input type="date" class="form-control" id="date" name="date">
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <b><label for="exampleFormControlTextarea1">Education 2</label></b>
-                        <div id="add_experience-2">
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">School Name</label>
-                                    <input type="text" class="form-control" id="School-Name" placeholder="School Name" value="" required="">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">major</label>
-                                    <input type="text" class="form-control" id="major" placeholder="Major" value="" required="">
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Start date</label>
-                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">End date</label>
-                                    <input type="date" class="form-control" id="date" name="date">
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <b> <label for="exampleFormControlTextarea1">Education 3</label></b>
-                        <div id="add_experience-3">
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">School Name</label>
-                                    <input type="text" class="form-control" id="School-Name" placeholder="School Name" value="" required="">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">major</label>
-                                    <input type="text" class="form-control" id="major" placeholder="Major" value="" required="">
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Start date</label>
-                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">End date</label>
-                                    <input type="date" class="form-control" id="date" name="date">
-
-                                </div>
-                            </div>
-
-                        </div>
-
+                        <!-- input eduction data -->
 
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <div class="form-group">
-                        <b> <label for="exampleFormControlTextarea1">Experience1</label></b>
-                        <div id="inputBox_options">
+                    <div class="form-group" id="experience">
 
-                        </div>
-                        <div id="add_experience-1">
-
-                            <input type="text" class="survey_options skillBox" size="50" placeholder="Company Name">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Start date</label>
-                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">End date</label>
-                                    <input type="date" class="form-control" id="date" name="date">
-
-                                </div>
-                            </div>
-                            <textarea type="text" class="form-control skillBox" id="exampleFormControlTextarea1" rows="5" placeholder="Description"></textarea>
-                        </div>
-
-                        <b><label for="exampleFormControlTextarea1">Experience 2</label></b>
-                        <div id="add_experience-2">
-
-                            <input type="text" class="survey_options skillBox" size="50" placeholder="Company Name">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Start date</label>
-                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">End date</label>
-                                    <input type="date" class="form-control" id="date" name="date">
-
-                                </div>
-                            </div>
-                            <textarea type="text" class="form-control skillBox" id="exampleFormControlTextarea1" rows="5" placeholder="Description"></textarea>
-                        </div>
-
-                        <b> <label for="exampleFormControlTextarea1">Experience 3</label></b>
-                        <div id="add_experience-3">
-
-                            <input type="text" class="survey_options skillBox" size="50" placeholder="Company Name">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Start date</label>
-                                    <input type="date" class="form-control" style="margin-left: 10px" id="date" name="date">
-
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">End date</label>
-                                    <input type="date" class="form-control" id="date" name="date">
-
-                                </div>
-                            </div>
-                            <textarea type="text" class="form-control skillBox" id="exampleFormControlTextarea1" rows="5" placeholder="Description"></textarea>
-                        </div>
+                        <!-- input experience data -->
 
 
                     </div>
@@ -253,8 +107,7 @@
                     <div class="controls">
                         <button type="button" id="add_more_fields" class="btn btn-primary">Add More</button>
                         <button type="button" id="remove_fields" class="btn btn-danger">Delete</button>
-                        <!-- <a href="#" id="add_more_fields"><i class="fa fa-plus"></i>Add More</a> -->
-                        <!-- <a href="#" id="remove_fields"><i class="fa fa-plus"></i>Remove Field</a> -->
+
                     </div>
                     <!-- </div> -->
                 </div>
@@ -264,7 +117,7 @@
 
 
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="saveCv()" id="send">Continue to checkout</button>
             </form>
         </div>
     </div>
@@ -273,6 +126,120 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
+    //show edcution input
+    for (var i = 0; i < 3; i++) {
+        $('#edu').append('<b> <label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
+            // console.log(i)
+    }
+
+    //show experience input
+    for (var i = 0; i < 3; i++) {
+        $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div>')
+    }
+
+
+    function saveCv() {
+
+
+
+
+        var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
+            return $(elem).val();
+        }).get();
+        // console.log(schoolNames)
+
+        var majors = $('input[id^=major]').map(function(idx, elem) {
+            return $(elem).val();
+        }).get();
+        // console.log(majors)
+
+        var schoolStartDates = $('input[id^=schoolStartDate]').map(function(idx, elem) {
+            return new Date($(elem).val());
+        }).get();
+
+
+        var schoolEndDates = $('input[id^=schoolEndDate]').map(function(idx, elem) {
+            return new Date($(elem).val());
+        }).get();
+
+
+
+        var companyNames = $('input[id^=companyName]').map(function(idx, elem) {
+            return $(elem).val();
+        }).get();
+
+        var companyStartDate = $('input[id^=companyStartDate]').map(function(idx, elem) {
+            return new Date($(elem).val());
+        }).get();
+        // console.log(companyStartDate)
+
+        var companyEndDate = $('input[id^=companyEndDate]').map(function(idx, elem) {
+            return new Date($(elem).val());
+        }).get();
+
+
+        var description = $('textarea[id^=description]').map(function(idx, elem) {
+            return $(elem).val();
+        }).get();
+
+
+        var lan = $('input[name^=survey_options]').map(function(idx, elem) {
+            return $(elem).val();
+        }).get();
+
+        // console.log(description)
+
+
+
+
+
+        $.ajax({
+            url: "/create_cvProfile",
+            type: 'POST',
+            data: {
+                fristName: $("#fristName").val(),
+                lastName: $("#lastName").val(),
+                nickName: $("#nickName").val(),
+                phoneNumber: $("#phoneNumber").val(),
+                email: $("#email").val(),
+                aboutMe: $("#aboutMe").val(),
+                schoolNames: schoolNames,
+                majors: majors,
+                schoolStartDates: schoolStartDates,
+                schoolEndDates: schoolEndDates,
+                companyNames: companyNames,
+                companyStartDate: companyStartDate,
+                companyEndDate: companyEndDate,
+                description: description,
+                language: lan,
+            },
+            datatype: 'html',
+            success: function(result) {
+                //On success
+                console.log(result)
+                console.log(result.status)
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(xhr.responseText);
+            }
+
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+    $("#send").click((e) => {
+        e.preventDefault()
+    })
+
     var survey_options = document.getElementById('survey_options');
     var add_more_fields = document.getElementById('add_more_fields');
     var remove_fields = document.getElementById('remove_fields');
@@ -295,4 +262,4 @@
     }
 </script>
 
-</html>
+{% endblock %}
