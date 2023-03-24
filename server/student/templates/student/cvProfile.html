@@ -122,15 +122,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
     //show edcution input
-    // for (var i = 0; i < 3; i++) {
-    //     $('#edu').append('<b> <label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
-    //         // console.log(i)
-    // }
+    for (var i = 0; i < 3; i++) {
+        $('#edu').append('<b> <label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
+            // console.log(i)
+    }
 
-    // //show experience input
-    // for (var i = 0; i < 3; i++) {
-    //     $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div>')
-    // }
+    //show experience input
+    for (var i = 0; i < 3; i++) {
+        $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div>')
+    }
+
     function getBase64(file) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
