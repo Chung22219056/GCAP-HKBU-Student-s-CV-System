@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 import random
+from django_base64field.fields import Base64Field
+
 # Create your models here.
 
 
@@ -21,6 +23,7 @@ class Student(models.Model):
     
 class CvInfoBase(models.Model):
     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
+    profileIcon=Base64Field(max_length=900000,blank=True,null=True)
     cvname = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
     fristName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)

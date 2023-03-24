@@ -42,7 +42,8 @@ def student_cvRecord(request):
 @login_required
 def create_cvProfile(request):
     if request.method=='POST':
-        student = Student.objects.get(user_id=request.user.id)
+        # student = Student.objects.get(user_id=request.user.id)
+        print(request.POST.get('profileIcon'))
         fristName = request.POST.get('fristName')
         lastName = request.POST.get('lastName')
         nickName = request.POST.get('nickName')
@@ -53,8 +54,8 @@ def create_cvProfile(request):
         schoolNames = request.POST.getlist('schoolNames[]')
         majoies = request.POST.getlist('majors[]')
 
-        new_cv = CvInfoBase(studentID=student,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
-        new_cv.save()
+        # new_cv = CvInfoBase(studentID=student,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
+        # new_cv.save()
         
         #save education data
         for i in range(len(majoies)):
