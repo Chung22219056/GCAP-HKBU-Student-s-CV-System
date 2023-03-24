@@ -5,6 +5,7 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from .models import *
+from django_base64field.fields import Base64Field
 # Create your views here.
 
 cv_list = [
@@ -43,7 +44,8 @@ def student_cvRecord(request):
 def create_cvProfile(request):
     if request.method=='POST':
         # student = Student.objects.get(user_id=request.user.id)
-        print(request.POST.get('profileIcon'))
+        # print(request.POST)
+        profileIcon=request.POST.get('profileIcon')
         fristName = request.POST.get('fristName')
         lastName = request.POST.get('lastName')
         nickName = request.POST.get('nickName')
@@ -54,10 +56,10 @@ def create_cvProfile(request):
         schoolNames = request.POST.getlist('schoolNames[]')
         majoies = request.POST.getlist('majors[]')
 
-        # new_cv = CvInfoBase(studentID=student,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
-        # new_cv.save()
+        new_cv = CvInfoBase(studentID=student,profileIcon=profileIcon,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
+        new_cv.save()
         
-        #save education data
+        # save education data
         for i in range(len(majoies)):
             education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],cv=new_cv)
             education.save()
