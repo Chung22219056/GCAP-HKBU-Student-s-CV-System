@@ -30,20 +30,19 @@ def student_CV_UI2(request):
 def student_cvProfile(request):
     return render(request, 'student/cvProfile.html', {'nav':'student'})
 
+@login_required
 def student_cvRecord(request):
-    stu_id=request.GET.get('stu_id', '')
-    student = Student.objects.get(student_id=stu_id)
+    # only for logged user
+    student = Student.objects.get(user_id=request.user)
     studentLan = [{'language':[lan.name for lan in Language.objects.filter(studentID=student)]} for student in Student.objects.all()]
     cv_list = CvInfoBase.objects.filter(studentID=student)
-   
-    # print(studentLan)
     return render(request, 'student/cvRecord.html', {'nav':'student','cv_list':cv_list,'studentLan':studentLan})
 
 @csrf_exempt
 @login_required
 def create_cvProfile(request):
     if request.method=='POST':
-        # student = Student.objects.get(user_id=request.user.id)
+        student = Student.objects.get(user_id=request.user.id)
         # print(request.POST)
         profileIcon=request.POST.get('profileIcon')
         fristName = request.POST.get('fristName')
@@ -63,7 +62,6 @@ def create_cvProfile(request):
         for i in range(len(majoies)):
             education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],cv=new_cv)
             education.save()
-
         return JsonResponse({"status":True})
     return HttpResponseForbidden()
 

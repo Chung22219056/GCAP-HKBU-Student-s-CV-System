@@ -4,9 +4,13 @@
 {% for cv in cv_list %}
 <div class="card-container cardLayout">
     <span class="pro">PRO</span>
-    <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-    <h3>{{cv.fristName}} {{cv.lastName}}</h3>
-    <h6>{{cv.nickName}}</h6>
+    {% if cv.profileIcon == None %}
+        <img class="round" src="/static/images/default-avatar.png" alt="user" style="width: 100px ;height: 100px; object-fit:cover"/>
+    {% else %}
+        <img class="round" src="{{cv.profileIcon}}" alt="user" style="width: 100px ;height: 100px; object-fit:cover"/>
+    {% endif %}
+    <h3>{{cv.cvname}}</h3>
+    <h6>{{cv.fristName}} {{cv.lastName}} ({{cv.nickName}})</h6>
     <p style="text-align: justify;padding-left: 20px;padding-right: 20px;">{{cv.aboutMe}}</p>
     <div class="buttons">
         <button class="primary">
