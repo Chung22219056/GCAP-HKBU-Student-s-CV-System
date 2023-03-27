@@ -36,7 +36,7 @@ def student_cvRecord(request):
     student = Student.objects.get(user_id=request.user)
     studentLan = [{'language':[lan.name for lan in Language.objects.filter(studentID=student)]} for student in Student.objects.all()]
     cv_list = CvInfoBase.objects.filter(studentID=student)
-    return render(request, 'student/cvRecord.html', {'nav':'student','cv_list':cv_list,'studentLan':studentLan})
+    return render(request, 'student/cvRecord.html', {'nav':'student','cv_list':cv_list})
 
 @csrf_exempt
 @login_required
@@ -54,6 +54,7 @@ def create_cvProfile(request):
 
         schoolNames = request.POST.getlist('schoolNames[]')
         majoies = request.POST.getlist('majors[]')
+        languages = request.POST.getlist('language[]')
 
         new_cv = CvInfoBase(studentID=student,profileIcon=profileIcon,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
         new_cv.save()
@@ -61,7 +62,17 @@ def create_cvProfile(request):
         # save education data
         for i in range(len(majoies)):
             education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],cv=new_cv)
-            education.save()
+            #education.save()
+
+        #save language
+        for i in languages:
+            lan = Language(name=i, studentID=student)
+            lan.save()
+            lan.cv.add(new_cv)
+
         return JsonResponse({"status":True})
     return HttpResponseForbidden()
+
+
+
 

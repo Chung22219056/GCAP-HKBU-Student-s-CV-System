@@ -11,7 +11,7 @@
     {% endif %}
     <h3>{{cv.cvname}}</h3>
     <h6>{{cv.fristName}} {{cv.lastName}} ({{cv.nickName}})</h6>
-    <p style="text-align: justify;padding-left: 20px;padding-right: 20px;">{{cv.aboutMe}}</p>
+    <!-- <p style="text-align: justify;padding-left: 20px;padding-right: 20px;">{{cv.aboutMe}}</p> -->
     <div class="buttons">
         <button class="primary">
                     Edit
@@ -23,9 +23,9 @@
     <div class="skills">
         <h6>Skills</h6>
         <ul>
-            {% for student in studentLan%} {% for lan in student.language %}
-            <li>{{lan}}</li>
-            {% endfor %} {% endfor %}
+            {% for lan in cv.getLanguage %}
+                <li>{{lan.name}}</li>
+            {% endfor %}
         </ul>
     </div>
 </div>

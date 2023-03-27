@@ -37,6 +37,9 @@ class CvInfoBase(models.Model):
     def __str__(self):
         return self.cvname
     
+    @property
+    def getLanguage(self):
+        return Language.objects.filter(cv=self,studentID=self.studentID)
 
 class Education(models.Model):
     cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
@@ -53,7 +56,6 @@ class Education(models.Model):
 class EducationType(models.Model):
     type = models.CharField(max_length=255)
     education = models.ForeignKey(Education, on_delete=models.CASCADE)
-
 
 
 class Skill(models.Model):
