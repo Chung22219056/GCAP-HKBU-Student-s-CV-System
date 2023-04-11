@@ -71,14 +71,12 @@ def create_cvProfile(request):
         new_cv.save()
         
         # # save education data
-        # for i in range(len(majoies)):
-        #    education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i],end_date=schoolEndDates[i],cv=new_cv)
-        #    education.save()
+        for i in range(len(majoies)):
+           education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i],end_date=schoolEndDates[i],cv=new_cv)
+           education.save()
 
         # save work experiences data
         for i in range(len(companyNames)):
-            print("errorsssssssssssssssssss")
-            # print(i)
             workExperience = WorkExperience(studentID=student,companyName=companyNames[i],start_date=companyStartDate[i],end_date=companyEndDate[i],description=description[i],cv=new_cv)
             workExperience.save()
 
