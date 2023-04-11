@@ -23,8 +23,9 @@ class Student(models.Model):
     
 class CvInfoBase(models.Model):
     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
+    cvName= models.CharField(max_length=255)
     profileIcon = Base64Field(max_length=900000,blank=True,null=True)
-    cvname = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
+    cvId = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
     fristName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
     nickName = models.CharField(max_length=255)
@@ -35,7 +36,7 @@ class CvInfoBase(models.Model):
     # github = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.cvname
+        return "{0} CV Name:[{1}]".format(self.cvId,self.cvName)
     
     @property
     def getLanguage(self):
@@ -81,4 +82,7 @@ class WorkExperience(models.Model):
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
     description = models.TextField()
+
+    def __str__(self):
+        return "{0} {1}".format(self.studentID.user_id,self.companyName)
 

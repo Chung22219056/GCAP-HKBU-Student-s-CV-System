@@ -44,6 +44,7 @@ def create_cvProfile(request):
     if request.method=='POST':
         student = Student.objects.get(user_id=request.user.id)
         # print(request.POST)
+        cvName=request.POST.get('cvName')
         profileIcon=request.POST.get('profileIcon')
         fristName = request.POST.get('fristName')
         lastName = request.POST.get('lastName')
@@ -52,19 +53,38 @@ def create_cvProfile(request):
         email = request.POST.get('email')
         aboutMe = request.POST.get('aboutMe')
 
+        # Education
         schoolNames = request.POST.getlist('schoolNames[]')
         majoies = request.POST.getlist('majors[]')
         languages = request.POST.getlist('language[]')
+        schoolStartDates = request.POST.getlist('schoolStartDates[]')
+        schoolEndDates = request.POST.getlist('schoolEndDates[]')
 
-        new_cv = CvInfoBase(studentID=student,profileIcon=profileIcon,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
+        #WorkExperience
+        companyNames=request.POST.getlist('companyNames[]')
+        companyStartDate = request.POST.getlist('companyStartDate[]')
+        companyEndDate = request.POST.getlist('companyEndDate[]')
+        description=request.POST.getlist('description[]')
+
+
+        new_cv = CvInfoBase(studentID=student,cvName=cvName,profileIcon=profileIcon,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
         new_cv.save()
         
-        # save education data
-        for i in range(len(majoies)):
-            education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],cv=new_cv)
-            #education.save()
+        # # save education data
+        # for i in range(len(majoies)):
+        #    education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i],end_date=schoolEndDates[i],cv=new_cv)
+        #    education.save()
 
-        #save language
+        # save work experiences data
+        for i in range(len(companyNames)):
+            print("errorsssssssssssssssssss")
+            # print(i)
+            workExperience = WorkExperience(studentID=student,companyName=companyNames[i],start_date=companyStartDate[i],end_date=companyEndDate[i],description=description[i],cv=new_cv)
+            workExperience.save()
+
+
+
+        # #save language
         for i in languages:
             lan = Language(name=i, studentID=student)
             lan.save()

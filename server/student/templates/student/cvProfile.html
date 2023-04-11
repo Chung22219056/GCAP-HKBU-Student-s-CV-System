@@ -11,6 +11,16 @@
     <div class="col-md-8 order-md-1" style="margin: 0 auto; width:auto;">
 
         <h4 class="mb-3">Personal Information</h4>
+        <div class="mb-3">
+            <label for="username">CV Name</label>
+            <div class="input-group">
+
+                <input type="text" class="form-control" id="cvName" placeholder="CV Name" required>
+                <div class="invalid-feedback" style="width: 100%;">
+                    Your username is required.
+                </div>
+            </div>
+        </div>
         <form class="needs-validation" novalidate="" id="profile">
 
             <div class="row">
@@ -32,7 +42,7 @@
                         Valid first name is required.
                     </div>
                 </div>
-                
+
 
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Last name</label>
@@ -124,8 +134,7 @@
 
 
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="saveCv()" id="send">Continue to
-                checkout</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="saveCv()" id="send">Save</button>
         </form>
     </div>
 </div>
@@ -142,7 +151,7 @@
 
     //show experience input
     for (var i = 0; i < 3; i++) {
-        $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div>')
+        $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div>  <div class="input-group"><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div></div>')
     }
 
     function getBase64(file) {
@@ -164,7 +173,7 @@
     function saveCv() {
 
         var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
-            
+
             return $(elem).val();
         }).get();
         // console.log(schoolNames)
@@ -175,12 +184,12 @@
         // console.log(majors)
 
         var schoolStartDates = $('input[id^=schoolStartDate]').map(function(idx, elem) {
-            return new Date($(elem).val());
+            return $(elem).val();
         }).get();
 
 
         var schoolEndDates = $('input[id^=schoolEndDate]').map(function(idx, elem) {
-            return new Date($(elem).val());
+            return $(elem).val();
         }).get();
 
 
@@ -189,13 +198,13 @@
             return $(elem).val();
         }).get();
 
-        var companyStartDate = $('input[id^=companyStartDate]').map(function(idx, elem) {
-            return new Date($(elem).val());
+        var companyStartDates = $('input[id^=companyStartDate]').map(function(idx, elem) {
+            return $(elem).val();
         }).get();
         // console.log(companyStartDate)
 
-        var companyEndDate = $('input[id^=companyEndDate]').map(function(idx, elem) {
-            return new Date($(elem).val());
+        var companyEndDates = $('input[id^=companyEndDate]').map(function(idx, elem) {
+            return $(elem).val();
         }).get();
 
         // console.log(companyEndDate)
@@ -235,6 +244,7 @@
             type: 'POST',
             data: {
                 profileIcon: base64ImgProfileIcon,
+                cvName: $("#cvName").val(),
                 fristName: $("#fristName").val(),
                 lastName: $("#lastName").val(),
                 nickName: $("#nickName").val(),
@@ -246,8 +256,8 @@
                 schoolStartDates: schoolStartDates,
                 schoolEndDates: schoolEndDates,
                 companyNames: companyNames,
-                companyStartDate: companyStartDate,
-                companyEndDate: companyEndDate,
+                companyStartDate: companyStartDates,
+                companyEndDate: companyEndDates,
                 description: description,
                 language: lan,
             },
@@ -274,15 +284,15 @@
         e.preventDefault()
     })
 
-    $("#profileIcon").change((e)=>{
+    $("#profileIcon").change((e) => {
         let file = $("#profileIcon")[0].files[0]
         const reader = new FileReader()
         reader.readAsDataURL(file)
-        reader.onload = function () {
+        reader.onload = function() {
             const base64String = reader.result
             base64ImgProfileIcon = base64String //global
-            $("#icon-preview").attr("src",base64String)
-          };
+            $("#icon-preview").attr("src", base64String)
+        };
     })
 
     var survey_options = document.getElementById('survey_options');

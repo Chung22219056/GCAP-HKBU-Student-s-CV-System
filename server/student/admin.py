@@ -9,5 +9,6 @@ admin.site.register(models.CvInfoBase)
 # admin.site.register(models.CVSkill)
 admin.site.register(models.Education)
 admin.site.register(models.Language)
+admin.site.register(models.WorkExperience)
 # admin.site.register(models.Skill)
 
