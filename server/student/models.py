@@ -79,8 +79,8 @@ class WorkExperience(models.Model):
     cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     companyName = models.CharField(max_length=255)
-    start_date = models.DateField(null=True, blank=True, default=datetime.datetime.now().date())
-    end_date = models.DateField(null=True, blank=True,  default=datetime.datetime.now().date())
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
     description = models.TextField()
 
     def __str__(self):

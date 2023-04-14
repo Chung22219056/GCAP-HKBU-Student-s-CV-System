@@ -9,6 +9,10 @@ body {
     clear: both;
 }
 
+.cvSize {
+    height: auto;
+}
+
 .resume-box {
     width: 800px;
     height: 1100px;
@@ -48,10 +52,12 @@ body {
 
 .profile {
     width: 100%;
+    height: 400px;
 }
 
 .content {
-    padding: 20px;
+    padding: 15px;
+    text-align: justify;
 }
 
 h1 {
@@ -156,20 +162,20 @@ p {
 }
 
 .ma {
-    font-family: 'Raleway'!important;
+    font-family: 'Raleway' !important;
     margin: 0px;
     padding: 0px;
-    margin-bottom: -11px!important;
+    margin-bottom: -11px !important;
 }
 
 .hr1 {
     position: absolute;
     background: #f59d17;
     height: 6px;
-    width: 322px;
+    width: 512px;
     border: none;
     right: 0px;
-    top: 17%;
+    /* top: 17%; */
 }
 
 .content-2 {
@@ -220,13 +226,13 @@ p {
 
 .circle {
     color: black;
-    font-size: 14px!important;
+    font-size: 14px !important;
     margin-top: 7px;
 }
 
 .circle1 {
     color: #f19b23;
-    font-size: 14px!important;
+    font-size: 14px !important;
     margin-top: 7px;
 }
 
@@ -235,7 +241,7 @@ p {
 }
 
 .para-21 {
-    font-size: 10px;
+    font-size: 12px;
     text-transform: uppercase;
     color: #000;
     font-weight: 400;

@@ -16,7 +16,8 @@ cv_list = [
 ]
 
 def dashboard(request):
-    return render(request, 'student/dashboard.html', {'nav':'student','cv_list':cv_list})
+    cvID= request.GET.get('cvID')
+    return render(request, 'student/dashboard.html', {'nav':'student','cv_list':cv_list,'cvID':cvID})
 
 def student_CV_UI(request):
     return render(request, 'student/cv.html', {'nav':'student'})
@@ -25,7 +26,21 @@ def student_CV_UI1(request):
     return render(request, 'student/cv-version-1.html', {'nav':'student'})
 
 def student_CV_UI2(request):
-    return render(request, 'student/cv-version-2.html', {'nav':'student'})
+    language=[]
+    education=[]
+    experience=[]
+    cvBasic=[]
+
+    cvID= request.GET.get('cvID')
+    # student = Student.objects.get(user_id=request.user)
+    cvBasic=CvInfoBase.objects.filter(cvId=cvID).values()
+
+    for cvID in CvInfoBase.objects.filter(cvId=cvID):
+         language = [lan for lan in Language.objects.filter(cv=cvID)]
+         education = [edu for edu in Education.objects.filter(cv=cvID)]
+         experience = [work for work in WorkExperience.objects.filter(cv=cvID)]
+    
+    return render(request, 'student/cv-version-2.html', {'nav':'student','cvBasic':cvBasic,'language':language,'education':education,'experience':experience})
 
 def student_cvProfile(request):
     return render(request, 'student/cvProfile.html', {'nav':'student'})
@@ -41,7 +56,6 @@ def student_cvRecord(request):
 @csrf_exempt
 @login_required
 def create_cvProfile(request):
-    dataList=[]
 
     if request.method=='POST':
     
@@ -76,8 +90,8 @@ def create_cvProfile(request):
         for i in range(len(schoolNames)):
             if schoolNames[i] == '' or schoolNames[i] == None:
                 continue
-            e = Education(cv=new_cv, studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i], end_date=schoolEndDates[i])
-            e.save()
+            education = Education(cv=new_cv, studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i], end_date=schoolEndDates[i])
+            education.save()
         
         for i in range(len(companyNames)):
             if companyNames[i] == '':
@@ -95,7 +109,5 @@ def create_cvProfile(request):
 
         return JsonResponse({"status":True})
     return HttpResponseForbidden()
-
-
 
 

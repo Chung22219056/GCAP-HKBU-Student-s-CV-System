@@ -3,16 +3,13 @@
 <h3 style="text-align: center;">Your Cv Record</h3>
 {% for cv in cv_list %}
 <div class="card-container cardLayout">
-    <span class="pro">PRO</span>
-    {% if cv.profileIcon == None %}
-        <img class="round" src="/static/images/default-avatar.png" alt="user" style="width: 100px ;height: 100px; object-fit:cover"/>
-    {% else %}
-        <img class="round" src="{{cv.profileIcon}}" alt="user" style="width: 100px ;height: 100px; object-fit:cover"/>
-    {% endif %}
+    <span class="pro">PRO</span> {% if cv.profileIcon == None %}
+    <img class="round" src="/static/images/default-avatar.png" alt="user" style="width: 100px ;height: 100px; object-fit:cover" /> {% else %}
+    <img class="round" src="{{cv.profileIcon}}" alt="user" style="width: 100px ;height: 100px; object-fit:cover" /> {% endif %}
     <h3>{{cv.cvname}}</h3>
     <h6>{{cv.fristName}} {{cv.lastName}} ({{cv.nickName}})</h6>
     <!-- <p style="text-align: justify;padding-left: 20px;padding-right: 20px;">{{cv.aboutMe}}</p> -->
-    <div class="buttons">
+    <div class="buttons" style="padding-bottom: 15px;">
         <button class="primary">
                     Edit
                 </button>
@@ -20,11 +17,12 @@
                     Delete
                 </button>
     </div>
+    <button type="button" class="btn btn-warning" style="width: 55%;height: 45px;padding-left: 20px;"><a href="/student/dashboard?cvID={{cv.cvId}}">Watch CV</a></button>
     <div class="skills">
         <h6>Skills</h6>
         <ul>
             {% for lan in cv.getLanguage %}
-                <li>{{lan.name}}</li>
+            <li>{{lan.name}}</li>
             {% endfor %}
         </ul>
     </div>
@@ -56,7 +54,8 @@
             <li>Node</li>
         </ul>
     </div>
-</div> {% endcomment %}
+</div>
+{% endcomment %}
 
 
 <button class="btn btn-primary btn-lg btn-block" style="display: block;margin: 0 auto;" type="submit">Create New CV</button> {% endblock %}

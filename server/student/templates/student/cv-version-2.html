@@ -1,122 +1,129 @@
-<!Doctype HTML>
-<html>
+<!-- {% extends 'base.html' %} {% block header %} -->
 
-<head>
-    <title>resume</title>
-    <link rel="stylesheet" type="text/css" href="../../../../static/css/cv-version-2.css" />
+<title>resume</title>
+<link rel="stylesheet" type="text/css" href="../../../../static/css/cv-version-2.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-</head>
+<!-- {% endblock %}
 
-<body>
-    <div class="box-outer">
-        <div class="resume-box">
-            <div class="box-1">
-                <img src="../../../static/images/pic.jpg" class="profile" />
-                <div class="content">
-                    <h1>About me</h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+    {% block content %} -->
 
-                    </p>
+{% for cvBasic in cvBasic %}
+<div class="box-outer">
 
-                    <br/>
-                    <h1>Award</h1>
-                    <p><span style="color:white">Lorem Ipsum </span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                        <br/><br/>
-                        <span style="color:white">text ever </span> the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    <div class="resume-box cvSize">
 
-                    </p>
-                    <br/>
-                    <h1>Contact</h1>
+        <div class="box-1">
 
-                    <p><i class="fa fa-map"></i> &nbsp;LON,United Kingdom </p>
-                    <p><i class="fa fa-phone"></i> &nbsp;phone +(91)1 234 3455</p>
-                    <p><i class="fa fa-envelope"></i> &nbsp;email : demo@gmail.com</p>
-                    <p><i class="fa fa-globe"></i> &nbsp;www.m-softtech.in</p>
+            <img src="{{cvBasic.profileIcon}}" class="profile" />
+            <div class="content">
 
-                </div>
+                <h1>About me</h1>
+                <p> {{cvBasic.aboutMe}} </p>
 
-            </div>
+                <br/>
+                <h1>Award</h1>
+                <p><span style="color:white">Lorem Ipsum </span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                    <br/><br/>
+                    <span style="color:white">text ever </span> the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 
-            <div class="box-2">
+                </p>
+                <br/>
+                <h1>Contact</h1>
 
-                <div class="intro">
-
-                    <br/>
-                    <h1 class="ma">Manoj</h1>
-                    <h1> <strong>Adhikari</strong></h1>
-
-                    <p class="phead">Graphic Designer</p>
-                    <div class="clearfix"></div>
-                    <hr class="hr1" />
-                </div>
-
-                <br/><br/><br/>
-                <div class="content-2">
-                    <h1 class="head">Experience</h1>
-                    <hr class="hr2" />
-                    <div class="clearfix"></div>
-                    <p class="para-1">UI Designer In Lorem Ipsum <strong>(2018 - Now)</strong></p>
-                    <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
-
-                    <p class="para-1">UI Designer <strong>(2013 - 2015)</strong></p>
-                    <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-
-                    <p class="para-1">Grapic Designer<strong>(2010)</strong></p>
-                    <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p>
-                </div>
-
-
-                <div class="content-2">
-                    <h1 class="head">Education</h1>
-                    <hr class="hr2" />
-                    <div class="clearfix"></div>
-                    <p class="para-1">High school of cbse <strong>(2009 - 2010)</strong></p>
-                    <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p>
-
-                    <p class="para-1">Bachelor of Computer Application <strong>(2013 - 2015)</strong></p>
-                    <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-
-
-                </div>
-
-                <h1 class="head">Skills</h1>
-                <hr class="hr2" />
-
-                <div class="container">
-                    <div class="row">
-                        <div class="clearfix"></div>
-                        <div class="col-div-4">
-                            <p class="p25">HTML</p>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-div-4">
-                            <p class="p25">CSS</p>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-div-4">
-                            <p class="p25">JQUERY</p>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-div-4">
-                            <p class="p25">JAVASCRIPT</p>
-                        </div>
-
-                    </div>
-                </div>
-                <br>
-
+                <!-- <p><i class="fa fa-map"></i> &nbsp;LON,United Kingdom </p> -->
+                <p><i class="fa fa-phone"></i> &nbsp;phone +(852){{cvBasic.phone}}</p>
+                <p><i class="fa fa-envelope"></i> &nbsp;email : {{cvBasic.email}}</p>
+                <!-- <p><i class="fa fa-globe"></i> &nbsp;www.m-softtech.in</p> -->
 
             </div>
 
         </div>
-        <div class="clearfix"></div>
-    </div>
-</body>
 
-</html>
+        <div class="box-2">
+
+            <div class="intro">
+
+                <br/>
+                <!-- <h1 class="ma">Manoj</h1>
+                <h1> <strong>Adhikari</strong></h1> -->
+                <br/>
+
+                <p class="phead">{{cvBasic.cvName}}</p>
+                <!-- <div class="clearfix"></div> -->
+                <hr class="hr1" />
+
+            </div>
+
+            <br/><br/><br/>
+            <div class="content-2">
+                <h1 class="head">Experience</h1>
+                <hr class="hr2" />
+                <div class="clearfix"></div>
+                {% for exp in experience %}
+                <p class="para-1">{{exp.companyName}} <strong>[{{exp.start_date}} - {{exp.end_date}}]</strong></p>
+                <p class="para-21">{{exp.description}}</p>
+                {% endfor %}
+                <!-- <p class="para-1">UI Designer <strong>(2013 - 2015)</strong></p>
+                <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+
+                <p class="para-1">Grapic Designer<strong>(2010)</strong></p>
+                <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p> -->
+            </div>
+
+
+            <div class="content-2">
+                <h1 class="head">Education</h1>
+                <hr class="hr2" />
+                <div class="clearfix"></div>
+                {% for edu in education %}
+                <p class="para-1">{{edu.shcoolName}} <strong>[{{edu.start_date}} - {{edu.end_date}}]</strong></p>
+                <p class="para-21">Major: {{edu.major}}</p>
+                {% endfor %}
+                <!-- <p class="para-1">Bachelor of Computer Application <strong>(2013 - 2015)</strong></p>
+                <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p> -->
+
+
+            </div>
+            <h1 class="head">Skills</h1>
+            <hr class="hr2" />
+            <div class="container">
+                <div class="row">
+                    {% for lan in language%}
+                    <div class="clearfix"></div>
+                    <div class="col-div-4">
+                        <p class="p25">{{lan.name}}</p>
+                    </div>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                    <div class="col-div-4">
+                        <p class="p25">CSS</p>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-div-4">
+                        <p class="p25">JQUERY</p>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-div-4">
+                        <p class="p25">JAVASCRIPT</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <br>
+
+
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+{% endfor %}
+<!-- {% endblock %} -->
