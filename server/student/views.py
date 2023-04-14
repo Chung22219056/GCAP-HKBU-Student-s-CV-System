@@ -9,8 +9,8 @@ from django_base64field.fields import Base64Field
 # Create your views here.
 
 cv_list = [
-    {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/cascade@1x.png","title":"Cascade"},
-    {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/crisp@1x.png","title":"Crisp"},
+    {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/cascade@1x.png","title":"Cascade","version":"cv_ui1"},
+    {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/crisp@1x.png","title":"Crisp","version":"cv_ui2"},
     {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/enfold@1x.png","title":"Enfold"},
     
 ]
@@ -23,7 +23,21 @@ def student_CV_UI(request):
     return render(request, 'student/cv.html', {'nav':'student'})
 
 def student_CV_UI1(request):
-    return render(request, 'student/cv-version-1.html', {'nav':'student'})
+    language=[]
+    education=[]
+    experience=[]
+    cvBasic=[]
+
+    cvID= request.GET.get('cvID')
+    # student = Student.objects.get(user_id=request.user)
+    cvBasic=CvInfoBase.objects.filter(cvId=cvID).values()
+
+    for cvID in CvInfoBase.objects.filter(cvId=cvID):
+         language = [lan for lan in Language.objects.filter(cv=cvID)]
+         education = [edu for edu in Education.objects.filter(cv=cvID)]
+         experience = [work for work in WorkExperience.objects.filter(cv=cvID)]
+    
+    return render(request, 'student/cv-version-1.html', {'nav':'student','cvBasic':cvBasic,'language':language,'education':education,'experience':experience})
 
 def student_CV_UI2(request):
     language=[]
@@ -39,7 +53,6 @@ def student_CV_UI2(request):
          language = [lan for lan in Language.objects.filter(cv=cvID)]
          education = [edu for edu in Education.objects.filter(cv=cvID)]
          experience = [work for work in WorkExperience.objects.filter(cv=cvID)]
-    
     return render(request, 'student/cv-version-2.html', {'nav':'student','cvBasic':cvBasic,'language':language,'education':education,'experience':experience})
 
 def student_cvProfile(request):

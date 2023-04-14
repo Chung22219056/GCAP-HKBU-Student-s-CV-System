@@ -11,21 +11,20 @@
 </head>
 
 <body>
-
+    {% for cvBasic in cvBasic %}
     <div class="resume_wrapper" id="cv">
         <div class="resume_left">
             <div class="resume_image">
-                <img src="../../../static/images/pic.jpg" alt="Resume_image">
+                <img src="{{cvBasic.profileIcon}}" alt="Resume_image">
             </div>
             <div class="resume_bottom">
                 <div class="resume_item resume_namerole">
-                    <div class="name">Rosie Jackson</div>
-                    <div class="role">UI Designer</div>
+                    <div class="name">{{cvBasic.cvName}}</div>
+                    <!-- <div class="role">UI Designer</div> -->
                 </div>
                 <div class="resume_item resume_profile">
                     <div class="resume_title">Profile</div>
-                    <div class="resume_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                    <div class="resume_info">{{cvBasic.aboutMe}}</div>
                 </div>
                 <div class="resume_item resume_address">
                     <div class="resume_title">Address</div>
@@ -37,121 +36,66 @@
                     <div class="resume_title">Contact</div>
                     <div class="resume_info">
                         <div class="resume_subtitle">Phone</div>
-                        <div class="resume_subinfo">+62 000 222 333</div>
+                        <div class="resume_subinfo">+852 {{cvBasic.phone}}</div>
                     </div>
                     <div class="resume_info">
                         <div class="resume_subtitle">Email</div>
-                        <div class="resume_subinfo">rosiejack@gmail.com</div>
+                        <div class="resume_subinfo">{{cvBasic.email}}</div>
                     </div>
                 </div>
                 <div class="resume_item resume_skills">
                     <div class="resume_title">Skills</div>
                     <div class="resume_info">
+                        {% for lan in language%}
                         <div class="skills_list">
-                            <div class="skills_left">HTML</div>
+                            <div class="skills_left">{{lan.name}}</div>
                             <div class="skills_bar">
-                                <p>
+                                <!-- <p>
                                     <span style="width: 90%"></span>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
-                        <div class="skills_list">
-                            <div class="skills_left">CSS</div>
-                            <div class="skills_bar">
-                                <p>
-                                    <span style="width: 80%"></span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="skills_list">
-                            <div class="skills_left">Javascript</div>
-                            <div class="skills_bar">
-                                <p>
-                                    <span style="width: 50%"></span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="skills_list">
-                            <div class="skills_left">Photoshop</div>
-                            <div class="skills_bar">
-                                <p>
-                                    <span style="width: 95%"></span>
-                                </p>
-                            </div>
-                        </div>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="resume_right">
             <div class="resume_item resume_namerole">
-                <div class="name">Rosie Jackson</div>
-                <div class="role">UI Designer</div>
+                <div class="name">{{cvBasic.cvName}}</div>
+                <!-- <div class="role">UI Designer</div> -->
             </div>
             <div class="resume_item resume_education">
                 <div class="resume_title">Education</div>
                 <div class="resume_info">
+                    {% for edu in education %}
                     <div class="resume_data">
                         <div class="year">2000 - 2010</div>
                         <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>{{edu.shcoolName}} </p>
+                            <p>Major: {{edu.major}}</p>
+                            <p>[{{edu.start_date}} - {{edu.end_date}}]</p>
                         </div>
+
                     </div>
-                    <div class="resume_data">
-                        <div class="year">2010 - 2013</div>
-                        <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                    <div class="resume_data">
-                        <div class="year">2013 - 2015</div>
-                        <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                 </div>
             </div>
             <div class="resume_item resume_experience">
                 <div class="resume_title">Experience</div>
                 <div class="resume_info">
+                    {% for exp in experience %}
                     <div class="resume_data">
-                        <div class="year">2000 - 2010</div>
+                        <div class="year">[{{exp.start_date}} - {{exp.end_date}}]</div>
                         <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>{{exp.companyName}}</p>
+                            <p>{{exp.description}}</p>
                         </div>
                     </div>
-                    <div class="resume_data">
-                        <div class="year">2010 - 2013</div>
-                        <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                    <div class="resume_data">
-                        <div class="year">2013 - 2015</div>
-                        <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                    <div class="resume_data">
-                        <div class="year">2013 - 2015</div>
-                        <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                    <div class="resume_data">
-                        <div class="year">2013 - 2015</div>
-                        <div class="content">
-                            <p>Title</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                 </div>
             </div>
             <div class="resume_item resmue_interests">
@@ -221,5 +165,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endfor %}
 
 </html>

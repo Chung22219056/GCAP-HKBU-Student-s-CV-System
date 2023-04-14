@@ -10,7 +10,7 @@
                 {% for cv in cv_list %}
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
                     <div class="card d-flex justify-content-center align-items-center cv-card-item">
-                        <a href="/student/cv_ui2?cvID={{cvID}}" class="btn btn-dark use-this-template-btn">Use this template</a>
+                        <a href="/student/{{cv.version}}?cvID={{cvID}}" class="btn btn-dark use-this-template-btn">Use this template</a>
                         <img src="{{cv.thumbnail}}" class="card-img-top" style="object-fit:cover">
 
                         <div class="card-body">
