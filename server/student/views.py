@@ -41,7 +41,10 @@ def student_cvRecord(request):
 @csrf_exempt
 @login_required
 def create_cvProfile(request):
+    dataList=[]
+
     if request.method=='POST':
+    
         student = Student.objects.get(user_id=request.user.id)
         # print(request.POST)
         cvName=request.POST.get('cvName')
@@ -65,28 +68,30 @@ def create_cvProfile(request):
         companyStartDate = request.POST.getlist('companyStartDate[]')
         companyEndDate = request.POST.getlist('companyEndDate[]')
         description=request.POST.getlist('description[]')
-
+        #print(request.POST)
 
         new_cv = CvInfoBase(studentID=student,cvName=cvName,profileIcon=profileIcon,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
         new_cv.save()
         
-        # # save education data
-        for i in range(len(majoies)):
-           education = Education(studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i],end_date=schoolEndDates[i],cv=new_cv)
-           education.save()
-
-        # save work experiences data
+        for i in range(len(schoolNames)):
+            if schoolNames[i] == '' or schoolNames[i] == None:
+                continue
+            e = Education(cv=new_cv, studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i], end_date=schoolEndDates[i])
+            e.save()
+        
         for i in range(len(companyNames)):
+            if companyNames[i] == '':
+                continue
             workExperience = WorkExperience(studentID=student,companyName=companyNames[i],start_date=companyStartDate[i],end_date=companyEndDate[i],description=description[i],cv=new_cv)
             workExperience.save()
 
-
-
-        # #save language
         for i in languages:
             lan = Language(name=i, studentID=student)
             lan.save()
             lan.cv.add(new_cv)
+            
+      
+
 
         return JsonResponse({"status":True})
     return HttpResponseForbidden()

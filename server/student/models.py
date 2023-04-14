@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import random
+import random, datetime
 from django_base64field.fields import Base64Field
 
 # Create your models here.
@@ -79,8 +79,8 @@ class WorkExperience(models.Model):
     cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     companyName = models.CharField(max_length=255)
-    start_date = models.DateField(null=True)
-    end_date = models.DateField(null=True)
+    start_date = models.DateField(null=True, blank=True, default=datetime.datetime.now().date())
+    end_date = models.DateField(null=True, blank=True,  default=datetime.datetime.now().date())
     description = models.TextField()
 
     def __str__(self):
