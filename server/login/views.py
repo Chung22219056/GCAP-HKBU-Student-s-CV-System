@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import authenticate
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
 
@@ -33,3 +34,6 @@ def login(request):
 
     return render (request,'login/login.html')
     
+def logout(request):
+    auth_logout(request)
+    return HttpResponseRedirect('/')
