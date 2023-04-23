@@ -9,8 +9,8 @@ from django_base64field.fields import Base64Field
 # Create your views here.
 
 cv_list = [
-    {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/cascade@1x.png","title":"Cascade","version":"cv_ui1"},
-    {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/crisp@1x.png","title":"Crisp","version":"cv_ui2"},
+    {"thumbnail":"/static/images/cv1.png","title":"Template-1","version":"cv_ui1"},
+    {"thumbnail":"/static/images/cv2.png","title":"Template-2","version":"cv_ui2"},
     {"thumbnail":"https://cdn-images.zety.com/images/zety/landings/templates/enfold@1x.png","title":"Enfold"},
     
 ]

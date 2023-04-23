@@ -71,11 +71,12 @@
                 <div class="resume_info">
                     {% for edu in education %}
                     <div class="resume_data">
-                        <div class="year">2000 - 2010</div>
+                        <div class="year">[{{edu.start_date.year}}/{{edu.start_date.month}} - {{edu.end_date.year}}/{{edu.end_date.month}}]</div>
                         <div class="content">
                             <p>{{edu.shcoolName}} </p>
                             <p>Major: {{edu.major}}</p>
-                            <p>[{{edu.start_date}} - {{edu.end_date}}]</p>
+
+
                         </div>
 
                     </div>
@@ -88,7 +89,7 @@
                 <div class="resume_info">
                     {% for exp in experience %}
                     <div class="resume_data">
-                        <div class="year">[{{exp.start_date}} - {{exp.end_date}}]</div>
+                        <div class="year">[{{exp.start_date.year}}/{{exp.start_date.month}} - {{exp.end_date.year}}/{{exp.end_date.month}}]</div>
                         <div class="content">
                             <p>{{exp.companyName}}</p>
                             <p>{{exp.description}}</p>
@@ -129,7 +130,7 @@
             </div>
         </div>
     </div>
-    <button id="download" class="btn btn-dark" role="button" style="display: block;margin-left: auto;margin-right: auto;" data-toggle="modal" data-target="#exampleModal">dowload</button>
+    <button id="download" class="btn btn-dark" role="button" style="display: block;margin-left: auto;margin-right: auto;" data-toggle="modal" data-target="#exampleModal">Download CV</button>
 </body>
 
 <script>
