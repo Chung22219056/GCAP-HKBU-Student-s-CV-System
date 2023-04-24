@@ -11,9 +11,10 @@
     <h6> {{cv.cvName}}</h6>
     <!-- <p style="text-align: justify;padding-left: 20px;padding-right: 20px;">{{cv.aboutMe}}</p> -->
     <div class="buttons" style="padding-bottom: 15px;">
-        <button class="primary">
+        <a href="/student/edit_cvProfile?cvID={{cv.cvId}}">
+            <button class="primary">
                     Edit
-                </button>
+                </button></a>
         <button class="primary ghost">
                     Delete
                 </button>
@@ -59,4 +60,4 @@
 {% endcomment %}
 
 
-<button class="btn btn-primary btn-lg btn-block" style="display: block;margin: 0 auto;" type="submit">Create New CV</button> {% endblock %}
+<a href="/student/cvProfile"><button class="btn btn-primary btn-lg btn-block" style="display: block;margin: 0 auto;">Create New CV</button></a> {% endblock %}

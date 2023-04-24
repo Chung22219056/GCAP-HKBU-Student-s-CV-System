@@ -124,3 +124,72 @@ def create_cvProfile(request):
     return HttpResponseForbidden()
 
 
+@csrf_exempt
+@login_required
+def edit_cvProfile(request):
+
+    # if request.method=='POST':
+    
+    #     student = Student.objects.get(user_id=request.user.id)
+    #     # print(request.POST)
+    #     cvName=request.POST.get('cvName')
+    #     profileIcon=request.POST.get('profileIcon')
+    #     fristName = request.POST.get('fristName')
+    #     lastName = request.POST.get('lastName')
+    #     nickName = request.POST.get('nickName')
+    #     phoneNumber = request.POST.get('phoneNumber')
+    #     email = request.POST.get('email')
+    #     aboutMe = request.POST.get('aboutMe')
+
+    #     # Education
+    #     schoolNames = request.POST.getlist('schoolNames[]')
+    #     majoies = request.POST.getlist('majors[]')
+    #     languages = request.POST.getlist('language[]')
+    #     schoolStartDates = request.POST.getlist('schoolStartDates[]')
+    #     schoolEndDates = request.POST.getlist('schoolEndDates[]')
+
+    #     #WorkExperience
+    #     companyNames=request.POST.getlist('companyNames[]')
+    #     companyStartDate = request.POST.getlist('companyStartDate[]')
+    #     companyEndDate = request.POST.getlist('companyEndDate[]')
+    #     description=request.POST.getlist('description[]')
+    #     #print(request.POST)
+
+    #     new_cv = CvInfoBase(studentID=student,cvName=cvName,profileIcon=profileIcon,fristName=fristName,lastName=lastName,nickName=nickName,phone=phoneNumber,email=email,aboutMe=aboutMe)
+    #     new_cv.save()
+        
+    #     for i in range(len(schoolNames)):
+    #         if schoolNames[i] == '' or schoolNames[i] == None:
+    #             continue
+    #         education = Education(cv=new_cv, studentID=student,shcoolName=schoolNames[i],major=majoies[i],start_date=schoolStartDates[i], end_date=schoolEndDates[i])
+    #         education.save()
+        
+    #     for i in range(len(companyNames)):
+    #         if companyNames[i] == '':
+    #             continue
+    #         workExperience = WorkExperience(studentID=student,companyName=companyNames[i],start_date=companyStartDate[i],end_date=companyEndDate[i],description=description[i],cv=new_cv)
+    #         workExperience.save()
+
+    #     for i in languages:
+    #         lan = Language(name=i, studentID=student)
+    #         lan.save()
+    #         lan.cv.add(new_cv)
+    
+    cvID= request.GET.get('cvID')
+    language=[]
+    education=[]
+    experience=[]
+    cvBasic=[]
+    cvBasic=CvInfoBase.objects.filter(cvId=cvID).values()
+    for cvID in CvInfoBase.objects.filter(cvId=cvID):
+         language = [lan for lan in Language.objects.filter(cv=cvID)]
+        #  education = [edu for edu in Education.objects.filter(cv=cvID)]
+         education =  Education.objects.filter(cv=cvID).values
+         
+         experience = [work for work in WorkExperience.objects.filter(cv=cvID)]
+    print(education)
+    #     return JsonResponse({"status":True})
+    return render(request, 'student/editProfile.html', {'nav':'student','cvBasic':cvBasic,'language':language,'education':education,'experience':experience})
+    # return HttpResponseForbidden()
+
+
