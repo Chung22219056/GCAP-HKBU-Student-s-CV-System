@@ -3,7 +3,7 @@
 <h3 style="text-align: center;">Your Cv Record</h3>
 {% for cv in cv_list %}
 <div class="card-container cardLayout">
-    <span class="pro">PRO</span> {% if cv.profileIcon == None %}
+    <span class="pro">CV</span> {% if cv.profileIcon == None %}
     <img class="round" src="/static/images/default-avatar.png" alt="user" style="width: 100px ;height: 100px; object-fit:cover" /> {% else %}
     <img class="round" src="{{cv.profileIcon}}" alt="user" style="width: 100px ;height: 100px; object-fit:cover" /> {% endif %}
     <h3>{{cv.cvname}}</h3>

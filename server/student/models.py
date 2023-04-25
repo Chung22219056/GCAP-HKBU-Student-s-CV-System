@@ -53,6 +53,15 @@ class Education(models.Model):
 
     def __str__(self):
         return self.shcoolName
+    
+    def to_dict(self):
+        return {
+            'studentID': self.studentID.student_id,
+            'schoolName': self.shcoolName,
+            'major': self.major,
+            'start_date': self.start_date.strftime("%Y-%m-%d"),
+            'end_date': self.end_date.strftime("%Y-%m-%d")
+        }
 
 class EducationType(models.Model):
     type = models.CharField(max_length=255)
@@ -85,4 +94,12 @@ class WorkExperience(models.Model):
 
     def __str__(self):
         return "{0} {1}".format(self.studentID.user_id,self.companyName)
+    
+    def to_dict(self):
+        return {
+            'companyName': self.companyName,
+            'description': self.description,
+            'start_date': self.start_date.strftime("%Y-%m-%d"),
+            'end_date': self.end_date.strftime("%Y-%m-%d")
+        }
 

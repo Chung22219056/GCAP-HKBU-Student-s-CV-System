@@ -117,6 +117,9 @@
                 <!-- <h1>Dynamic Fields Javascript</h1> -->
                 <!-- <div class="wrapper"> -->
                 <div id="survey_options">
+                    {% for language in languages %}
+                        <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language" value="{{language}}">
+                    {% endfor %}
                     <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
 
                 </div>
@@ -133,7 +136,7 @@
 
 
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="saveCv()" id="send">Save</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="saveCv()" id="save_cv">Save</button>
         </form>
     </div>
 
@@ -143,6 +146,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
     var delay = 1;
+    var cv_id = "{{cvID}}"
+    var edus = {{educations | safe}}
+    var exps = {{experiences | safe}}
 
     function delayURL(value) {
         var t = setTimeout("delayURL('" + value + "')", 1500);
@@ -155,19 +161,110 @@
         }
     }
 
+    function eduTemplate(education, index){
+        let schoolName, major, startDate, endDate = null
+
+        if (education != null){
+            schoolName = education.schoolName
+            major = education.major
+            startDate = education.start_date
+            endDate = education.end_date
+        }else{
+            schoolName = ""
+            major = ""
+            startDate = ""
+            endDate = ""
+        }
+        return `
+            <b>
+                <label for="exampleFormControlTextarea1">Education ${index}</label>
+            </b>
+            <div id="add_experience-1">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="schoolName">School Name</label>
+                        <input type="text" class="form-control" id="schoolName" placeholder="School Name" value="${schoolName}" required>
+                    </div>
+                    <div class="col-md-6 mb-3"><label for="major">major</label>
+                        <input type="text" class="form-control" id="major" placeholder="Major" value="${major}" required="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="startDate">Start date</label>
+                        <input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date" value="${startDate}">
+                    </div>
+                    <div class="col-md-6 mb-3"><label for="endDate">End date</label>
+                        <input type="date" class="form-control" id="schoolEndDate" name="date" value="${endDate}">
+                    </div>
+                </div
+            </div>
+        `
+    }
+    //show edcution input
+    for(let i = 0; i < 3; i++){
+        if(i < edus.length)
+            $('#edu').append(eduTemplate(edus[i],i+1))
+        else
+        $('#edu').append(eduTemplate(null,i+1))
+    }
 
 
     var base64ImgProfileIcon = '';
-    //show edcution input
+    {% comment %} //show edcution input
     for (var i = 0; i < 3; i++) {
         $('#edu').append('{{education.0.shcoolName}}{{education.1.shcoolName}}<b><label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
+    } {% endcomment %}
 
+
+    function expTemplate(exp, index){
+        let companyName,description,startDate,endDate;
+        if (exp != null){
+            companyName = exp.companyName
+            description = exp.description
+            startDate = exp.start_date
+            endDate = exp.end_date
+        }else{
+            companyName = ""
+            description = ""
+            startDate = ""
+            endDate = ""
+        }
+
+        return `
+        <b> 
+            <label for="exampleFormControlTextarea1">Experience ${index}</label>
+        </b>
+        <div id="inputBox_options"></div><div id="add_experience-1">
+            <input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" value="${companyName}" required>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">Start date</label>
+                    <input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date" value="${startDate}" >
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">End date</label>
+                    <input type="date" class="form-control" id="companyEndDate" name="date" value="${endDate}" >
+                </div>
+            </div>  
+            <div class="input-group">
+                <textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description" value="${description}" ></textarea>
+            </div>
+        </div>
+        `
+    }
+    //show experience
+    for(let i = 0; i < 3; i++){
+        if(exps.length > i)
+            $('#experience').append(expTemplate(exps[i], i))
+        else
+            $('#experience').append(expTemplate(null, i))
     }
 
     //show experience input
-    for (var i = 0; i < 3; i++) {
+    {% comment %} for (var i = 0; i < 3; i++) {
         $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div>  <div class="input-group"><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div></div>')
-    }
+    } {% endcomment %}
 
     function getBase64(file) {
         var reader = new FileReader();
@@ -182,11 +279,12 @@
         };
     }
 
-
-
+        
+    $("#save_cv").click((e) => {
+        e.preventDefault()
+    })
 
     function saveCv() {
-
         var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
 
             return $(elem).val();
@@ -233,9 +331,10 @@
         }).get();
 
         $.ajax({
-            url: "/student/create_cvProfile",
+            url: "/student/edit_cvProfile",
             type: 'POST',
             data: {
+                cv_id: cv_id,
                 profileIcon: base64ImgProfileIcon,
                 cvName: $("#cvName").val(),
                 fristName: $("#fristName").val(),
@@ -281,12 +380,6 @@
     }
 
 
-
-
-
-    $("#send").click((e) => {
-        e.preventDefault()
-    })
 
     $("#profileIcon").change((e) => {
         let file = $("#profileIcon")[0].files[0]
