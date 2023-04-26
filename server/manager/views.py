@@ -53,3 +53,13 @@ def send_email_to_student(request):
         print(e)
         return JsonResponse({'status': False})
 
+
+
+def watch_studentCvRecord(request):
+    # only for logged user
+    stud_id= request.GET.get('studentID')
+    print(stud_id)
+    student = Student.objects.get(student_id=stud_id)
+    studentLan = [{'language':[lan.name for lan in Language.objects.filter(studentID=student)]} for student in Student.objects.all()]
+    cv_list = CvInfoBase.objects.filter(studentID=student)
+    return render(request, 'manager/watchStudentCvRecord.html', {'nav':'manager','cv_list':cv_list})

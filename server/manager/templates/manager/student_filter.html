@@ -36,7 +36,7 @@
                         <td>
                             {% for lan in student.language %} {{lan}}, {% endfor %}
                         </td>
-                        <td><a class="btn btn-primary" href="/student/cvRecord?stu_id={{student.student_id}}">View</a>
+                        <td><a class="btn btn-primary" href="/manager/watch_student_CvRecord?studentID={{student.student_id}}">View</a>
 
                         </td>
                         <td> <button class="btn btn-warning" role="button" data-toggle="modal" data-target="#exampleModal" onclick="setEmailReceiver('{{student.student_id}}')">Send</button></td>
