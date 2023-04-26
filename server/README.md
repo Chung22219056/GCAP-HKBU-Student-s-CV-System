@@ -6,8 +6,7 @@ The system allows students to input their personal information, educational back
 # UI Design
 <h3>Login UI Design</h3>
 
-<h4> login page of the system</h4>
 ![image](https://user-images.githubusercontent.com/123064890/222131003-802b4897-645a-4f28-8b8f-fd7b53fcae34.png)
 
-<h4> failed login  </h4>
+
 ![Screenshot from 2023-04-26 01-34-22](https://user-images.githubusercontent.com/123064890/234518682-f83eed07-9375-41b0-a899-9326f7ce01e0.png)
