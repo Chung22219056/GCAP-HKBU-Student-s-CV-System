@@ -15,7 +15,7 @@
             <button class="primary">
                     Edit
                 </button></a>
-        <button class="primary ghost">
+            <button class="primary ghost" onclick="deleteCVHandler('{{cv.cvId}}')">
                     Delete
                 </button>
     </div>
@@ -60,4 +60,56 @@
 {% endcomment %}
 
 
-<a href="/student/cvProfile"><button class="btn btn-primary btn-lg btn-block" style="display: block;margin: 0 auto;">Create New CV</button></a> {% endblock %}
+<a href="/student/cvProfile"><button class="btn btn-primary btn-lg btn-block" style="display: block;margin: 0 auto;">Create New CV</button></a> 
+
+
+<script>
+var delay = 1;
+function delayURL(value) {
+    var t = setTimeout("delayURL('" + value + "')", 1500);
+    if (delay > 0) {
+        console.log(delay)
+        delay--;
+    } else {
+        clearTimeout(t);
+        window.location.href = value;
+    }
+}
+
+function deleteCVHandler(cv_id){
+    fetch("/student/delete_cv",{
+        method: "POST",
+        body: JSON.stringify(
+            {
+                "cv_id": cv_id
+            }
+        )
+    }).then(response => response.json())
+      .then(json => {
+        if(json.status){
+            Swal.fire({
+                title: 'Delete CV Successfully',
+                text: 'Success',
+                icon: 'success',
+                showCancelButton: true,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'OK'
+            })
+            delayURL("/student/cvRecord")
+        }else{
+            Swal.fire({
+                title: 'Fail to delete CV',
+                text: 'Fail!',
+                icon: 'error',
+                showCancelButton: true,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'OK'
+            })
+        }
+      })
+}
+</script>
+
+{% endblock %}

@@ -5,6 +5,7 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from .models import *
+import json
 from django_base64field.fields import Base64Field
 # Create your views here.
 
@@ -224,7 +225,17 @@ def edit_cvProfile(request):
 
 @csrf_exempt
 @login_required
-def deleteCV(request):
-    return HttpResponse(200)
+def delete_CV(request):
+    if request.method == 'POST':
+        request_JSON = json.loads(request.body)
+        try:
+            cv = CvInfoBase.objects.get(cvId=request_JSON["cv_id"])
+            cv.delete()
+            return JsonResponse({"status":True})
+        except:
+            
+            return JsonResponse({"status":False})
+        
+    return HttpResponseForbidden()
 
 
