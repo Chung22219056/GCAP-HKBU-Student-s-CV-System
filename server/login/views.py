@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
+from student.models import *
+
 
 # Create your views here.
 
@@ -24,7 +26,11 @@ def login(request):
             user = User.objects.get(email=email)
             if user and user.check_password(password):
                 auth_login(request, user)
-                return JsonResponse({"status":True})
+                try:
+                    student = Student.objects.get(user_id=user)
+                    return JsonResponse({"status":True, "is_student": True})
+                except:
+                    return JsonResponse({"status":True, "is_student": False})
             else:
                 #return render(request,'login/login.html',{"login_failed":True})
                 return JsonResponse({"status":False})

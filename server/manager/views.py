@@ -39,13 +39,16 @@ def send_email_to_student(request):
         email_content = json_data['email_content']
 
         if student_id == 'all':
-            pass
+            students = Student.objects.all()
+            for student in students:
+                sendEmail(student.user_id.email, email_content)
         else:
             student = Student.objects.get(student_id=student_id)
             print(email_content)
             sendEmail(student.user_id.email, email_content)
         
         return JsonResponse({'status': True})
+    
     except Exception as e:
         print(e)
         return JsonResponse({'status': False})

@@ -158,7 +158,16 @@
             })
         }).then(response => response.json())
         .then((json)=>{
-            console.log(json)
+            Swal.fire({
+                title: 'Send email Successfully',
+                text: 'Success',
+                icon: 'success',
+                showCancelButton: true,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'OK'
+            })
+            //delayURL("/manager/student_filter")
         })
     })
     

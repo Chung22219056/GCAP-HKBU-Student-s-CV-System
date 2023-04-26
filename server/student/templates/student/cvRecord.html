@@ -77,38 +77,55 @@ function delayURL(value) {
 }
 
 function deleteCVHandler(cv_id){
-    fetch("/student/delete_cv",{
-        method: "POST",
-        body: JSON.stringify(
-            {
-                "cv_id": cv_id
+
+    Swal.fire({
+        title: 'Are You Sure Delete The CV?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: 'No',
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-2',
+            denyButton: 'order-3',
+        }
+    }).then((result)=>{
+        if(result.isConfirmed){
+        fetch("/student/delete_cv",{
+            method: "POST",
+            body: JSON.stringify(
+                {
+                    "cv_id": cv_id
+                }
+            )
+        }).then(response => response.json())
+        .then(json => {
+            if(json.status){
+                Swal.fire({
+                    title: 'Delete CV Successfully',
+                    text: 'Success',
+                    icon: 'success',
+                    showCancelButton: true,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'OK'
+                })
+                delayURL("/student/cvRecord")
+            }else{
+                Swal.fire({
+                    title: 'Fail to delete CV',
+                    text: 'Fail!',
+                    icon: 'error',
+                    showCancelButton: true,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'OK'
+                })
             }
-        )
-    }).then(response => response.json())
-      .then(json => {
-        if(json.status){
-            Swal.fire({
-                title: 'Delete CV Successfully',
-                text: 'Success',
-                icon: 'success',
-                showCancelButton: true,
-                showDenyButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'OK'
-            })
-            delayURL("/student/cvRecord")
-        }else{
-            Swal.fire({
-                title: 'Fail to delete CV',
-                text: 'Fail!',
-                icon: 'error',
-                showCancelButton: true,
-                showDenyButton: false,
-                showCancelButton: false,
-                confirmButtonText: 'OK'
             })
         }
-      })
+    })
 }
 </script>
 

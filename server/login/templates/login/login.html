@@ -79,7 +79,12 @@
                         showCancelButton: false,
                         confirmButtonText: 'OK'
                     })
-                    delayURL("/student/cvRecord")
+
+                    if(result.is_student)
+                        delayURL("/student/cvRecord")
+                    else
+                        delayURL("/manager/student_filter")
+                        
                 } else {
                     Swal.fire({
                         title: 'Login',
