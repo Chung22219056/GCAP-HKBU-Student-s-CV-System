@@ -10,6 +10,7 @@ def sendEmail(to, email_content, subject=None):
         content["subject"] = "subject"  
 
     content["from"] = "gcap3055hkbu@gmail.com"  
+    content['Subject'] = "InterView"
     #content["to"] = "22219056@life.hkbu.edu.hk" 
     content["to"] = to
     content.attach(MIMEText(email_content, "html"))  

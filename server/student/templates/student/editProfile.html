@@ -5,413 +5,472 @@
 
 {% endblock %} {% block content %}
 <div class="container mt-4 text-dark">
-
-
-    <div class="col-md-8 order-md-1" style="margin: 0 auto; width:auto;">
-        {% for cvBasic in cvBasic %}
-        <h4 class="mb-3">Personal Information</h4>
-        <div class="mb-3">
-            <label for="username">CV Name</label>
-            <div class="input-group">
-
-                <input type="text" class="form-control" id="cvName" placeholder="CV Name" value="{{cvBasic.cvName}}" required>
-                <div class="invalid-feedback" style="width: 100%;">
-                    Your username is required.
-                </div>
-            </div>
+  <div class="col-md-8 order-md-1" style="margin: 0 auto; width: auto">
+    {% for cvBasic in cvBasic %}
+    <h4 class="mb-3">Personal Information</h4>
+    <div class="mb-3">
+      <label for="username">CV Name</label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          id="cvName"
+          placeholder="CV Name"
+          value="{{cvBasic.cvName}}"
+          required
+        />
+        <div class="invalid-feedback" style="width: 100%">
+          Your username is required.
         </div>
-        <form class="needs-validation" novalidate="" id="profile">
-
-            <div class="row">
-                <div class="col-12 mb-3 d-flex justify-content-center">
-                    <img class="rounded-circle" src="{{cvBasic.profileIcon}}" style="width: 180px; height: 180px; object-fit:cover" id="icon-preview">
-                </div>
-
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="profileIcon">Upload your portrait</label>
-                    <input type="file" class="form-control" id="profileIcon" value="{{cvBasic.profileIcon}}" />
-                </div>
-
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="firstName">First name</label>
-                    <input type="text" class="form-control" id="fristName" placeholder="Frist Name" value="{{cvBasic.fristName}}" required="">
-                    <div class="invalid-feedback">
-                        Valid first name is required.
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="lastName">Last name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" value="{{cvBasic.lastName}}" required="">
-                    <div class="invalid-feedback">
-                        Valid last name is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Nick Name</label>
-                <div class="input-group">
-
-                    <input type="text" class="form-control" id="nickName" placeholder="Nick Name" value="{{cvBasic.nickName}}" required>
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Your username is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Phone number</label>
-                <div class="input-group">
-
-                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone number" value="{{cvBasic.phone}}" required="">
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Your username is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Email</label>
-                <div class="input-group">
-
-                    <input type="text" class="form-control" id="email" placeholder="Email" value="{{cvBasic.email}}" required="">
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Your username is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">About me</label>
-                <div class="input-group">
-                    <textarea type="text" class="form-control skillBox" id="aboutMe" rows="5" placeholder="Description">{{cvBasic.aboutMe}}</textarea>
-
-                </div>
-            </div>
-
-            {% endfor %}
-
-            <div class="mb-3">
-                <div class="form-group" id="edu">
-
-                    <!-- input eduction data -->
-
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <div class="form-group" id="experience">
-
-                    <!-- input experience data -->
-
-
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="address">Language</label>
-                <!-- <h1>Dynamic Fields Javascript</h1> -->
-                <!-- <div class="wrapper"> -->
-                <div id="survey_options">
-                    {% for language in languages %}
-                        <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language" value="{{language}}">
-                    {% endfor %}
-                    <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
-
-                </div>
-                <div class="controls">
-                    <button type="button" id="add_more_fields" class="btn btn-primary">Add More</button>
-                    <button type="button" id="remove_fields" class="btn btn-danger">Delete</button>
-
-                </div>
-                <!-- </div> -->
-            </div>
-
-
-
-
-
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="saveCv()" id="save_cv">Save</button>
-        </form>
+      </div>
     </div>
+    <form class="needs-validation" novalidate="" id="profile">
+      <div class="row">
+        <div class="col-12 mb-3 d-flex justify-content-center">
+          <img
+            class="rounded-circle"
+            src="{{cvBasic.profileIcon}}"
+            style="width: 180px; height: 180px; object-fit: cover"
+            id="icon-preview"
+          />
+        </div>
 
+        <div class="col-12 mb-3">
+          <label class="form-label" for="profileIcon"
+            >Upload your portrait</label
+          >
+          <input
+            type="file"
+            class="form-control"
+            id="profileIcon"
+            value="{{cvBasic.profileIcon}}"
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="firstName">First name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fristName"
+            placeholder="Frist Name"
+            value="{{cvBasic.fristName}}"
+            required=""
+          />
+          <div class="invalid-feedback">Valid first name is required.</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="lastName">Last name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            placeholder="Last Name"
+            value="{{cvBasic.lastName}}"
+            required=""
+          />
+          <div class="invalid-feedback">Valid last name is required.</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="username">Nick Name</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="nickName"
+            placeholder="Nick Name"
+            value="{{cvBasic.nickName}}"
+            required
+          />
+          <div class="invalid-feedback" style="width: 100%">
+            Your username is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="username">Phone number</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="phoneNumber"
+            placeholder="Phone number"
+            value="{{cvBasic.phone}}"
+            required=""
+          />
+          <div class="invalid-feedback" style="width: 100%">
+            Your username is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="username">Email</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            placeholder="Email"
+            value="{{cvBasic.email}}"
+            required=""
+          />
+          <div class="invalid-feedback" style="width: 100%">
+            Your username is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="username">About me</label>
+        <div class="input-group">
+          <textarea
+            type="text"
+            class="form-control skillBox"
+            id="aboutMe"
+            rows="5"
+            placeholder="Description"
+          >
+{{cvBasic.aboutMe}}</textarea
+          >
+        </div>
+      </div>
+
+      {% endfor %}
+
+      <div class="mb-3">
+        <div class="form-group" id="edu">
+          <!-- input eduction data -->
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="form-group" id="experience">
+          <!-- input experience data -->
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="address">Language</label>
+        <!-- <h1>Dynamic Fields Javascript</h1> -->
+        <!-- <div class="wrapper"> -->
+        <div id="survey_options">
+          {% for language in languages %}
+          <input
+            type="text"
+            name="survey_options[]"
+            class="survey_options skillBox"
+            size="50"
+            placeholder="language"
+            value="{{language}}"
+          />
+          {% endfor %}
+          <input
+            type="text"
+            name="survey_options[]"
+            class="survey_options skillBox"
+            size="50"
+            placeholder="language"
+          />
+        </div>
+        <div class="controls">
+          <button type="button" id="add_more_fields" class="btn btn-primary">
+            Add More
+          </button>
+          <button type="button" id="remove_fields" class="btn btn-danger">
+            Delete
+          </button>
+        </div>
+        <!-- </div> -->
+      </div>
+
+      <hr class="mb-4" />
+      <button
+        class="btn btn-primary btn-lg btn-block"
+        type="submit"
+        onclick="saveCv()"
+        id="save_cv"
+      >
+        Save
+      </button>
+    </form>
+  </div>
 </div>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
-    var delay = 1;
-    var cv_id = "{{cvID}}"
-    var edus = {{educations | safe}}
-    var exps = {{experiences | safe}}
+  var delay = 1;
+  var cv_id = "{{cvID}}"
+  var edus = {{educations | safe}}
+  var exps = {{experiences | safe}}
 
-    function delayURL(value) {
-        var t = setTimeout("delayURL('" + value + "')", 1500);
-        if (delay > 0) {
-            console.log(delay)
-            delay--;
-        } else {
-            clearTimeout(t);
-            window.location.href = value;
-        }
-    }
+  function delayURL(value) {
+      var t = setTimeout("delayURL('" + value + "')", 1500);
+      if (delay > 0) {
+          console.log(delay)
+          delay--;
+      } else {
+          clearTimeout(t);
+          window.location.href = value;
+      }
+  }
 
-    function eduTemplate(education, index){
-        let schoolName, major, startDate, endDate = null
+  function eduTemplate(education, index){
+      let schoolName, major, startDate, endDate = null
 
-        if (education != null){
-            schoolName = education.schoolName
-            major = education.major
-            startDate = education.start_date
-            endDate = education.end_date
-        }else{
-            schoolName = ""
-            major = ""
-            startDate = ""
-            endDate = ""
-        }
-        return `
-            <b>
-                <label for="exampleFormControlTextarea1">Education ${index}</label>
-            </b>
-            <div id="add_experience-1">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="schoolName">School Name</label>
-                        <input type="text" class="form-control" id="schoolName" placeholder="School Name" value="${schoolName}" required>
-                    </div>
-                    <div class="col-md-6 mb-3"><label for="major">major</label>
-                        <input type="text" class="form-control" id="major" placeholder="Major" value="${major}" required="">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="startDate">Start date</label>
-                        <input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date" value="${startDate}">
-                    </div>
-                    <div class="col-md-6 mb-3"><label for="endDate">End date</label>
-                        <input type="date" class="form-control" id="schoolEndDate" name="date" value="${endDate}">
-                    </div>
-                </div
-            </div>
-        `
-    }
-    //show edcution input
-    for(let i = 0; i < 3; i++){
-        if(i < edus.length)
-            $('#edu').append(eduTemplate(edus[i],i+1))
-        else
-        $('#edu').append(eduTemplate(null,i+1))
-    }
-
-
-    var base64ImgProfileIcon = '';
-    {% comment %} //show edcution input
-    for (var i = 0; i < 3; i++) {
-        $('#edu').append('{{education.0.shcoolName}}{{education.1.shcoolName}}<b><label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
-    } {% endcomment %}
+      if (education != null){
+          schoolName = education.schoolName
+          major = education.major
+          startDate = education.start_date
+          endDate = education.end_date
+      }else{
+          schoolName = ""
+          major = ""
+          startDate = ""
+          endDate = ""
+      }
+      return `
+          <b>
+              <label for="exampleFormControlTextarea1">Education ${index}</label>
+          </b>
+          <div id="add_experience-1">
+              <div class="row">
+                  <div class="col-md-6 mb-3">
+                      <label for="schoolName">School Name</label>
+                      <input type="text" class="form-control" id="schoolName" placeholder="School Name" value="${schoolName}" required>
+                  </div>
+                  <div class="col-md-6 mb-3"><label for="major">major</label>
+                      <input type="text" class="form-control" id="major" placeholder="Major" value="${major}" required="">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6 mb-3">
+                      <label for="startDate">Start date</label>
+                      <input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date" value="${startDate}">
+                  </div>
+                  <div class="col-md-6 mb-3"><label for="endDate">End date</label>
+                      <input type="date" class="form-control" id="schoolEndDate" name="date" value="${endDate}">
+                  </div>
+              </div
+          </div>
+      `
+  }
+  //show edcution input
+  for(let i = 0; i < 3; i++){
+      if(i < edus.length)
+          $('#edu').append(eduTemplate(edus[i],i+1))
+      else
+      $('#edu').append(eduTemplate(null,i+1))
+  }
 
 
-    function expTemplate(exp, index){
-        let companyName,description,startDate,endDate;
-        if (exp != null){
-            companyName = exp.companyName
-            description = exp.description
-            startDate = exp.start_date
-            endDate = exp.end_date
-        }else{
-            companyName = ""
-            description = ""
-            startDate = ""
-            endDate = ""
-        }
-
-        return `
-        <b> 
-            <label for="exampleFormControlTextarea1">Experience ${index}</label>
-        </b>
-        <div id="inputBox_options"></div><div id="add_experience-1">
-            <input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" value="${companyName}" required>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="firstName">Start date</label>
-                    <input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date" value="${startDate}" >
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="lastName">End date</label>
-                    <input type="date" class="form-control" id="companyEndDate" name="date" value="${endDate}" >
-                </div>
-            </div>  
-            <div class="input-group">
-                <textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description" value="${description}" ></textarea>
-            </div>
-        </div>
-        `
-    }
-    //show experience
-    for(let i = 0; i < 3; i++){
-        if(exps.length > i)
-            $('#experience').append(expTemplate(exps[i], i))
-        else
-            $('#experience').append(expTemplate(null, i))
-    }
-
-    //show experience input
-    {% comment %} for (var i = 0; i < 3; i++) {
-        $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div>  <div class="input-group"><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div></div>')
-    } {% endcomment %}
-
-    function getBase64(file) {
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function() {
-            // console.log(reader.result);
-            return reader.result
-
-        };
-        reader.onerror = function(error) {
-            console.log('Error: ', error);
-        };
-    }
-
-        
-    $("#save_cv").click((e) => {
-        e.preventDefault()
-    })
-
-    function saveCv() {
-        var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
-
-            return $(elem).val();
-        }).get();
-        // console.log(schoolNames)
-
-        var majors = $('input[id^=major]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        // console.log(majors)
-
-        var schoolStartDates = $('input[id^=schoolStartDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
+  var base64ImgProfileIcon = '';
+  {% comment %} //show edcution input
+  for (var i = 0; i < 3; i++) {
+      $('#edu').append('{{education.0.shcoolName}}{{education.1.shcoolName}}<b><label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
+  } {% endcomment %}
 
 
-        var schoolEndDates = $('input[id^=schoolEndDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
+  function expTemplate(exp, index){
+      let companyName,description,startDate,endDate;
+      if (exp != null){
+          companyName = exp.companyName
+          description = exp.description
+          startDate = exp.start_date
+          endDate = exp.end_date
+      }else{
+          companyName = ""
+          description = ""
+          startDate = ""
+          endDate = ""
+      }
+
+      return `
+      <b>
+          <label for="exampleFormControlTextarea1">Experience ${index}</label>
+      </b>
+      <div id="inputBox_options"></div><div id="add_experience-1">
+          <input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" value="${companyName}" required>
+          <div class="row">
+              <div class="col-md-6 mb-3">
+                  <label for="firstName">Start date</label>
+                  <input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date" value="${startDate}" >
+              </div>
+              <div class="col-md-6 mb-3">
+                  <label for="lastName">End date</label>
+                  <input type="date" class="form-control" id="companyEndDate" name="date" value="${endDate}" >
+              </div>
+          </div>
+          <div class="input-group">
+              <textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description" value="${description}" >${description}</textarea>
+          </div>
+      </div>
+      `
+  }
+  //show experience
+  for(let i = 0; i < 3; i++){
+      if(exps.length > i)
+          $('#experience').append(expTemplate(exps[i], i))
+      else
+          $('#experience').append(expTemplate(null, i))
+  }
+
+  //show experience input
+  {% comment %} for (var i = 0; i < 3; i++) {
+      $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div>  <div class="input-group"><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div></div>')
+  } {% endcomment %}
+
+  function getBase64(file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+          // console.log(reader.result);
+          return reader.result
+
+      };
+      reader.onerror = function(error) {
+          console.log('Error: ', error);
+      };
+  }
 
 
+  $("#save_cv").click((e) => {
+      e.preventDefault()
+  })
 
-        var companyNames = $('input[id^=companyName]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
+  function saveCv() {
+      var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
 
-        var companyStartDates = $('input[id^=companyStartDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        // console.log(companyStartDate)
+          return $(elem).val();
+      }).get();
+      // console.log(schoolNames)
 
-        var companyEndDates = $('input[id^=companyEndDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
+      var majors = $('input[id^=major]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
+      // console.log(majors)
 
-        // console.log(companyEndDate)
-        var description = $('textarea[id^=description]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
+      var schoolStartDates = $('input[id^=schoolStartDate]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
 
 
-        var lan = $('input[name^=survey_options]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        $.ajax({
-            url: "/student/edit_cvProfile",
-            type: 'POST',
-            data: {
-                cv_id: cv_id,
-                profileIcon: base64ImgProfileIcon,
-                cvName: $("#cvName").val(),
-                fristName: $("#fristName").val(),
-                lastName: $("#lastName").val(),
-                nickName: $("#nickName").val(),
-                phoneNumber: $("#phoneNumber").val(),
-                email: $("#email").val(),
-                aboutMe: $("#aboutMe").val(),
-                schoolNames: schoolNames,
-                majors: majors,
-                schoolStartDates: schoolStartDates,
-                schoolEndDates: schoolEndDates,
-                companyNames: companyNames,
-                companyStartDate: companyStartDates,
-                companyEndDate: companyEndDates,
-                description: description,
-                language: lan,
-            },
-            datatype: 'html',
-            success: function(result) {
-                //On success
-                console.log(result)
-                if (result.status == true) {
-
-                    Swal.fire({
-                        title: 'Create CV Successful',
-                        text: 'Success',
-                        icon: 'success',
-                        showCancelButton: true,
-                        showDenyButton: false,
-                        showCancelButton: false,
-                        confirmButtonText: 'OK'
-                    })
-                    delayURL("/student/cvRecord")
-                }
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText);
-            }
-
-        })
-    }
+      var schoolEndDates = $('input[id^=schoolEndDate]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
 
 
 
-    $("#profileIcon").change((e) => {
-        let file = $("#profileIcon")[0].files[0]
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = function() {
-            const base64String = reader.result
-            base64ImgProfileIcon = base64String //global
-            $("#icon-preview").attr("src", base64String)
-        };
-    })
+      var companyNames = $('input[id^=companyName]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
 
-    var survey_options = document.getElementById('survey_options');
-    var add_more_fields = document.getElementById('add_more_fields');
-    var remove_fields = document.getElementById('remove_fields');
+      var companyStartDates = $('input[id^=companyStartDate]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
+      // console.log(companyStartDate)
 
-    add_more_fields.onclick = function() {
-        var newField = document.createElement('input');
-        newField.setAttribute('type', 'text');
-        newField.setAttribute('name', 'survey_options[]');
-        newField.setAttribute('class', 'survey_options skillBox');
-        newField.setAttribute('siz', 50);
-        newField.setAttribute('placeholder', 'language');
-        survey_options.appendChild(newField);
-    }
+      var companyEndDates = $('input[id^=companyEndDate]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
 
-    remove_fields.onclick = function() {
-        var input_tags = survey_options.getElementsByTagName('input');
-        if (input_tags.length > 1) {
-            survey_options.removeChild(input_tags[(input_tags.length) - 1]);
-        }
-    }
+      // console.log(companyEndDate)
+      var description = $('textarea[id^=description]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
+
+
+      var lan = $('input[name^=survey_options]').map(function(idx, elem) {
+          return $(elem).val();
+      }).get();
+
+      $.ajax({
+          url: "/student/edit_cvProfile",
+          type: 'POST',
+          data: {
+              cv_id: cv_id,
+              profileIcon: $('.rounded-circle').attr('src'),
+              cvName: $("#cvName").val(),
+              fristName: $("#fristName").val(),
+              lastName: $("#lastName").val(),
+              nickName: $("#nickName").val(),
+              phoneNumber: $("#phoneNumber").val(),
+              email: $("#email").val(),
+              aboutMe: $("#aboutMe").val(),
+              schoolNames: schoolNames,
+              majors: majors,
+              schoolStartDates: schoolStartDates,
+              schoolEndDates: schoolEndDates,
+              companyNames: companyNames,
+              companyStartDate: companyStartDates,
+              companyEndDate: companyEndDates,
+              description: description,
+              language: lan,
+          },
+          datatype: 'html',
+          success: function(result) {
+              //On success
+              console.log(result)
+              if (result.status == true) {
+
+                  Swal.fire({
+                      title: 'Create CV Successful',
+                      text: 'Success',
+                      icon: 'success',
+                      showCancelButton: true,
+                      showDenyButton: false,
+                      showCancelButton: false,
+                      confirmButtonText: 'OK'
+                  })
+                  delayURL("/student/cvRecord")
+              }
+
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              alert(jqXHR.responseText);
+          }
+
+      })
+  }
+
+
+
+  $("#profileIcon").change((e) => {
+      let file = $("#profileIcon")[0].files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = function() {
+          const base64String = reader.result
+          base64ImgProfileIcon = base64String //global
+          $("#icon-preview").attr("src", base64String)
+      };
+  })
+
+  var survey_options = document.getElementById('survey_options');
+  var add_more_fields = document.getElementById('add_more_fields');
+  var remove_fields = document.getElementById('remove_fields');
+
+  add_more_fields.onclick = function() {
+      var newField = document.createElement('input');
+      newField.setAttribute('type', 'text');
+      newField.setAttribute('name', 'survey_options[]');
+      newField.setAttribute('class', 'survey_options skillBox');
+      newField.setAttribute('siz', 50);
+      newField.setAttribute('placeholder', 'language');
+      survey_options.appendChild(newField);
+  }
+
+  remove_fields.onclick = function() {
+      var input_tags = survey_options.getElementsByTagName('input');
+      if (input_tags.length > 1) {
+          survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+      }
+  }
 </script>
 
 {% endblock %}

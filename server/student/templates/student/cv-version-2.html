@@ -1,10 +1,16 @@
 <!-- {% extends 'base.html' %} {% block header %} -->
 
 <title>resume</title>
-<link rel="stylesheet" type="text/css" href="../../../../static/css/cv-version-2.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="../../../../static/css/cv-version-2.css"
+/>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 
 <!-- {% endblock %}
 
@@ -12,118 +18,158 @@
 
 {% for cvBasic in cvBasic %}
 <div class="box-outer">
+  <div class="resume-box cvSize" id="cv">
+    <div class="box-1">
+      <img src="{{cvBasic.profileIcon}}" class="profile" />
+      <div class="content">
+        <h1>About me</h1>
+        <p>{{cvBasic.aboutMe}}</p>
 
-    <div class="resume-box cvSize">
-
-        <div class="box-1">
-
-            <img src="{{cvBasic.profileIcon}}" class="profile" />
-            <div class="content">
-
-                <h1>About me</h1>
-                <p> {{cvBasic.aboutMe}} </p>
-
-                <br/>
-                <!-- <h1>Award</h1>
+        <br />
+        <!-- <h1>Award</h1>
                 <p><span style="color:white">Lorem Ipsum </span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
                     <br/><br/>
                     <span style="color:white">text ever </span> the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 
                 </p> -->
-                <br/>
-                <h1>Contact</h1>
+        <br />
+        <h1>Contact</h1>
 
-                <!-- <p><i class="fa fa-map"></i> &nbsp;LON,United Kingdom </p> -->
-                <p><i class="fa fa-phone"></i> &nbsp;phone +(852){{cvBasic.phone}}</p>
-                <p><i class="fa fa-envelope"></i> &nbsp;email : {{cvBasic.email}}</p>
-                <!-- <p><i class="fa fa-globe"></i> &nbsp;www.m-softtech.in</p> -->
+        <!-- <p><i class="fa fa-map"></i> &nbsp;LON,United Kingdom </p> -->
+        <p><i class="fa fa-phone"></i> &nbsp;phone +(852){{cvBasic.phone}}</p>
+        <p><i class="fa fa-envelope"></i> &nbsp;email : {{cvBasic.email}}</p>
+        <!-- <p><i class="fa fa-globe"></i> &nbsp;www.m-softtech.in</p> -->
+      </div>
+    </div>
 
-            </div>
-
-        </div>
-
-        <div class="box-2">
-
-            <div class="intro">
-
-                <br/>
-                <!-- <h1 class="ma">Manoj</h1>
+    <div class="box-2">
+      <div class="intro">
+        <br />
+        <!-- <h1 class="ma">Manoj</h1>
                 <h1> <strong>Adhikari</strong></h1> -->
-                <br/>
+        <br />
 
-                <p class="phead">{{cvBasic.cvName}}</p>
-                <!-- <div class="clearfix"></div> -->
-                <hr class="hr1" />
+        <p class="phead">{{cvBasic.cvName}}</p>
+        <!-- <div class="clearfix"></div> -->
+        <hr class="hr1" />
+      </div>
 
-            </div>
-
-            <br/><br/><br/>
-            <div class="content-2">
-                <h1 class="head">Experience</h1>
-                <hr class="hr2" />
-                <div class="clearfix"></div>
-                {% for exp in experience %}
-                <p class="para-1">{{exp.companyName}} <br><strong>[{{exp.start_date}} - {{exp.end_date}}]</strong></p>
-                <p class="para-21">{{exp.description}}</p>
-                {% endfor %}
-                <!-- <p class="para-1">UI Designer <strong>(2013 - 2015)</strong></p>
+      <br /><br /><br />
+      <div class="content-2">
+        <h1 class="head">Experience</h1>
+        <hr class="hr2" />
+        <div class="clearfix"></div>
+        {% for exp in experience %}
+        <p class="para-1">
+          {{exp.companyName}} <br /><strong
+            >[{{exp.start_date}} - {{exp.end_date}}]</strong
+          >
+        </p>
+        <p class="para-21">{{exp.description}}</p>
+        {% endfor %}
+        <!-- <p class="para-1">UI Designer <strong>(2013 - 2015)</strong></p>
                 <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
 
                 <p class="para-1">Grapic Designer<strong>(2010)</strong></p>
                 <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p> -->
-            </div>
+      </div>
 
-
-            <div class="content-2">
-                <h1 class="head">Education</h1>
-                <hr class="hr2" />
-                <div class="clearfix"></div>
-                {% for edu in education %}
-                <p class="para-1">{{edu.shcoolName}} <br><strong>[{{edu.start_date}} - {{edu.end_date}}]</strong></p>
-                <p class="para-21">Major: {{edu.major}}</p>
-                {% endfor %}
-                <!-- <p class="para-1">Bachelor of Computer Application <strong>(2013 - 2015)</strong></p>
+      <div class="content-2">
+        <h1 class="head">Education</h1>
+        <hr class="hr2" />
+        <div class="clearfix"></div>
+        {% for edu in education %}
+        <p class="para-1">
+          {{edu.shcoolName}} <br /><strong
+            >[{{edu.start_date}} - {{edu.end_date}}]</strong
+          >
+        </p>
+        <p class="para-21">Major: {{edu.major}}</p>
+        {% endfor %}
+        <!-- <p class="para-1">Bachelor of Computer Application <strong>(2013 - 2015)</strong></p>
                 <p class="para-21">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p> -->
+      </div>
+      <h1 class="head">Skills</h1>
+      <hr class="hr2" />
+      <div class="container">
+        <div class="row">
+          {% for lan in language%}
+          <div class="clearfix"></div>
+          <div class="col-div-4">
+            <p class="p25">{{lan.name}}</p>
+          </div>
+          {% endfor %}
+          <div class="clearfix"></div>
+          <div class="col-div-4">
+            <p class="p25">CSS</p>
+          </div>
 
+          <div class="clearfix"></div>
+          <div class="col-div-4">
+            <p class="p25">JQUERY</p>
+          </div>
 
-            </div>
-            <h1 class="head">Skills</h1>
-            <hr class="hr2" />
-            <div class="container">
-                <div class="row">
-                    {% for lan in language%}
-                    <div class="clearfix"></div>
-                    <div class="col-div-4">
-                        <p class="p25">{{lan.name}}</p>
-                    </div>
-                    {% endfor %}
-                    <div class="clearfix"></div>
-                    <div class="col-div-4">
-                        <p class="p25">CSS</p>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-div-4">
-                        <p class="p25">JQUERY</p>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-div-4">
-                        <p class="p25">JAVASCRIPT</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <br>
-
-
+          <div class="clearfix"></div>
+          <div class="col-div-4">
+            <p class="p25">JAVASCRIPT</p>
+          </div>
         </div>
+      </div>
 
+      <br />
     </div>
+  </div>
 
-    <div class="clearfix"></div>
-
+  <div class="clearfix"></div>
+  <br /><br />
+  <button
+    id="download"
+    class="btn btn-dark"
+    role="button"
+    style="display: block; margin-left: auto; margin-right: auto"
+    data-toggle="modal"
+    data-target="#exampleModal"
+  >
+    Download CV
+  </button>
 </div>
+
+<script>
+  {% comment %} console.log(document.getElementById("getCVSize").offsetHeight); {% endcomment %}
+  window.onload = function () {
+    document
+      .getElementById("download")
+
+      .addEventListener("click", () => {
+        const cv = this.document.getElementById("cv");
+        console.log(cv);
+        console.log(window);
+        var opt = {
+          margin: 1,
+          filename: "myfile.pdf",
+          html2canvas: {
+            scale: 1,
+          },
+          jsPDF: {
+            //unit: "in",
+            // format: 'letter',
+            // orientation: 'landscape',
+            // orientation: 'p',
+            // unit: 'in',
+
+            format: [230, 350],
+          },
+        };
+        html2pdf().from(cv).set(opt).save();
+      });
+  };
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+  crossorigin="anonymous"
+></script>
 {% endfor %}
 <!-- {% endblock %} -->
