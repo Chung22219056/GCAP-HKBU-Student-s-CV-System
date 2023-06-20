@@ -30,7 +30,6 @@ def get_student_data(request):
 
     return HttpResponse(200)  
 
-
 @csrf_protect
 def send_email_to_student(request):
     try:
@@ -53,8 +52,6 @@ def send_email_to_student(request):
         print(e)
         return JsonResponse({'status': False})
 
-
-
 def watch_studentCvRecord(request):
     # only for logged user
     stud_id= request.GET.get('studentID')
@@ -63,3 +60,7 @@ def watch_studentCvRecord(request):
     studentLan = [{'language':[lan.name for lan in Language.objects.filter(studentID=student)]} for student in Student.objects.all()]
     cv_list = CvInfoBase.objects.filter(studentID=student)
     return render(request, 'manager/watchStudentCvRecord.html', {'nav':'manager','cv_list':cv_list})
+
+
+def dashboard(request):
+    return render(request, "manager/dashboard.html")
