@@ -20,6 +20,12 @@ def dashboard(request):
     cvID= request.GET.get('cvID')
     return render(request, 'student/dashboard.html', {'nav':'student','cv_list':cv_list,'cvID':cvID})
 
+
+def index(request):
+    # cvID = request.GET.get('cvID')
+    return render(request, 'student/index.html', {'nav': 'student'})
+
+
 def student_CV_UI(request):
     return render(request, 'student/cv.html', {'nav':'student'})
 
