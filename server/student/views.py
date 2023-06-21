@@ -26,6 +26,11 @@ def index(request):
     return render(request, 'student/index.html', {'nav': 'student'})
 
 
+def cvForm(request):
+    # cvID = request.GET.get('cvID')
+    return render(request, 'student/createCvForm.html', {'nav': 'student'})
+
+
 def student_CV_UI(request):
     return render(request, 'student/cv.html', {'nav':'student'})
 
