@@ -25,7 +25,7 @@
 
   .formbold-form-wrapper {
       margin: 0 auto;
-      max-width: 550px;
+      /* max-width: 550px; */
       width: 100%;
       background: white;
   }
@@ -109,4 +109,17 @@
 
   .formButtonPadding {
       padding-bottom: 50px;
+  }
+
+  .repeaterFormPadding {
+      padding: 40px;
+  }
+
+  .pull-left {
+      font-weight: 600;
+      font-size: 20px;
+  }
+
+  .inputBox{
+        padding-bottom: 20px;
   }
