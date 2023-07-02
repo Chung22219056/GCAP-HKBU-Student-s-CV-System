@@ -7,8 +7,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/student/cvForm.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="https://bootswatch.com/3/paper/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
     <title>Document</title>
 </head>
@@ -16,31 +15,65 @@
 <body>
     <div class="container">
 
+        <div class="row">
+            <div class="formbold-main-wrapper">
+                <!-- Author: FormBold Team -->
+                <!-- Learn More: https://formbold.com -->
 
-        <div class="formbold-main-wrapper">
-            <!-- Author: FormBold Team -->
-            <!-- Learn More: https://formbold.com -->
-            <div class="formbold-form-wrapper">
-                <form action="https://formbold.com/s/FORM_ID" method="POST">
-                    <div class="formbold-mb-5">
-                        <label for="name" class="formbold-form-label"> Full Name </label>
-                        <input type="text" name="name" id="name" placeholder="Full Name" class="formbold-form-input" />
+                <div class="formbold-form-wrapper">
+                    <!-- <form action="https://formbold.com/s/FORM_ID" method="POST"> -->
+
+                    <div style="margin: auto;width: 50%;">
+                        <div class="col-12 mb-3 d-flex justify-content-center">
+                            <img class="rounded-circle" src="/static/images/default-avatar.png" style="width: 180px; height: 180px; object-fit:cover" id="icon-preview">
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="profileIcon">Upload your portrait</label>
+                            <input type="file" class="form-control" id="profileIcon" />
+                        </div>
                     </div>
-                    <div class="formbold-mb-5">
-                        <label for="phone" class="formbold-form-label"> Phone Number </label>
-                        <input type="text" name="phone" id="phone" placeholder="Enter your phone number"
-                            class="formbold-form-input" />
+                    <br> <br> <br>
+                    <div class="formbold-mb-5 col-md-6 mb-3">
+                        <label for="name" class="formbold-form-label formPadding"> Frist Name </label>
+                        <input type="text" name="name" id="fristName" placeholder="Frist Name" class="formbold-form-input formPadding" />
                     </div>
-                    <div class="formbold-mb-5">
-                        <label for="email" class="formbold-form-label"> Email Address </label>
-                        <input type="email" name="email" id="email" placeholder="Enter your email"
-                            class="formbold-form-input" />
+                    <div class="formbold-mb-5 col-md-6 mb-3">
+                        <label for="name" class="formbold-form-label formPadding"> Last Name </label>
+                        <input type="text" name="name" id="lastName" placeholder="Last Name" class="formbold-form-input formPadding" />
                     </div>
-                    <div class="flex flex-wrap formbold--mx-3">
+
+                    <div class="formbold-mb-5 col-md-12 mb-3">
+                        <label for="name" class="formbold-form-label formPadding"> Nick Name </label>
+                        <input type="text" name="name" id="nickName" placeholder="Nick Name" class="formbold-form-input formPadding" />
+                    </div>
+
+
+
+                    <div class="formbold-mb-5 col-md-6 mb-3">
+                        <label for="phone" class="formbold-form-label formPadding"> Phone number </label>
+                        <input type="text" name="phone" id="phoneNumber" placeholder="Phone number" class="formbold-form-input formPadding" />
+                    </div>
+
+
+                    <div class="formbold-mb-5 col-md-6 mb-3">
+                        <label for="email" class="formbold-form-label formPadding"> Email Address </label>
+                        <input type="email" name="email" id="email" placeholder="Email" class="formbold-form-input formPadding" />
+                    </div>
+
+
+                    <div class="formbold-mb-5 col-md-12 mb-3">
+                        <label for="email" class="formbold-form-label formPadding">About Me </label>
+
+                        <textarea type="text" class="form-control skillBox " id="aboutMe" rows="5" placeholder="Description"></textarea>
+                    </div>
+
+
+                    <!-- <div class="flex flex-wrap formbold--mx-3">
                         <div class="w-full sm:w-half formbold-px-3">
                             <div class="formbold-mb-5 w-full">
                                 <label for="date" class="formbold-form-label"> Date </label>
-                                <input type="date" name="date" id="date" class="formbold-form-input" />
+                                <input type="date" name="date" id="date" class="formbold-form-input " />
                             </div>
                         </div>
                         <div class="w-full sm:w-half formbold-px-3">
@@ -49,149 +82,138 @@
                                 <input type="time" name="time" id="time" class="formbold-form-input" />
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="formbold-mb-5 formbold-pt-3">
-                        <label class="formbold-form-label formbold-form-label-2">
+                    <!-- <div class="formbold-mb-5 formbold-pt-3">
+                            <label class="formbold-form-label formbold-form-label-2">
                             Address Details
                         </label>
-                        <div class="flex flex-wrap formbold--mx-3">
-                            <div class="w-full sm:w-half formbold-px-3">
-                                <div class="formbold-mb-5">
-                                    <input type="text" name="area" id="area" placeholder="Enter area"
-                                        class="formbold-form-input" />
+                            <div class="flex flex-wrap formbold--mx-3">
+                                <div class="w-full sm:w-half formbold-px-3">
+                                    <div class="formbold-mb-5">
+                                        <input type="text" name="area" id="area" placeholder="Enter area" class="formbold-form-input" />
+                                    </div>
+                                </div>
+                                <div class="w-full sm:w-half formbold-px-3">
+                                    <div class="formbold-mb-5">
+                                        <input type="text" name="city" id="city" placeholder="Enter city" class="formbold-form-input" />
+                                    </div>
+                                </div>
+                                <div class="w-full sm:w-half formbold-px-3">
+                                    <div class="formbold-mb-5">
+                                        <input type="text" name="state" id="state" placeholder="Enter state" class="formbold-form-input" />
+                                    </div>
+                                </div>
+                                <div class="w-full sm:w-half formbold-px-3">
+                                    <div class="formbold-mb-5">
+                                        <input type="text" name="post-code" id="post-code" placeholder="Post Code" class="formbold-form-input" />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="w-full sm:w-half formbold-px-3">
-                                <div class="formbold-mb-5">
-                                    <input type="text" name="city" id="city" placeholder="Enter city"
-                                        class="formbold-form-input" />
-                                </div>
-                            </div>
-                            <div class="w-full sm:w-half formbold-px-3">
-                                <div class="formbold-mb-5">
-                                    <input type="text" name="state" id="state" placeholder="Enter state"
-                                        class="formbold-form-input" />
-                                </div>
-                            </div>
-                            <div class="w-full sm:w-half formbold-px-3">
-                                <div class="formbold-mb-5">
-                                    <input type="text" name="post-code" id="post-code" placeholder="Post Code"
-                                        class="formbold-form-input" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        </div> -->
 
 
-                </form>
+                    <!-- </form> -->
+                </div>
             </div>
         </div>
-
         <div class="row">
             <div class="repeaterFormPadding">
-            <!-- repeat education -->
-            <div id="repeaterEdu">
-                <!-- Repeater Heading -->
-                <div class="repeater-heading">
-                    <h5 class="pull-left">Education</h5>
-                    <button class="btn btn-primary pt-5 pull-right repeater-add-btn" id="addEdu">
+                <!-- repeat education -->
+                <div id="repeaterEdu">
+                    <!-- Repeater Heading -->
+                    <div class="repeater-heading">
+                        <h5 class="pull-left">Education</h5>
+                        <button class="btn btn-primary pt-5 pull-right repeater-add-btn" id="addEdu">
                         Add
                     </button>
-                </div>
-                <div class="clearfix"></div>
-                <!-- Repeater Items -->
-                <div class="items" data-group="test" id="edu">
-                    <!-- Repeater Content -->
-                    <div class="item-content">
-                        <div class="form-group">
-                            <label for="inputEdu" class="col-lg-2 control-label">School Name</label>
-                            <div class="col-lg-10 inputBox">
-                                <input type="text" class="form-control" id="inputName" placeholder="Name"
-                                    data-name="name">
-                            </div>
-                            <!-- </div> -->
-                            <!-- <div class="form-group"> -->
-                            <label for="inputEdu" class="col-lg-2 control-label formPadding">Start Date</label>
-                            <div class="col-lg-10">
-                                <input type="date" class="form-control" id="startDate" placeholder="startDate"
-                                    data-skip-name="true" data-name="description"></input>
-                            </div>
-                            <label for="inputEdu" class="col-lg-2 control-label formPadding">End Date</label>
-                            <div class="col-lg-10 inputBox">
-                                <input type="date" class="form-control" id="startDate" placeholder="EndDate"
-                                    data-skip-name="true" data-name="description"></input>
-                            </div>
-                            <!-- <div class="col-lg-10">
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Repeater Items -->
+                    <div class="items" data-group="test" id="edu">
+                        <!-- Repeater Content -->
+                        <div class="item-content">
+                            <div class="form-group">
+                                <label for="inputEdu" class="col-lg-2 control-label">School Name</label>
+                                <div class="col-lg-10 inputBox">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name" data-name="name">
+                                </div>
+                                <!-- </div> -->
+                                <!-- <div class="form-group"> -->
+                                <label for="inputEdu" class="col-lg-2 control-label formPadding">Start Date</label>
+                                <div class="col-lg-10">
+                                    <input type="date" class="form-control" id="startDate" placeholder="startDate" data-skip-name="true" data-name="description"></input>
+                                </div>
+                                <label for="inputEdu" class="col-lg-2 control-label formPadding">End Date</label>
+                                <div class="col-lg-10 inputBox">
+                                    <input type="date" class="form-control" id="startDate" placeholder="EndDate" data-skip-name="true" data-name="description"></input>
+                                </div>
+                                <!-- <div class="col-lg-10">
                                         <textarea class="form-control" id="description formPadding"
                                             placeholder="description" data-skip-name="true" data-name="description" rows="4"
                                             cols="50"></textarea>
                                     </div> -->
+                            </div>
                         </div>
-                    </div>
-                    <!-- Repeater Remove Btn -->
-                    <div class="pull-right repeater-remove-btn formButtonPadding">
-                        <button class="btn btn-danger remove-btn">
+                        <!-- Repeater Remove Btn -->
+                        <div class="pull-right repeater-remove-btn formButtonPadding">
+                            <button class="btn btn-danger remove-btn">
                             Remove
                         </button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- </div> -->
+
                     </div>
-                    <div class="clearfix"></div>
-                    <!-- </div> -->
-
+                    <!-- Repeater End -->
                 </div>
-                <!-- Repeater End -->
-            </div>
 
-            <!-- work experience -->
-            <div id="repeaterWrok">
-                <!-- Repeater Heading -->
-                <div class="repeater-heading">
-                    <h5 class="pull-left">Work Experience</h5>
-                    <button class="btn btn-primary pt-5 pull-right repeater-add-btn" id="addWork">
+                <!-- work experience -->
+                <div id="repeaterWrok">
+                    <!-- Repeater Heading -->
+                    <div class="repeater-heading">
+                        <h5 class="pull-left">Work Experience</h5>
+                        <button class="btn btn-primary pt-5 pull-right repeater-add-btn" id="addWork">
                         Add
                     </button>
-                </div>
-                <div class="clearfix"></div>
-                <!-- Repeater Items -->
-                <div class="items" data-group="test" id="edu">
-                    <!-- Repeater Content -->
-                    <div class="item-content">
-                        <div class="form-group">
-                            <label for="inputEdu" class="col-lg-2 control-label">Company Name</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="inputName" placeholder="Name"
-                                    data-name="name">
-                            </div>
-                            <!-- </div> -->
-                            <!-- <div class="form-group"> -->
-                            <label for="inputWork" class="col-lg-2 control-label formPadding">Start Date</label>
-                            <div class="col-lg-10">
-                                <input type="date" class="form-control" id="startDate" placeholder="startDate"
-                                    data-skip-name="true" data-name="description"></input>
-                            </div>
-                            <label for="inputEdu" class="col-lg-2 control-label formPadding">End Date</label>
-                            <div class="col-lg-10">
-                                <input type="date" class="form-control" id="startDate" placeholder="EndDate"
-                                    data-skip-name="true" data-name="description"></input>
-                            </div>
-                            <label for="inputWork" class="col-lg-2 control-label formPadding">Description</label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control" id="description formPadding" placeholder="description"
-                                    data-skip-name="true" data-name="description" rows="5" cols="50"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeater Remove Btn -->
-                    <div class="pull-right repeater-remove-btn formButtonPadding">
-                        <button class="btn btn-danger remove-btn">
-                            Remove
-                        </button>
                     </div>
                     <div class="clearfix"></div>
-                    <!-- </div> -->
+                    <!-- Repeater Items -->
+                    <div class="items" data-group="test" id="edu">
+                        <!-- Repeater Content -->
+                        <div class="item-content">
+                            <div class="form-group">
+                                <label for="inputEdu" class="col-lg-2 control-label">Company Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name" data-name="name">
+                                </div>
+                                <!-- </div> -->
+                                <!-- <div class="form-group"> -->
+                                <label for="inputWork" class="col-lg-2 control-label formPadding">Start Date</label>
+                                <div class="col-lg-10">
+                                    <input type="date" class="form-control" id="startDate" placeholder="startDate" data-skip-name="true" data-name="description"></input>
+                                </div>
+                                <label for="inputEdu" class="col-lg-2 control-label formPadding">End Date</label>
+                                <div class="col-lg-10">
+                                    <input type="date" class="form-control" id="startDate" placeholder="EndDate" data-skip-name="true" data-name="description"></input>
+                                </div>
+                                <label for="inputWork" class="col-lg-2 control-label formPadding">Description</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" id="description formPadding" style="border: none;outline: none;border-bottom: 1px solid black;" placeholder="description" data-skip-name="true" data-name="description" rows="5" cols="50"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Repeater Remove Btn -->
+                        <div class="pull-right repeater-remove-btn formButtonPadding">
+                            <button class="btn btn-danger remove-btn">
+                            Remove
+                        </button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- </div> -->
 
-                </div>
-                <!-- Repeater End -->
+                    </div>
+                    <!-- Repeater End -->
                 </div>
 
             </div>
@@ -203,19 +225,17 @@
 </body>
 <script src="../../static/student/js/repeater.js" type="text/javascript"></script>
 <script>
+    $("#addEdu").click(function() {
 
-
-    $("#addEdu").click(function () {
-
-        $('input[name*="wat"]').each(function (e) {
+        $('input[name*="wat"]').each(function(e) {
             console.log($(this).val());
 
         });
     });
 
-    $("#addWork").click(function () {
+    $("#addWork").click(function() {
 
-        $('input[name*="wat"]').each(function (e) {
+        $('input[name*="wat"]').each(function(e) {
             console.log($(this).val());
 
         });
@@ -230,6 +250,34 @@
         showFirstItemToDefault: true,
 
     });
+
+
+    var base64ImgProfileIcon = '';
+
+
+    // function getBase64(file) {
+    //     var reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = function() {
+    //         return reader.result
+
+    //     };
+    //     reader.onerror = function(error) {
+    //         console.log('Error: ', error);
+    //     };
+    // }
+
+    $("#profileIcon").change((e) => {
+        let file = $("#profileIcon")[0].files[0]
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = function() {
+            const base64String = reader.result
+                // console.log(base64String);
+            base64ImgProfileIcon = base64String //global
+            $("#icon-preview").attr("src", base64String)
+        };
+    })
 </script>
 
 </html>
