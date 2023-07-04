@@ -16,5 +16,5 @@ urlpatterns = [
     path('create_cvProfile', views.create_cvProfile, name='create_cvProfile'),
     path('edit_cvProfile', views.edit_cvProfile, name='edit_cvProfile'),
     path('delete_cv', views.delete_CV, name='delete_CV'),
-
+    path('testing_cv', views.testing_cv, name='testing_cv'),
 ]

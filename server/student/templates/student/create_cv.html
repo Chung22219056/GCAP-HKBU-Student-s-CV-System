@@ -1,0 +1,155 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="modal fade" id="edcutionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Education Form</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="institution" class="form-label">Name of institution</label>
+                        <input type="text" class="form-control" id="institution" placeholder="Input your institution" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="program" class="form-label">Program</label>
+                        <input type="text" class="form-control" id="program" placeholder="Input your program" required>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="startDate">Start date</label>
+                        <input type="date" class="form-control" id="startDate" name="date">  
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="endDate">End date</label>
+                        <input type="date" class="form-control" id="endDate" name="date">  
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onClick="handleSaveEducationData()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container pt-3">
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Personal Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="cv-name" class="form-label"><strong>Your CV Name</strong></label>
+                <input type="email" class="form-control" id="cv-name" placeholder="Input your CV name here">
+            </div>
+
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="first-name" class="form-label"><strong>First Name</strong></label>
+                    <input type="text" class="form-control" id="first-name" placeholder="First Name">    
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="last-name" class="form-label"><strong>Last Name</strong></label>
+                    <input type="text" class="form-control" id="last-name" placeholder="Last Name">    
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="email" class="form-label"><strong>Email Address</strong></label>
+                    <input type="email" class="form-control" id="email" placeholder="example@example.com">    
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="phone" class="form-label"><strong>Phone Number</strong></label>
+                    <input type="text" class="form-control" id="phone" placeholder="input your phone number">    
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="bio" class="form-label"><strong>Bio</strong></label>
+                <textarea class="form-control" id="bio" rows="3" placeholder="Share some information about yourself."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="mb-0">Education</h5>
+            <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edcutionModal" >Add new education</button>
+        </div>
+        <div class="card-body" id="education-field">
+            <h6 class="text-secondary"><center>There are no eduation data in here.</center></h6>
+        </div>
+    </div>
+
+    <br />
+
+</div>
+{% endblock %}
+
+
+
+{% block javascript %}
+<script>
+    var educations = []
+
+    function handleSaveEducationData(){
+        let institution = $("#institution").val()
+        let program = $("#program").val()
+        let startDate = $("#startDate").val()
+        let endDate = $("#endDate").val()
+
+        educations.push({"institution": institution, "program": program, "startDate":startDate, "endDate":endDate})
+        
+        //clear input fields
+        $("#institution").val('')
+        $("#program").val('')
+        $("#startDate").val('')
+        $("#endDate").val('')
+
+        //close modal
+        $("#edcutionModal").modal("hide")
+        renderDataInEducationField()
+    }
+
+    function renderDataInEducationField(){
+        $("#education-field").empty()
+        
+        if(educations.length < 0){
+            $("#education-field").append(`<h6 class="text-secondary"><center>There are no eduation in here !</center></h6>`)
+        }else{
+            educations.forEach((education) => {
+                $("#education-field").append(
+                    `
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
+                                    <h6 class="text-secondary"><i class="fa-solid fa-graduation-cap"></i> <strong>${education.program}</strong></h6>
+                                    <h6 class="text-secondary"><i class="fa-solid fa-calendar-days"></i> ${education.startDate} to ${education.endDate}</h6>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-danger float-end"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+            })
+        }
+        
+    }
+
+
+</script>
+{% endblock %}
