@@ -250,3 +250,5 @@ def delete_CV(request):
     return HttpResponseForbidden()
 
 
+def testing_cv(request):
+    return render(request, 'student/create_cv.html')
