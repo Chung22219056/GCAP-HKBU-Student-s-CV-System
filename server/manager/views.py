@@ -69,7 +69,7 @@ def dashboard(request):
 # @csrf_protect
 @csrf_exempt
 def create_Job(request):
-    
+    email=[]
     # if request.method=='POST':
     student = Student.objects.all()
     users = User.objects.all()
@@ -82,9 +82,11 @@ def create_Job(request):
                for language in request.POST.getlist('lan[]'):
                 programLan = Language.objects.filter(cv=cv).filter(name=language)
                 for lan in programLan:
-                   sendEmail(user.email, request.POST.get("jobDescription"))
-                   print(request.POST.get("jobDescription"))
-                   continue
+                    if user.email not in email:
+                        sendEmail(user.email, request.POST.get("jobDescription"))
+                        email.append(user.email)
+                    else:
+                        continue
 
     
   
