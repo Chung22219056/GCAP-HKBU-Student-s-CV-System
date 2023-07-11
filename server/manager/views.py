@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
-from django.views.decorators.csrf import requires_csrf_token,csrf_protect
+from django.views.decorators.csrf import requires_csrf_token,csrf_protect,csrf_exempt
 from student.models import *
 import json
 from function.email import sendEmail
+from django.http import HttpResponseForbidden
 
 # Create your views here.
 def student_filter(request):
@@ -64,3 +65,29 @@ def watch_studentCvRecord(request):
 
 def dashboard(request):
     return render(request, "manager/dashboard.html")
+
+# @csrf_protect
+@csrf_exempt
+def create_Job(request):
+    
+    # if request.method=='POST':
+    student = Student.objects.all()
+    users = User.objects.all()
+   
+    for user in users:
+        student = Student.objects.filter(user_id=user)
+        for stu in student:
+           studentCv = CvInfoBase.objects.filter(studentID=stu)
+           for cv in studentCv:
+               for language in request.POST.getlist('lan[]'):
+                programLan = Language.objects.filter(cv=cv).filter(name=language)
+                for lan in programLan:
+                   sendEmail(user.email, request.POST.get("jobDescription"))
+                   print(request.POST.get("jobDescription"))
+                   continue
+
+    
+  
+    #   print(request.POST)
+    return render(request, "manager/createJob.html", {'nav':'manage'})
+
