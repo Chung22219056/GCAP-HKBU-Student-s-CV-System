@@ -3,9 +3,13 @@
 
 
 {% block content %}
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color: transparent; width: auto;">
-</div>
+<script>
+$(document).ready(()=>{
+  $("#offcanvasExample").append($("#manager-sidenav").clone().attr("id",""))
+})
+</script>
 
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color: transparent; width: 260px;">
 </div>
 
 <div class="main" style="position: absolute;height: 100%; width: 100%">
@@ -40,7 +44,7 @@
       
       <nav class="navbar navbar-light bg-white shadow-sm" id="manager-nav"> 
           <div class="container-fluid align-content-center">
-            <a class="btn btn-secondary d-sm-block d-md-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            <a class="btn btn-light d-sm-block d-md-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
               <i class="fa-solid fa-bars"></i>
             </a>
               <span class="h5 mb-0"><strong>Dashboard</strong></span>

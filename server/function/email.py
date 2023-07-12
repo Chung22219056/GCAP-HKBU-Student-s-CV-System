@@ -19,7 +19,8 @@ def sendEmail(to, email_content, subject=None):
         try:
             smtp.ehlo()
             smtp.starttls()
-            smtp.login("gcap3055hkbu@gmail.com", "smfakeaptgbotnqc")
+            #smtp.login("gcap3055hkbu@gmail.com", "smfakeaptgbotnqc")
+            smtp.login("gcap3055bu@gmail.com","")
             smtp.send_message(content)
             print("Complete!")
         except Exception as e:
