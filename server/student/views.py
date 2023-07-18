@@ -271,4 +271,15 @@ def create_new_cv(request):
 
         student = Student.objects.get(user_id=request.user.id)
 
+        cv = CvInfoBase(studentID=student, cvName=json_data['cvName'], fristName=json_data['firstName'], lastName=json_data['lastName'], email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'])       
+        cv.save()
+
+        for education in json_data['educations']:
+            edu = Education(studentID=student, shcoolName=education['institution'], major=education['program'], start_date=education['startDate'], end_date=education['endDate'])      
+            edu.save()
+
+        for workExp in json_data['workExperiences']:
+            exp = WorkExperience(studentID=student, cv=cv, companyName=workExp['companyName'], description=workExp['description'], startDate=workExp['startDate'], endDate=workExp['endDate'])
+            exp.save()
+    
     return HttpResponseForbidden()
