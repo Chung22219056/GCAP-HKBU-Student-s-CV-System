@@ -261,5 +261,14 @@ def delete_CV(request):
     return HttpResponseForbidden()
 
 
-def testing_cv(request):
-    return render(request, 'student/create_cv.html')
+def create_cv_form(request):
+    return render(request, 'student/create_cv.html', {'nav':'student'})
+
+@csrf_exempt
+def create_new_cv(request):
+    if request.method == 'POST':
+        json_data = json.loads(request.body)
+
+        student = Student.objects.get(user_id=request.user.id)
+
+    return HttpResponseForbidden()

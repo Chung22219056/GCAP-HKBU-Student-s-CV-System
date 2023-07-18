@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 
 {% block content %}
+
 <div class="modal fade" id="edcutionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -36,7 +37,41 @@
 </div>
 
 
-<div class="container pt-3">
+<div class="modal fade" id="workExperienceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Work Experience Form</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="companyName" class="form-label">Name of Company</label>
+                        <input type="text" class="form-control" id="companyName" placeholder="Input your Company name" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="workExperienceDescription" class="form-label"><strong>Description</strong></label>
+                        <textarea class="form-control" id="workExperienceDescription" rows="3" placeholder="input your description of working experience"></textarea>        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="workExpStartDate">Start date</label>
+                        <input type="date" class="form-control" id="workExpStartDate" name="date">  
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="workExpEndDate">End date</label>
+                        <input type="date" class="form-control" id="workExpEndDate" name="date">  
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onClick="handleSaveWorkExperienceData()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pt-3" style="margin-top: 100px;">
 
     <div class="card">
         <div class="card-header">
@@ -82,7 +117,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h5 class="mb-0">Education</h5>
-            <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edcutionModal" >Add new education</button>
+            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#edcutionModal" >Add new education</button>
         </div>
         <div class="card-body" id="education-field">
             <h6 class="text-secondary"><center>There are no eduation data in here.</center></h6>
@@ -91,6 +126,17 @@
 
     <br />
 
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="mb-0">Work Experience</h5>
+            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal" >Add new experience</button>
+        </div>
+        <div class="card-body" id="workExperience-field">
+            <h6 class="text-secondary"><center>There are no work experience data in here.</center></h6>
+        </div>
+    </div>
+
+    <br>
 </div>
 {% endblock %}
 
@@ -99,6 +145,7 @@
 {% block javascript %}
 <script>
     var educations = []
+    var workExperiences = []
 
     function handleSaveEducationData(){
         let institution = $("#institution").val()
@@ -122,10 +169,10 @@
     function renderDataInEducationField(){
         $("#education-field").empty()
         
-        if(educations.length < 0){
-            $("#education-field").append(`<h6 class="text-secondary"><center>There are no eduation in here !</center></h6>`)
+        if(educations.length === 0){
+            $("#education-field").append(`<h6 class="text-secondary"><center>There are no eduation in here.</center></h6>`)
         }else{
-            educations.forEach((education) => {
+            educations.forEach((education, index) => {
                 $("#education-field").append(
                     `
                     <div class="card bg-light mb-3">
@@ -133,11 +180,11 @@
                             <div class="row">
                                 <div class="col-9">
                                     <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
-                                    <h6 class="text-secondary"><i class="fa-solid fa-graduation-cap"></i> <strong>${education.program}</strong></h6>
-                                    <h6 class="text-secondary"><i class="fa-solid fa-calendar-days"></i> ${education.startDate} to ${education.endDate}</h6>
+                                    <h6 class="text-secondary"><strong>${education.program}</strong></h6>
+                                    <h6 class="text-secondary">${education.startDate} to ${education.endDate}</h6>
                                 </div>
                                 <div class="col-3">
-                                    <button class="btn btn-danger float-end"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn btn-danger float-end" onClick="handleDeleteEducationRecord(${index})"><i class="fa-solid fa-trash"></i></button>
                                 </div>
                             
                             </div>
@@ -150,6 +197,82 @@
         
     }
 
+    function handleDeleteEducationRecord(index){
+        educations.splice(index, 1)
+        renderDataInEducationField()
+    }
 
+    function handleSaveWorkExperienceData(){
+        let companyName = $("#companyName").val()
+        let description = $("#workExperienceDescription").val()
+        let startDate = $("#workExpStartDate").val()
+        let endDate = $("#workExpEndDate").val()
+
+        workExperiences.push({"companyName":companyName, "description":description, "startDate":startDate, "endDate":endDate})
+        
+        //clear input fields
+        $("#companyName").val('')
+        $("#workExperienceDescription").val('')
+        $("#workExpStartDate").val('')
+        $("#workExpEndDate").val('')
+
+        //close modal
+        $("#workExperienceModal").modal("hide")
+        renderDataInWorkExperienceField()
+    
+    }
+
+    function handleDeleteWorkExperience(index){
+        workExperiences.splice(index, 1)
+        renderDataInWorkExperienceField()
+    }
+
+    function renderDataInWorkExperienceField(){
+        $("#workExperience-field").empty()
+
+        if(workExperiences.length === 0){
+            $("#workExperience-field").append(`<h6 class="text-secondary"><center>There are no work experience data in here.</center></h6>`)
+        }else{
+            workExperiences.forEach((workExperience, index)=>{
+                console.log(workExperience)
+                $("#workExperience-field").append(`
+                <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h5 class="card-title"><i class="fa-solid fa-building"></i> ${workExperience.companyName}</h5>
+                                    <h6 class="text-secondary"><strong>${workExperience.description}</strong></h6>
+                                    <h6 class="text-secondary">${workExperience.startDate} to ${workExperience.endDate}</h6>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-danger float-end" onClick="handleDeleteWorkExperience(${index})"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                
+                `)
+            })
+        }
+    }
+
+    function fetchRequsetCreateCV(){
+
+        fetch("/student/create_new_cv",{
+            method: "POST",
+            body: JSON.stringify({
+                cvName: $("#cv-name").val(),
+                firstName: $("#first-name").val(),
+                lastName: $("#last-name").val(),
+                email: $("#email").val(),
+                phone: $("#phone").val(),
+                bio: $("#bio").val(),
+                educations: educations,
+                workExperiences: workExperiences
+            }).then(response => response.json()).then(json => console.log(json))
+        })
+
+    }
 </script>
 {% endblock %}
