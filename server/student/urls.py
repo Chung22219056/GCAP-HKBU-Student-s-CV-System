@@ -7,6 +7,7 @@ urlpatterns = [
     path('cvForm', views.cvForm, name='cvForm'),
     path('jobList', views.jobList, name='jobList'),
     path('jobDetail', views.jobDetail, name='jobDetail'),
+    path('studentProfile', views.studentProfile, name='studentProfile'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('cv_ui', views.student_CV_UI, name='cv_ui'),
     path('cv_ui1', views.student_CV_UI1, name='cv_ui1'),

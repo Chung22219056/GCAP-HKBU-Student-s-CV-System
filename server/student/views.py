@@ -40,6 +40,10 @@ def jobDetail(request):
     # cvID = request.GET.get('cvID')
     return render(request, 'student/jobDetail.html', {'nav': 'student'})
 
+def studentProfile(request):
+    # cvID = request.GET.get('cvID')
+    return render(request, 'student/studentProfile.html', {'nav': 'student'})
+
 
 
 def student_CV_UI(request):

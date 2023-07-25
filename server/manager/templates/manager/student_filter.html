@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'manager/manager_base.html' %} {% block manager_content %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="container mt-3" id="cv">
     <h3 class="mb-4">Student Filter</h3>
@@ -17,7 +17,7 @@
                         </th>
                         <th>Student ID</th>
                         <th>Student Name</th>
-                        <th>Program Language</th>
+                        <!-- <th>Program Language</th> -->
                         <th>View CV</th>
                         <th>Send email</th>
 
@@ -27,15 +27,14 @@
                 {% comment %} {{ students }} {% endcomment %}
                 <tbody>
 
-
                     {% for student in students %}
                     <tr class="body" style="background-color: transparent;">
                         <td><input type="checkbox" class="check" id="checkAll"> Check</td>
                         <td>{{student.student_id}}</td>
                         <td>{{student.student_name}}</td>
-                        <td>
-                            {% for lan in student.language %} {{lan}}, {% endfor %}
-                        </td>
+                        <!-- <td>
+                            {% for lan in student.language %} {{lan}},{% endfor %}
+                        </td> -->
                         <td><a class="btn btn-primary" href="/manager/watch_student_CvRecord?studentID={{student.student_id}}">View</a>
 
                         </td>
