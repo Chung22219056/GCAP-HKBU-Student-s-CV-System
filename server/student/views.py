@@ -45,6 +45,22 @@ def studentProfile(request):
     return render(request, 'student/studentProfile.html', {'nav': 'student'})
 
 
+def basicInfo(request):
+    # cvID = request.GET.get('cvID')
+    return render(request, 'student/basicInfo.html', {'nav': 'student'})
+
+def checkLogin(request):
+    # cvID = request.GET.get('cvID')
+    cv = CvInfoBase.objects.filter(studentID=Student.objects.get(user_id=request.user)).values()
+    isCvEmpty = False
+    if(cv.count() == 0):
+        isCvEmpty = True
+    print(cv)
+    return render(request, 'student/checkLogin.html', {'nav': 'student','cv':cv, "isCvEmpty": isCvEmpty})
+
+
+
+
 
 def student_CV_UI(request):
     return render(request, 'student/cv.html', {'nav':'student'})

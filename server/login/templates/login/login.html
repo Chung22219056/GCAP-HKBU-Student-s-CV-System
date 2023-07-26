@@ -80,11 +80,12 @@
                         confirmButtonText: 'OK'
                     })
 
-                    if(result.is_student)
-                        delayURL("/student/cvRecord")
+                    if (result.is_student)
+                    <!-- delayURL("/student/cvRecord") -->
+                        delayURL("/student/checkLogin")
                     else
                         delayURL("/manager/student_filter")
-                        
+
                 } else {
                     Swal.fire({
                         title: 'Login',
