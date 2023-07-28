@@ -35,7 +35,6 @@ def jobList(request):
     # cvID = request.GET.get('cvID')
     return render(request, 'student/jobList.html', {'nav': 'student'})
 
-
 def jobDetail(request):
     # cvID = request.GET.get('cvID')
     return render(request, 'student/jobDetail.html', {'nav': 'student'})
@@ -268,15 +267,13 @@ def delete_CV(request):
     if request.method == 'POST':
         request_JSON = json.loads(request.body)
         try:
-            cv = CvInfoBase.objects.get(cvId=request_JSON["cv_id"])
+            print(CvInfoBase.objects.all())
+            cv = CvInfoBase.objects.filter(cvId=request_JSON["cv_id"])
             cv.delete()
             return JsonResponse({"status":True})
         except:
-            
-            return JsonResponse({"status":False})
-        
+            return JsonResponse({"status":False}) 
     return HttpResponseForbidden()
-
 
 def create_cv_form(request):
     return render(request, 'student/create_cv.html', {'nav':'student'})
