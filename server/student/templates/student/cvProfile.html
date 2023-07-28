@@ -25,8 +25,7 @@
 
             <div class="row">
                 <div class="col-12 mb-3 d-flex justify-content-center">
-                    <img class="rounded-circle" src="/static/images/default-avatar.png"
-                        style="width: 180px; height: 180px; object-fit:cover" id="icon-preview">
+                    <img class="rounded-circle" src="/static/images/default-avatar.png" style="width: 180px; height: 180px; object-fit:cover" id="icon-preview">
                 </div>
 
                 <div class="col-12 mb-3">
@@ -38,8 +37,7 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="firstName">First name</label>
-                    <input type="text" class="form-control" id="fristName" placeholder="Frist Name" value=""
-                        required="">
+                    <input type="text" class="form-control" id="fristName" placeholder="Frist Name" value="" required="">
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
@@ -91,8 +89,7 @@
             <div class="mb-3">
                 <label for="username">About me</label>
                 <div class="input-group">
-                    <textarea type="text" class="form-control skillBox" id="aboutMe" rows="5"
-                        placeholder="Description"></textarea>
+                    <textarea type="text" class="form-control skillBox" id="aboutMe" rows="5" placeholder="Description"></textarea>
 
                 </div>
             </div>
@@ -121,8 +118,7 @@
                 <!-- <h1>Dynamic Fields Javascript</h1> -->
                 <!-- <div class="wrapper"> -->
                 <div id="survey_options">
-                    <input type="text" name="survey_options[]" class="survey_options skillBox" size="50"
-                        placeholder="language">
+                    <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
 
                 </div>
                 <div class="controls">
@@ -166,7 +162,7 @@
     //show edcution input
     for (var i = 0; i < 3; i++) {
         $('#edu').append('<b> <label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
-        // console.log(i)
+            // console.log(i)
     }
 
     //show experience input
@@ -177,12 +173,12 @@
     function getBase64(file) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function () {
+        reader.onload = function() {
             // console.log(reader.result);
             return reader.result
 
         };
-        reader.onerror = function (error) {
+        reader.onerror = function(error) {
             console.log('Error: ', error);
         };
     }
@@ -192,48 +188,48 @@
 
     function saveCv() {
 
-        var schoolNames = $('input[id^=schoolName]').map(function (idx, elem) {
+        var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
 
             return $(elem).val();
         }).get();
         // console.log(schoolNames)
 
-        var majors = $('input[id^=major]').map(function (idx, elem) {
+        var majors = $('input[id^=major]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
         // console.log(majors)
 
-        var schoolStartDates = $('input[id^=schoolStartDate]').map(function (idx, elem) {
+        var schoolStartDates = $('input[id^=schoolStartDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
 
-        var schoolEndDates = $('input[id^=schoolEndDate]').map(function (idx, elem) {
+        var schoolEndDates = $('input[id^=schoolEndDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
 
 
-        var companyNames = $('input[id^=companyName]').map(function (idx, elem) {
+        var companyNames = $('input[id^=companyName]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
-        var companyStartDates = $('input[id^=companyStartDate]').map(function (idx, elem) {
+        var companyStartDates = $('input[id^=companyStartDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
         // console.log(companyStartDate)
 
-        var companyEndDates = $('input[id^=companyEndDate]').map(function (idx, elem) {
+        var companyEndDates = $('input[id^=companyEndDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
         // console.log(companyEndDate)
-        var description = $('textarea[id^=description]').map(function (idx, elem) {
+        var description = $('textarea[id^=description]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
 
-        var lan = $('input[name^=survey_options]').map(function (idx, elem) {
+        var lan = $('input[name^=survey_options]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
@@ -260,11 +256,11 @@
                 language: lan,
             },
             datatype: 'html',
-            success: function (result) {
+            success: function(result) {
                 //On success
                 console.log(result)
                 if (result.status == true) {
-           
+
                     Swal.fire({
                         title: 'Create CV Successful',
                         text: 'Success',
@@ -278,7 +274,7 @@
                 }
 
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function(jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText);
             }
 
@@ -297,7 +293,7 @@
         let file = $("#profileIcon")[0].files[0]
         const reader = new FileReader()
         reader.readAsDataURL(file)
-        reader.onload = function () {
+        reader.onload = function() {
             const base64String = reader.result
             base64ImgProfileIcon = base64String //global
             $("#icon-preview").attr("src", base64String)
@@ -308,7 +304,7 @@
     var add_more_fields = document.getElementById('add_more_fields');
     var remove_fields = document.getElementById('remove_fields');
 
-    add_more_fields.onclick = function () {
+    add_more_fields.onclick = function() {
         var newField = document.createElement('input');
         newField.setAttribute('type', 'text');
         newField.setAttribute('name', 'survey_options[]');
@@ -318,7 +314,7 @@
         survey_options.appendChild(newField);
     }
 
-    remove_fields.onclick = function () {
+    remove_fields.onclick = function() {
         var input_tags = survey_options.getElementsByTagName('input');
         if (input_tags.length > 1) {
             survey_options.removeChild(input_tags[(input_tags.length) - 1]);

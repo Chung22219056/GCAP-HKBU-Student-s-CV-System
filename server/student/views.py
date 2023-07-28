@@ -44,10 +44,23 @@ def studentProfile(request):
     # cvID = request.GET.get('cvID')
     return render(request, 'student/studentProfile.html', {'nav': 'student'})
 
-
+@csrf_exempt
+@login_required
 def basicInfo(request):
     # cvID = request.GET.get('cvID')
+    if request.method == 'POST':
+        request_JSON = json.loads(request.body)
+        # request_JSON = request.body
+        print(request_JSON)
+        # student = Student.objects.get(user_id=request.user.id)
+        # student.firstName = request_JSON["firstName"]
+        # student.lastName = request_JSON["lastName"]
+        # student.email = request_JSON["email"]
+        # student.phone = request_JSON["phone"]
+        # student.save()
+        # return JsonResponse({"status":True})
     return render(request, 'student/basicInfo.html', {'nav': 'student'})
+
 
 def checkLogin(request):
     # cvID = request.GET.get('cvID')
