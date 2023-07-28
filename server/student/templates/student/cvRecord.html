@@ -60,7 +60,7 @@
 {% endcomment %}
 
 
-<a href="/student/cvProfile"><button class="btn btn-primary btn-lg btn-block" style="display: block;margin: 0 auto;">Create New CV</button></a> 
+<a href="/student/create_cv_form"><button class="btn btn-primary btn-lg btn-block" style="display: block;margin: 0 auto;">Create New CV</button></a> 
 
 
 <script>
@@ -81,7 +81,7 @@ function deleteCVHandler(cv_id){
     Swal.fire({
         title: 'Are You Sure Delete The CV?',
         showDenyButton: true,
-        showCancelButton: true,
+        showCancelButton: false,
         confirmButtonText: 'Yes',
         denyButtonText: 'No',
         customClass: {

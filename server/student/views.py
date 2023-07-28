@@ -35,7 +35,6 @@ def jobList(request):
     # cvID = request.GET.get('cvID')
     return render(request, 'student/jobList.html', {'nav': 'student'})
 
-
 def jobDetail(request):
     # cvID = request.GET.get('cvID')
     return render(request, 'student/jobDetail.html', {'nav': 'student'})
@@ -70,9 +69,6 @@ def checkLogin(request):
         isCvEmpty = True
     print(cv)
     return render(request, 'student/checkLogin.html', {'nav': 'student','cv':cv, "isCvEmpty": isCvEmpty})
-
-
-
 
 
 def student_CV_UI(request):
@@ -284,15 +280,13 @@ def delete_CV(request):
     if request.method == 'POST':
         request_JSON = json.loads(request.body)
         try:
-            cv = CvInfoBase.objects.get(cvId=request_JSON["cv_id"])
+            print(CvInfoBase.objects.all())
+            cv = CvInfoBase.objects.filter(cvId=request_JSON["cv_id"])
             cv.delete()
             return JsonResponse({"status":True})
         except:
-            
-            return JsonResponse({"status":False})
-        
+            return JsonResponse({"status":False}) 
     return HttpResponseForbidden()
-
 
 def create_cv_form(request):
     return render(request, 'student/create_cv.html', {'nav':'student'})
@@ -300,19 +294,24 @@ def create_cv_form(request):
 @csrf_exempt
 def create_new_cv(request):
     if request.method == 'POST':
-        json_data = json.loads(request.body)
+        try:
+            json_data = json.loads(request.body)
+            student = Student.objects.get(user_id=request.user.id)
 
-        student = Student.objects.get(user_id=request.user.id)
+            cv = CvInfoBase(studentID=student, cvName=json_data['cvName'], fristName=json_data['firstName'], lastName=json_data['lastName'], email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'], profileIcon=json_data['base64ImgProfileIcon'])       
+            cv.save()
 
-        cv = CvInfoBase(studentID=student, cvName=json_data['cvName'], fristName=json_data['firstName'], lastName=json_data['lastName'], email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'])       
-        cv.save()
+            for education in json_data['educations']:
+                edu = Education(studentID=student, cv=cv, shcoolName=education['institution'], major=education['program'], start_date=education['startDate'], end_date=education['endDate'])      
+                edu.save()
 
-        for education in json_data['educations']:
-            edu = Education(studentID=student, shcoolName=education['institution'], major=education['program'], start_date=education['startDate'], end_date=education['endDate'])      
-            edu.save()
-
-        for workExp in json_data['workExperiences']:
-            exp = WorkExperience(studentID=student, cv=cv, companyName=workExp['companyName'], description=workExp['description'], startDate=workExp['startDate'], endDate=workExp['endDate'])
-            exp.save()
+            for workExp in json_data['workExperiences']:
+                exp = WorkExperience(studentID=student, cv=cv, companyName=workExp['companyName'], description=workExp['description'], start_date=workExp['startDate'], end_date=workExp['endDate'])
+                exp.save()
+            
+            return JsonResponse({"status":True})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"status":False})
     
     return HttpResponseForbidden()
