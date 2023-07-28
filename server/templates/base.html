@@ -5,6 +5,13 @@
   </head>
   <style>
     {% comment %} global {% endcomment %}
+
+    {% if nav == 'student' %}
+      #main-content{
+        margin-top: 100px;
+      }
+    {% endif %}
+    
   </style>
   <body class="bg-light">
     {% if nav == 'student' %}
@@ -14,7 +21,7 @@
  
     {% endif %}
     
-    <div style="margin-top: 100px">
+    <div id="main-content">
       {% block content %}{% endblock %}
     </div>
     
