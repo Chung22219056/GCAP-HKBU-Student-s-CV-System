@@ -36,7 +36,7 @@ class CvInfoBase(models.Model):
     # github = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return "{0} CV Name:[{1}]".format(self.cvId,self.nickName)
+        return "{0} student Name:[{1} {2}]".format(self.cvId,self.fristName,self.lastName)
     
     @property
     def getLanguage(self):

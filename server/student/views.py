@@ -109,21 +109,25 @@ def student_CV_UI2(request):
 @csrf_exempt
 @login_required
 def student_cvProfile(request):
-   
-   
+    
     cvBasicInfo = CvInfoBase.objects.filter(studentID=Student.objects.get(user_id=request.user)).values()
- 
- 
     if request.method == 'POST':
         request_JSON = json.loads(request.body)
 
-            
         student = Student.objects.get(user_id=request.user.id)
-            # print(student)
-        CvInfoBase.objects.get(studentID=student)
-        newCvInfoBasic =CvInfoBase(studentID=student,profileIcon=request_JSON["profileIcon"],fristName=request_JSON["fristName"],lastName=request_JSON["lastName"],nickName=request_JSON["nickName"],phone=request_JSON["phoneNumber"],email=request_JSON["email"],aboutMe=request_JSON["aboutMe"])
-     
-        newCvInfoBasic.save()
+        # print(request_JSON)
+
+        editCvInfoBasic = CvInfoBase.objects.get(studentID=student)
+        editCvInfoBasic.profileIcon = request_JSON["profileIcon"]
+        editCvInfoBasic.fristName = request_JSON["fristName"]
+        editCvInfoBasic.lastName = request_JSON["lastName"]
+        editCvInfoBasic.nickName = request_JSON["nickName"]
+        editCvInfoBasic.phone = request_JSON["phoneNumber"]
+        editCvInfoBasic.email = request_JSON["email"]
+        editCvInfoBasic.aboutMe = request_JSON["aboutMe"]
+        editCvInfoBasic.save()
+        
+        
         return JsonResponse({"status":True})
     return render(request, 'student/cvProfile.html', {'nav':'student','cvBasicInfo':cvBasicInfo})
 
