@@ -1,293 +1,104 @@
-{% extends 'base.html' %} {% block header %}
-<link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" />
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
-
+{% extends 'base.html'%} {% block header %}
+<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="../../static/student/profile.css">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  -->
 {% endblock %} {% block content %}
-
-<div class="container mt-4 text-dark">
+<section class="py-5 my-5">
 
     {% csrf_token %}
-    <div class="col-md-8 order-md-1" style="margin: 0 auto; width:auto;">
+    <div class="container">
 
-        <h4 class="mb-3">Personal Information</h4>
-        <div class="mb-3">
-            <label for="username">CV Name</label>
-            <div class="input-group">
+        <h1 class="mb-5">Basic Infomation</h1>
 
-                <input type="text" class="form-control" id="cvName" placeholder="CV Name" required>
-                <div class="invalid-feedback" style="width: 100%;">
-                    Your username is required.
+        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="profile-tab-nav border-right">
+                <div class="p-4">
+                    <div class="img-circle text-center mb-3">
+
+                        <img src="/static/images/user-defult.png" alt="Image" class="shadow" id="icon-preview">
+
+                    </div>
+                    <input type="file" id="profileIcon" accept="image/*">
+                    <!-- <h4 class="text-center">Kiran Acharya</h4> -->
                 </div>
+
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+                        <i class="fa fa-home text-center mr-1"></i> Account
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                {% for cvBasic in cvBasicInfo %}
+
+                <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+
+                    <h3 class="mb-4">Basic Infomation</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" value="{{cvBasic.fristName}}" id="fristName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" value="{{cvBasic.lastName}}" id="lastName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nick Name</label>
+                                <input type="text" class="form-control" value="{{cvBasic.nickName}}" id="nickName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="email" class="form-control" value="{{cvBasic.email}}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Phone number</label>
+                                <input type="number" class="form-control" id="phoneNumber" value="{{cvBasic.phone}}" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Bio</label>
+                                <textarea class="form-control" id="aboutMe" rows="4" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore vero enim error similique quia numquam ullam corporis officia odio repellendus aperiam consequatur laudantium porro voluptatibus, itaque laboriosam veritatis voluptatum distinctio!"
+                                    required>{{cvBasic.aboutMe}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" onclick="save()">save</button>
+                        <!-- <button class="btn btn-light">Cancel</button> -->
+                    </div>
+
+                </div>
+                {% endfor %}
+
             </div>
         </div>
-        <form class="needs-validation" novalidate="" id="profile">
-
-            <div class="row">
-                <div class="col-12 mb-3 d-flex justify-content-center">
-                    <img class="rounded-circle" src="/static/images/default-avatar.png" style="width: 180px; height: 180px; object-fit:cover" id="icon-preview">
-                </div>
-
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="profileIcon">Upload your portrait</label>
-                    <input type="file" class="form-control" id="profileIcon" />
-                </div>
-
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="firstName">First name</label>
-                    <input type="text" class="form-control" id="fristName" placeholder="Frist Name" value="" required="">
-                    <div class="invalid-feedback">
-                        Valid first name is required.
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="lastName">Last name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" value="" required="">
-                    <div class="invalid-feedback">
-                        Valid last name is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Nick Name</label>
-                <div class="input-group">
-
-                    <input type="text" class="form-control" id="nickName" placeholder="Nick Name" required>
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Your username is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Phone number</label>
-                <div class="input-group">
-
-                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone number" required="">
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Your username is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Email</label>
-                <div class="input-group">
-
-                    <input type="text" class="form-control" id="email" placeholder="Email" required="">
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Your username is required.
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">About me</label>
-                <div class="input-group">
-                    <textarea type="text" class="form-control skillBox" id="aboutMe" rows="5" placeholder="Description"></textarea>
-
-                </div>
-            </div>
-
-
-
-            <div class="mb-3">
-                <div class="form-group" id="edu">
-
-                    <!-- input eduction data -->
-
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <div class="form-group" id="experience">
-
-                    <!-- input experience data -->
-
-
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="address">Language</label>
-                <!-- <h1>Dynamic Fields Javascript</h1> -->
-                <!-- <div class="wrapper"> -->
-                <div id="survey_options">
-                    <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
-
-                </div>
-                <div class="controls">
-                    <button type="button" id="add_more_fields" class="btn btn-primary">Add More</button>
-                    <button type="button" id="remove_fields" class="btn btn-danger">Delete</button>
-
-                </div>
-                <!-- </div> -->
-            </div>
-
-
-
-
-
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="saveCv()" id="send">Save</button>
-        </form>
     </div>
-</div>
+    </div>
+</section>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
 <script>
-    var delay = 1;
-
-    function delayURL(value) {
-        var t = setTimeout("delayURL('" + value + "')", 1500);
-        if (delay > 0) {
-            console.log(delay)
-            delay--;
-        } else {
-            clearTimeout(t);
-            window.location.href = value;
-        }
-    }
-
-
-
     var base64ImgProfileIcon = '';
 
-    //show edcution input
-    for (var i = 0; i < 3; i++) {
-        $('#edu').append('<b> <label for="exampleFormControlTextarea1">Education ', [i + 1], '</label></b><div id="add_experience-1"><div class="row"><div class="col-md-6 mb-3"><label for="schoolName">School Name</label><input type="text" class="form-control" id="schoolName" placeholder="School Name" value="" required></div><div class="col-md-6 mb-3"><label for="major">major</label><input type="text" class="form-control" id="major" placeholder="Major" value="" required=""></div></div><div class="row"><div class="col-md-6 mb-3"><label for="startDate">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="schoolStartDate" name="date"></div><div class="col-md-6 mb-3"><label for="endDate">End date</label><input type="date" class="form-control" id="schoolEndDate" name="date"></div></div</div>')
-            // console.log(i)
-    }
-
-    //show experience input
-    for (var i = 0; i < 3; i++) {
-        $('#experience').append('<b> <label for="exampleFormControlTextarea1">Experience ', [i + 1], '</label></b><div id="inputBox_options"></div><div id="add_experience-1"><input type="text" id="companyName" class="survey_options skillBox" size="50" placeholder="Company Name" required><div class="row"><div class="col-md-6 mb-3"><label for="firstName">Start date</label><input type="date" class="form-control" style="margin-left: 10px" id="companyStartDate" name="Date"></div><div class="col-md-6 mb-3"><label for="lastName">End date</label><input type="date" class="form-control" id="companyEndDate" name="date"></div></div>  <div class="input-group"><textarea type="text" class="form-control skillBox"  id="description" rows="5" placeholder="Description"></textarea></div></div>')
-    }
-
-    function getBase64(file) {
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function() {
-            // console.log(reader.result);
-            return reader.result
-
-        };
-        reader.onerror = function(error) {
-            console.log('Error: ', error);
-        };
-    }
-
-
-
-
-    function saveCv() {
-
-        var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
-
-            return $(elem).val();
-        }).get();
-        // console.log(schoolNames)
-
-        var majors = $('input[id^=major]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        // console.log(majors)
-
-        var schoolStartDates = $('input[id^=schoolStartDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-
-        var schoolEndDates = $('input[id^=schoolEndDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-
-
-        var companyNames = $('input[id^=companyName]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        var companyStartDates = $('input[id^=companyStartDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        // console.log(companyStartDate)
-
-        var companyEndDates = $('input[id^=companyEndDate]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        // console.log(companyEndDate)
-        var description = $('textarea[id^=description]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-
-        var lan = $('input[name^=survey_options]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        $.ajax({
-            url: "/student/create_cvProfile",
-            type: 'POST',
-            data: {
-                profileIcon: base64ImgProfileIcon,
-                cvName: $("#cvName").val(),
-                fristName: $("#fristName").val(),
-                lastName: $("#lastName").val(),
-                nickName: $("#nickName").val(),
-                phoneNumber: $("#phoneNumber").val(),
-                email: $("#email").val(),
-                aboutMe: $("#aboutMe").val(),
-                schoolNames: schoolNames,
-                majors: majors,
-                schoolStartDates: schoolStartDates,
-                schoolEndDates: schoolEndDates,
-                companyNames: companyNames,
-                companyStartDate: companyStartDates,
-                companyEndDate: companyEndDates,
-                description: description,
-                language: lan,
-            },
-            datatype: 'html',
-            success: function(result) {
-                //On success
-                console.log(result)
-                if (result.status == true) {
-
-                    Swal.fire({
-                        title: 'Create CV Successful',
-                        text: 'Success',
-                        icon: 'success',
-                        showCancelButton: true,
-                        showDenyButton: false,
-                        showCancelButton: false,
-                        confirmButtonText: 'OK'
-                    })
-                    delayURL("/student/cvRecord")
-                }
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText);
-            }
-
-        })
-    }
-
-
-
-
-
-    $("#send").click((e) => {
-        e.preventDefault()
-    })
 
     $("#profileIcon").change((e) => {
         let file = $("#profileIcon")[0].files[0]
@@ -300,26 +111,58 @@
         };
     })
 
-    var survey_options = document.getElementById('survey_options');
-    var add_more_fields = document.getElementById('add_more_fields');
-    var remove_fields = document.getElementById('remove_fields');
 
-    add_more_fields.onclick = function() {
-        var newField = document.createElement('input');
-        newField.setAttribute('type', 'text');
-        newField.setAttribute('name', 'survey_options[]');
-        newField.setAttribute('class', 'survey_options skillBox');
-        newField.setAttribute('siz', 50);
-        newField.setAttribute('placeholder', 'language');
-        survey_options.appendChild(newField);
-    }
 
-    remove_fields.onclick = function() {
-        var input_tags = survey_options.getElementsByTagName('input');
-        if (input_tags.length > 1) {
-            survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+    function save() {
+        if (base64ImgProfileIcon == '') {
+            base64ImgProfileIcon = "/static/images/user-defult.png"
+
         }
+
+        // baseInfo = []
+
+        // baseInfo.push({
+        //     profileIcon: base64ImgProfileIcon,
+        //     fristName: $("#fristName").val(),
+        //     lastName: $("#lastName").val(),
+        //     nickName: $("#nickName").val(),
+        //     phoneNumber: $("#phoneNumber").val(),
+        //     email: $("#email").val(),
+        //     aboutMe: $("#aboutMe").val()
+        // })
+
+
+
+
+        fetch("/student/cvProfile", {
+            method: "POST",
+            body: JSON.stringify({
+                profileIcon: base64ImgProfileIcon,
+                fristName: $("#fristName").val(),
+                lastName: $("#lastName").val(),
+                nickName: $("#nickName").val(),
+                phoneNumber: $("#phoneNumber").val(),
+                email: $("#email").val(),
+                aboutMe: $("#aboutMe").val()
+            })
+        }).then(response => response.json()).then((json) => {
+            Swal.fire({
+                title: 'CV Status',
+                text: json.status ? 'Save CV Successfully' : 'Fail to create CV',
+                icon: json.status ? 'success' : 'error',
+                showCancelButton: true,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'OK'
+            })
+
+            //if server save CV successfully than redirect the page to "cvRecord" after 2 seconds
+            if (json.status) {
+                setTimeout(function() {
+                    window.location.href = "/student/cvProfile";
+                }, 2000);
+            }
+        })
     }
 </script>
-
 {% endblock %}
