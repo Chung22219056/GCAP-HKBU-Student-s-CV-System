@@ -1,4 +1,4 @@
-# Admin Password: 1&z6#ubK16h&
+# Admin Password: Admin123456
 # GCAP-HKBU-Student-s-CV-System
 The HKBU Student's CV System is a platform designed to help students at Hong Kong Baptist University (HKBU) create and manage their resumes or curriculum vitae (CVs). The system aims to simplify the process of creating a professional and effective CV that accurately showcases a student's skills, experience, and achievements.
 
