@@ -14,7 +14,7 @@ class Student(models.Model):
     def toDict(self):
         return {
             'student_id': self.student_id,
-            'student_name': self.user_id.first_name,
+            'student_name': self.user_id.username,
             'email': self.user_id.email
         }
     

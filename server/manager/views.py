@@ -4,7 +4,8 @@ from django.views.decorators.csrf import requires_csrf_token,csrf_protect,csrf_e
 from student.models import *
 import json
 from function.email import sendEmail
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseServerError
+from django.contrib.auth.models import User
 
 # Create your views here.
 def student_filter(request):
@@ -64,7 +65,9 @@ def watch_studentCvRecord(request):
 
 
 def dashboard(request):
-    return render(request, "manager/dashboard.html")
+    numOfStudent = len(Student.objects.all())
+    numOfCv = len(CvInfoBase.objects.all())
+    return render(request, "manager/dashboard.html", {'numOfStudent': numOfStudent, 'numOfCv': numOfCv})
 
 # @csrf_protect
 @csrf_exempt
@@ -92,4 +95,65 @@ def create_Job(request):
   
     #   print(request.POST)
     return render(request, "manager/createJob.html", {'nav':'manage'})
+
+@csrf_exempt
+def delete_student_api(request):
+    if request.method == 'POST':
+        try:
+            json_data = json.loads(request.body)
+            student_id = json_data['student_id']
+            student = Student.objects.get(student_id=student_id)
+            student.user_id.delete()
+            student.delete()
+
+            return JsonResponse({'status': True})
+        except Exception as e:
+            return JsonResponse({'status': False})
+        
+    return HttpResponseForbidden
+
+@csrf_exempt
+def edit_student_api(request):
+    if request.method == 'POST':
+        try:
+            json_data = json.loads(request.body)
+            old_student_id = json_data['old_student_id']
+            print(json_data)
+            student = Student.objects.get(student_id=old_student_id)
+            user = student.user_id
+
+            user.username = json_data['username']
+            user.email = json_data['email']
+            student.student_id = json_data['student_id']
+            
+            user.save()
+            student.save()
+            return JsonResponse({'status':True})
+        except Exception as e:
+            print(e)
+            return JsonResponse({'status':False})
+    
+    return HttpResponseForbidden
+
+@csrf_exempt
+def create_student_api(request):
+    if request.method == 'POST':
+        try:
+            json_data = json.loads(request.body)
+            user = User.objects.create_user(username=json_data['username'], email=json_data['email'], password=json_data['password'])
+            student = Student(user_id=user, student_id=json_data['student_id'], status=True)
+            student.save()
+            return JsonResponse({'status':True})
+        except Exception as e:
+            print(e)
+            return JsonResponse({'status':False})
+    
+    return HttpResponseForbidden
+
+
+
+def students(request):
+    students = [student.toDict() for student in Student.objects.all()]
+    return render(request, "manager/students.html",{'students': students})
+
 

@@ -319,7 +319,7 @@ def create_new_cv(request):
             json_data = json.loads(request.body)
             student = Student.objects.get(user_id=request.user.id)
 
-            cv = CvInfoBase(studentID=student, cvName=json_data['cvName'], fristName=json_data['firstName'], lastName=json_data['lastName'], email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'], profileIcon=json_data['base64ImgProfileIcon'])       
+            cv = CvInfoBase(studentID=student, fristName=json_data['firstName'], lastName=json_data['lastName'], email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'], profileIcon=json_data['base64ImgProfileIcon'])       
             cv.save()
 
             for education in json_data['educations']:

@@ -2,7 +2,22 @@
 <script>
     $(document).ready(() => {
         $("#offcanvasExample").append($("#manager-sidenav").clone().attr("id", ""))
+
+        //active navigation
+        let page = window.location.pathname.split("/")[2]
+        if(page == ""){
+            $(".dashboard-nav").addClass("active")
+            $("#page-title").html("Dashboard")
+        }else{
+            $(`.${page}-nav`).addClass("active")
+            $("#page-title").html(capitalizeFirstLetter(page))
+        }
+
     })
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 </script>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="background-color: transparent; width: 260px;">
@@ -20,12 +35,12 @@
         <h6 class="text-muted">Navigation</h6>
         <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <a href="#" class="nav-link text-white active">
+                <a href="/manager/" class="dashboard-nav nav-link text-white">
                     <i class="fa-solid fa-gauge"></i> Dashboard
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a href="students" class="students-nav nav-link text-white">
                     <i class="fa-solid fa-users"></i> Students
                 </a>
             </li>
@@ -41,7 +56,7 @@
                 <a class="btn btn-light d-sm-block d-md-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                     <i class="fa-solid fa-bars"></i>
                 </a>
-                <span class="h5 mb-0"><strong>Dashboard</strong></span>
+                <span class="h5 mb-0"><strong id="page-title">Dashboard</strong></span>
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
