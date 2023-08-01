@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import requires_csrf_token,csrf_protect,csrf_exempt
 from student.models import *
 import json
+from django.contrib.auth.decorators import login_required
 from function.email import sendEmail
 from django.http import HttpResponseForbidden, HttpResponseServerError
 from django.contrib.auth.models import User
@@ -54,6 +55,7 @@ def send_email_to_student(request):
         print(e)
         return JsonResponse({'status': False})
 
+
 def watch_studentCvRecord(request):
     # only for logged user
     stud_id= request.GET.get('studentID')
@@ -63,13 +65,13 @@ def watch_studentCvRecord(request):
     cv_list = CvInfoBase.objects.filter(studentID=student)
     return render(request, 'manager/watchStudentCvRecord.html', {'nav':'manager','cv_list':cv_list})
 
-
+@login_required
 def dashboard(request):
     numOfStudent = len(Student.objects.all())
     numOfCv = len(CvInfoBase.objects.all())
     return render(request, "manager/dashboard.html", {'numOfStudent': numOfStudent, 'numOfCv': numOfCv})
 
-# @csrf_protect
+@login_required
 @csrf_exempt
 def create_Job(request):
     email=[]
@@ -96,6 +98,7 @@ def create_Job(request):
     #   print(request.POST)
     return render(request, "manager/createJob.html", {'nav':'manage'})
 
+@login_required
 @csrf_exempt
 def delete_student_api(request):
     if request.method == 'POST':
@@ -112,6 +115,7 @@ def delete_student_api(request):
         
     return HttpResponseForbidden
 
+@login_required
 @csrf_exempt
 def edit_student_api(request):
     if request.method == 'POST':
@@ -135,6 +139,7 @@ def edit_student_api(request):
     
     return HttpResponseForbidden
 
+@login_required
 @csrf_exempt
 def create_student_api(request):
     if request.method == 'POST':
@@ -150,8 +155,7 @@ def create_student_api(request):
     
     return HttpResponseForbidden
 
-
-
+@login_required
 def students(request):
     students = [student.toDict() for student in Student.objects.all()]
     return render(request, "manager/students.html",{'students': students})

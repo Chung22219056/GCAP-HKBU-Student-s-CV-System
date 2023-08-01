@@ -1,0 +1,33 @@
+<div class="modal fade" id="workExperienceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Work Experience Form</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="companyName" class="form-label">Name of Company</label>
+                        <input type="text" class="form-control" id="companyName" placeholder="Input your Company name" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="workExperienceDescription" class="form-label"><strong>Description</strong></label>
+                        <textarea class="form-control" id="workExperienceDescription" rows="3" placeholder="input your description of working experience"></textarea>        
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="workExpStartDate">Start date</label>
+                        <input type="date" class="form-control" id="workExpStartDate" name="date">  
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="workExpEndDate">End date</label>
+                        <input type="date" class="form-control" id="workExpEndDate" name="date">  
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onClick="handleSaveWorkExperienceData()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

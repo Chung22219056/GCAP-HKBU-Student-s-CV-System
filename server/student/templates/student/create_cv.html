@@ -1,75 +1,13 @@
 {% extends 'base.html'%}
 
+{% block header %}
+<script src="/static/student/components/create_cv_page/create_cv_page.js"></script>
+{% endblock %}
+
 {% block content %}
 
-<div class="modal fade" id="edcutionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title">Education Form</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <label for="institution" class="form-label">Name of institution</label>
-                        <input type="text" class="form-control" id="institution" placeholder="Input your institution" required>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label for="program" class="form-label">Program</label>
-                        <input type="text" class="form-control" id="program" placeholder="Input your program" required>
-                    </div>
-                    <div class="col-6 mb-3">
-                        <label for="startDate">Start date</label>
-                        <input type="date" class="form-control" id="startDate" name="date">  
-                    </div>
-                    <div class="col-6 mb-3">
-                        <label for="endDate">End date</label>
-                        <input type="date" class="form-control" id="endDate" name="date">  
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onClick="handleSaveEducationData()">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="workExperienceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title">Work Experience Form</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <label for="companyName" class="form-label">Name of Company</label>
-                        <input type="text" class="form-control" id="companyName" placeholder="Input your Company name" required>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label for="workExperienceDescription" class="form-label"><strong>Description</strong></label>
-                        <textarea class="form-control" id="workExperienceDescription" rows="3" placeholder="input your description of working experience"></textarea>        
-                    </div>
-                    <div class="col-6 mb-3">
-                        <label for="workExpStartDate">Start date</label>
-                        <input type="date" class="form-control" id="workExpStartDate" name="date">  
-                    </div>
-                    <div class="col-6 mb-3">
-                        <label for="workExpEndDate">End date</label>
-                        <input type="date" class="form-control" id="workExpEndDate" name="date">  
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onClick="handleSaveWorkExperienceData()">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
+{% include 'student/components/create_cv_page/education_modal.html' %}
+{% include 'student/components/create_cv_page/work_experience_modal.html' %}
 
 <div class="container pt-3" style="margin-top: 100px;">
 
@@ -168,155 +106,6 @@
 
 {% block javascript %}
 <script>
-    var educations = []
-    var workExperiences = []
-    var base64ImgProfileIcon = ''
-
-    function handleSaveEducationData(){
-        let institution = $("#institution").val()
-        let program = $("#program").val()
-        let startDate = $("#startDate").val()
-        let endDate = $("#endDate").val()
-
-        educations.push({"institution": institution, "program": program, "startDate":startDate, "endDate":endDate})
-        
-        //clear input fields
-        $("#institution").val('')
-        $("#program").val('')
-        $("#startDate").val('')
-        $("#endDate").val('')
-
-        //close modal
-        $("#edcutionModal").modal("hide")
-        renderDataInEducationField()
-    }
-
-    function renderDataInEducationField(){
-        $("#education-field").empty()
-        
-        if(educations.length === 0){
-            $("#education-field").append(`<h6 class="text-secondary"><center>There are no eduation in here.</center></h6>`)
-        }else{
-            educations.forEach((education, index) => {
-                $("#education-field").append(
-                    `
-                    <div class="card bg-light mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-9">
-                                    <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
-                                    <h6 class="text-secondary"><strong>${education.program}</strong></h6>
-                                    <h6 class="text-secondary">${education.startDate} to ${education.endDate}</h6>
-                                </div>
-                                <div class="col-3">
-                                    <button class="btn btn-danger float-end" onClick="handleDeleteEducationRecord(${index})"><i class="fa-solid fa-trash"></i></button>
-                                </div>
-                            
-                            </div>
-                        </div>
-                    </div>
-                    `
-                )
-            })
-        }
-        
-    }
-
-    function handleDeleteEducationRecord(index){
-        educations.splice(index, 1)
-        renderDataInEducationField()
-    }
-
-    function handleSaveWorkExperienceData(){
-        let companyName = $("#companyName").val()
-        let description = $("#workExperienceDescription").val()
-        let startDate = $("#workExpStartDate").val()
-        let endDate = $("#workExpEndDate").val()
-
-        workExperiences.push({"companyName":companyName, "description":description, "startDate":startDate, "endDate":endDate})
-        
-        //clear input fields
-        $("#companyName").val('')
-        $("#workExperienceDescription").val('')
-        $("#workExpStartDate").val('')
-        $("#workExpEndDate").val('')
-
-        //close modal
-        $("#workExperienceModal").modal("hide")
-        renderDataInWorkExperienceField()
-    
-    }
-
-    function handleDeleteWorkExperience(index){
-        workExperiences.splice(index, 1)
-        renderDataInWorkExperienceField()
-    }
-
-    function renderDataInWorkExperienceField(){
-        $("#workExperience-field").empty()
-
-        if(workExperiences.length === 0){
-            $("#workExperience-field").append(`<h6 class="text-secondary"><center>There are no work experience data in here.</center></h6>`)
-        }else{
-            workExperiences.forEach((workExperience, index)=>{
-                console.log(workExperience)
-                $("#workExperience-field").append(`
-                <div class="card bg-light mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-9">
-                                    <h5 class="card-title"><i class="fa-solid fa-building"></i> ${workExperience.companyName}</h5>
-                                    <h6 class="text-secondary"><strong>${workExperience.description}</strong></h6>
-                                    <h6 class="text-secondary">${workExperience.startDate} to ${workExperience.endDate}</h6>
-                                </div>
-                                <div class="col-3">
-                                    <button class="btn btn-danger float-end" onClick="handleDeleteWorkExperience(${index})"><i class="fa-solid fa-trash"></i></button>
-                                </div>
-                            
-                            </div>
-                        </div>
-                    </div>
-                
-                `)
-            })
-        }
-    }
-
-    function fetchRequsetCreateCV(){
-
-        fetch("/student/create_new_cv",{
-            method: "POST",
-            body: JSON.stringify({
-                base64ImgProfileIcon: base64ImgProfileIcon,
-                cvName: $("#cv-name").val(),
-                firstName: $("#first-name").val(),
-                lastName: $("#last-name").val(),
-                email: $("#email").val(),
-                phone: $("#phone").val(),
-                bio: $("#bio").val(),
-                educations: educations,
-                workExperiences: workExperiences
-            })
-        }).then(response => response.json()).then((json) => {
-            Swal.fire({
-                        title: 'CV Status',
-                        text: json.status ? 'Create CV Successfully' : 'Fail to create CV',
-                        icon: json.status ? 'success' : 'error',
-                        showCancelButton: true,
-                        showDenyButton: false,
-                        showCancelButton: false,
-                        confirmButtonText: 'OK'
-            })
-
-            //if server save CV successfully than redirect the page to "cvRecord" after 2 seconds
-            if(json.status){
-                setTimeout(function() {
-                    window.location.href = "/student/cvRecord";
-                }, 2000);
-            }
-        })
-
-    }
 
     $(document).ready(()=>{
         $("#profileIcon").change((e) => {
@@ -331,5 +120,6 @@
             };
         })
     })
+
 </script>
 {% endblock %}

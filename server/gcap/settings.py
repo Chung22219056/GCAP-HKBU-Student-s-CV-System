@@ -126,6 +126,7 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'student/static'),
+    os.path.join(BASE_DIR, 'manager/static'),
 ]
 
 STATIC_URL = 'static/'
@@ -134,3 +135,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL='/'
+LOGIN_REDIRECT_URL='/'
