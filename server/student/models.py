@@ -42,8 +42,19 @@ class CvInfoBase(models.Model):
     def getLanguage(self):
         return Language.objects.filter(cv=self,studentID=self.studentID)
 
+
+class Cv(models.Model):
+     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
+     cvId = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
+     cvName= models.CharField(max_length=255)
+     def __str__(self):
+        return "{0} Cv Name:[{1}]".format(self.cvName)
+    
+
+
+
 class Education(models.Model):
-    cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
+    cv = models.ForeignKey(Cv, on_delete=models.CASCADE)
     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
     shcoolName = models.CharField(max_length=255)
     major = models.CharField(max_length=255)
@@ -69,14 +80,14 @@ class EducationType(models.Model):
 
 
 class Skill(models.Model):
-    cv = models.ManyToManyField(CvInfoBase)
+    cv = models.ManyToManyField(Cv)
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
 
 class Language(models.Model):
-    cv = models.ManyToManyField(CvInfoBase)
+    cv = models.ManyToManyField(Cv)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
@@ -85,7 +96,7 @@ class Language(models.Model):
 
 
 class WorkExperience(models.Model):
-    cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
+    cv = models.ForeignKey(Cv, on_delete=models.CASCADE)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     companyName = models.CharField(max_length=255)
     start_date = models.DateField(null=True)
