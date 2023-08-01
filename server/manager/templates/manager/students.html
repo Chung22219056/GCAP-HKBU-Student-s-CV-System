@@ -3,6 +3,8 @@
 {% block header %}
 <script src="/static/manager/components/students_page/create_student.js"></script>
 <script src="/static/manager/components/students_page/edit_student.js"></script>
+<script src="/static/manager/components/students_page/delete_student.js"></script>
+<script src="/static/manager/components/students_page/send_email.js"></script>
 {% endblock %}
 
 
@@ -19,7 +21,7 @@
         students.forEach((student)=>{
             let deleteBtn = $(`<button class="btn btn-danger me-1" onclick="deleteStudent(${student.student_id})"><i class="fa-solid fa-trash"></i></button>`)
             let editBtn = $(`<button class="btn btn-primary me-1" onclick="editStudent('${student.student_id}')"><i class="fa-solid fa-pen"></i></button>`)
-            let sendEmail = $(`<button class="btn btn-secondary" me-1><i class="fa-solid fa-envelope"></i></button>`)
+            let sendEmail = $(`<button class="btn btn-secondary" me-1 onclick="showEmailModal('${student.student_id}')" ><i class="fa-solid fa-envelope"></i></button>`)
             var studentRow = $('<tr>');
             studentRow.append($('<td>').text(student.student_id));
             studentRow.append($('<td>').text(student.student_name));
@@ -31,51 +33,6 @@
         $("#student_table").DataTable();
     })
 
-    function confirmationOfDeleteStudent(){
-        return Swal.fire({
-            title: 'Are You Sure Delete The Student ?',
-            showDenyButton: true,
-            showCancelButton: false,
-            confirmButtonText: 'Yes',
-            denyButtonText: 'No',
-            customClass: {
-                actions: 'my-actions',
-                cancelButton: 'order-1 right-gap',
-                confirmButton: 'order-2',
-                denyButton: 'order-3',
-            }
-        })
-    }
-    
-    function deleteStudent(student_id){
-        confirmationOfDeleteStudent().then((result)=>{
-            if(!result.isConfirmed){
-                return
-            }
-
-            fetch("/manager/delete_student_api",{
-                method: "POST",
-                body: JSON.stringify({
-                    "student_id": student_id
-                })
-            }).then(response => response.json())
-            .then((json) => {
-                Swal.fire({
-                    icon: json.status ? 'success' : 'error',
-                    title: json.status ? 'Removed Student' : 'Fail to remove student',
-                    showDenyButton: false,
-                    showCancelButton: false,
-                    confirmButtonText: 'OK',
-                })
-            })
-            .then(() => {
-                setTimeout(function() {
-                    location.reload();
-                }, 2000);
-            })
-        })
-
-    }
 </script>
 {% endblock %}
 
@@ -83,6 +40,7 @@
 
 {% include 'manager/components/students_page/create_student_modal.html' %}
 {% include 'manager/components/students_page/edit_student_modal.html' %}
+{% include 'manager/components/students_page/email_modal.html' %}
 
 <div class="mb-3 d-flex justify-content-between w-100">
     <h5 class="text-secondary">Number Of Student: <span id="num_of_student_label"></span> </h5>

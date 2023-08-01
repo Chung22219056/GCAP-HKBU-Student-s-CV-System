@@ -1,0 +1,33 @@
+<div class="modal fade" id="edcutionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Education Form</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="institution" class="form-label">Name of institution</label>
+                        <input type="text" class="form-control" id="institution" placeholder="Input your institution" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="program" class="form-label">Program</label>
+                        <input type="text" class="form-control" id="program" placeholder="Input your program" required>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="startDate">Start date</label>
+                        <input type="date" class="form-control" id="startDate" name="date">  
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="endDate">End date</label>
+                        <input type="date" class="form-control" id="endDate" name="date">  
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onClick="handleSaveEducationData()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
