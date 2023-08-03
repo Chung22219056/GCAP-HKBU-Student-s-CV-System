@@ -48,7 +48,7 @@ class Cv(models.Model):
      cvId = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
      cvName= models.CharField(max_length=255)
      def __str__(self):
-        return "{0} Cv Name:[{1}]".format(self.cvName)
+        return "Cv Name:[{0}]".format(self.cvName)
     
 
 

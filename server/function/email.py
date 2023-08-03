@@ -9,7 +9,7 @@ def sendEmail(to, email_content, subject=None):
     if subject != None:
         content["subject"] = "subject"  
 
-    content["from"] = "gcap3055hkbu@gmail.com"  
+    content["from"] = "nfesystemfyp@gmail.com"  
     content['Subject'] = "InterView"
     #content["to"] = "22219056@life.hkbu.edu.hk" 
     content["to"] = to
@@ -20,7 +20,7 @@ def sendEmail(to, email_content, subject=None):
             smtp.ehlo()
             smtp.starttls()
             #smtp.login("gcap3055hkbu@gmail.com", "smfakeaptgbotnqc")
-            smtp.login("gcap3055bu@gmail.com","")
+            smtp.login("nfesystemfyp@gmail.com","debpgcwcwbqjabuo")
             smtp.send_message(content)
             print("Complete!")
         except Exception as e:

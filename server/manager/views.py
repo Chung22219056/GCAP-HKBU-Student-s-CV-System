@@ -82,7 +82,7 @@ def create_Job(request):
     for user in users:
         student = Student.objects.filter(user_id=user)
         for stu in student:
-           studentCv = CvInfoBase.objects.filter(studentID=stu)
+           studentCv = Cv.objects.filter(studentID=stu)
            for cv in studentCv:
                for language in request.POST.getlist('lan[]'):
                 programLan = Language.objects.filter(cv=cv).filter(name=language)
