@@ -82,7 +82,7 @@ def create_Job(request):
     for user in users:
         student = Student.objects.filter(user_id=user)
         for stu in student:
-           studentCv = Cv.objects.filter(studentID=stu)
+           studentCv = CvInfoBase.objects.filter(studentID=stu)
            for cv in studentCv:
                for language in request.POST.getlist('lan[]'):
                 programLan = Language.objects.filter(cv=cv).filter(name=language)
@@ -145,8 +145,21 @@ def create_student_api(request):
     if request.method == 'POST':
         try:
             json_data = json.loads(request.body)
+            print(json_data)
             user = User.objects.create_user(username=json_data['username'], email=json_data['email'], password=json_data['password'])
-            student = Student(user_id=user, student_id=json_data['student_id'], status=True)
+            user.is_active = False
+            user.first_name = json_data['firstName']
+            user.last_name = json_data['lastName']
+            user.save()
+
+            student = Student(
+                user_id=user, 
+                student_id=json_data['student_id'], 
+                nickName='',
+                phone=json_data['phone'],
+                aboutMe=json_data['bio'],
+                status=True
+            )
             student.save()
             return JsonResponse({'status':True})
         except Exception as e:

@@ -8,6 +8,9 @@ from django_base64field.fields import Base64Field
 
 class Student(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    nickName = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    aboutMe = models.TextField(max_length=1000, default="")
     student_id = models.CharField(max_length=8, primary_key=True) # 8 digital numbers example 22221111 
     status = models.BooleanField()
 
@@ -20,10 +23,18 @@ class Student(models.Model):
     
     def getName(self):
         return self.user_id.username
-    
+
+
+# class Cv(models.Model):
+#      studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
+#      cvId = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
+#      cvName= models.CharField(max_length=255)
+#      def __str__(self):
+#         return "Cv Name:[{0}]".format(self.cvName)
+     
 class CvInfoBase(models.Model):
     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
-    # cvName= models.CharField(max_length=255)
+    cvName= models.CharField(max_length=255)
     profileIcon = Base64Field(max_length=900000,blank=True,null=True)
     cvId = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
     fristName = models.CharField(max_length=255)
@@ -32,6 +43,7 @@ class CvInfoBase(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     aboutMe = models.TextField(max_length=1000, default="")
+    testa1 = models.CharField(max_length=255, null=True)
     # website = models.URLField(blank=True, null=True)
     # github = models.URLField(blank=True, null=True)
 
@@ -41,20 +53,12 @@ class CvInfoBase(models.Model):
     @property
     def getLanguage(self):
         return Language.objects.filter(cv=self,studentID=self.studentID)
-
-
-class Cv(models.Model):
-     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
-     cvId = models.CharField(max_length=255, default="{0}-CV".format(random.randint(11111,99999)))
-     cvName= models.CharField(max_length=255)
-     def __str__(self):
-        return "Cv Name:[{0}]".format(self.cvName)
     
-
-
+    def copyInformationFromStudent(self):
+        pass
 
 class Education(models.Model):
-    cv = models.ForeignKey(Cv, on_delete=models.CASCADE)
+    cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
     studentID =models.ForeignKey(Student, on_delete=models.CASCADE)
     shcoolName = models.CharField(max_length=255)
     major = models.CharField(max_length=255)
@@ -80,14 +84,14 @@ class EducationType(models.Model):
 
 
 class Skill(models.Model):
-    cv = models.ManyToManyField(Cv)
+    cv = models.ManyToManyField(CvInfoBase)
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
 
 class Language(models.Model):
-    cv = models.ManyToManyField(Cv)
+    cv = models.ManyToManyField(CvInfoBase)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
@@ -96,7 +100,7 @@ class Language(models.Model):
 
 
 class WorkExperience(models.Model):
-    cv = models.ForeignKey(Cv, on_delete=models.CASCADE)
+    cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     companyName = models.CharField(max_length=255)
     start_date = models.DateField(null=True)

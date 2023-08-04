@@ -5,7 +5,11 @@ function createUserFetch(){
             email: $("#email_create_user").val(),
             student_id: $("#student_id_create_user").val(),
             username: $("#username_create_user").val(),
-            password: $("#password_create_user").val()
+            password: $("#password_create_user").val(),
+            firstName: $("#first_name_create_user").val(),
+            lastName: $("#last_name_create_user").val(),
+            phone: $("#phone_create_user").val(),
+            bio: $("#bio_create_user").val(),
         })
     })
     .then(response => response.json())
