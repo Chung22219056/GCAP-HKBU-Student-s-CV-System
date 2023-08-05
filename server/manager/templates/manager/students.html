@@ -10,54 +10,54 @@
 
 {% block javascript %}
 <script>
-    const students = {{students|safe}}
+    const students = {{ students| safe}}
 
 
     $(document).ready(function() {
         var tableBody = $('#student_table tbody')
 
-        $("#num_of_student_label").html(students.length)
+    $("#num_of_student_label").html(students.length)
 
         students.forEach((student)=>{
-            let deleteBtn = $(`<button class="btn btn-danger me-1" onclick="deleteStudent(${student.student_id})"><i class="fa-solid fa-trash"></i></button>`)
-            let editBtn = $(`<button class="btn btn-primary me-1" onclick="editStudent('${student.student_id}')"><i class="fa-solid fa-pen"></i></button>`)
-            let sendEmail = $(`<button class="btn btn-secondary" me-1 onclick="showEmailModal('${student.student_id}')" ><i class="fa-solid fa-envelope"></i></button>`)
-            var studentRow = $('<tr>');
-            studentRow.append($('<td>').text(student.student_id));
+        let deleteBtn = $(`<button class="btn btn-danger me-1" onclick="deleteStudent(${student.student_id})"><i class="fa-solid fa-trash"></i></button>`)
+    let editBtn = $(`<button class="btn btn-primary me-1" onclick="editStudent('${student.student_id}')"><i class="fa-solid fa-pen"></i></button>`)
+    let sendEmail = $(`<button class="btn btn-secondary" me-1 onclick="showEmailModal('${student.student_id}')" ><i class="fa-solid fa-envelope"></i></button>`)
+    var studentRow = $('<tr>');
+        studentRow.append($('<td>').text(student.student_id));
             studentRow.append($('<td>').text(student.student_name));
-            studentRow.append($('<td>').text(student.email));
-            studentRow.append($('<td>').append(deleteBtn).append(editBtn).append(sendEmail));
-            tableBody.append(studentRow);
+                studentRow.append($('<td>').text(student.email));
+                    studentRow.append($('<td>').append(deleteBtn).append(editBtn).append(sendEmail));
+                        tableBody.append(studentRow);
         })
 
-        $("#student_table").DataTable();
+                        $("#student_table").DataTable();
     })
 
-</script>
-{% endblock %}
+                    </script>
+                    {% endblock %}
 
-{% block manager_content %}
+                    {% block manager_content %}
 
-{% include 'manager/components/students_page/create_student_modal.html' %}
-{% include 'manager/components/students_page/edit_student_modal.html' %}
-{% include 'manager/components/students_page/email_modal.html' %}
+                    {% include 'manager/components/students_page/create_student_modal.html' %}
+                    {% include 'manager/components/students_page/edit_student_modal.html' %}
+                    {% include 'manager/components/students_page/email_modal.html' %}
 
-<div class="mb-3 d-flex justify-content-between w-100">
-    <h5 class="text-secondary">Number Of Student: <span id="num_of_student_label"></span> </h5>
-    <button class="btn btn-primary" onclick="" data-bs-toggle="modal" data-bs-target="#createUserModal">Create User</button>
-</div>
+                    <div class="mb-3 d-flex justify-content-between w-100">
+                        <h5 class="text-secondary">Number Of Student: <span id="num_of_student_label"></span> </h5>
+                        <button class="btn btn-primary" onclick="" data-bs-toggle="modal" data-bs-target="#createUserModal">Create User</button>
+                    </div>
 
-<table id="student_table" class="display dataTable">
-    <thead>
-        <tr>
-          <th>Student ID</th>
-          <th>Student Name</th>
-          <th>Email</th>
-          <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+                    <table id="student_table" class="display dataTable">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
 
-{% endblock %}
+                    {% endblock %}
