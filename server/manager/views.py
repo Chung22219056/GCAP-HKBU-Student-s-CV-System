@@ -78,19 +78,26 @@ def create_Job(request):
     # if request.method=='POST':
     student = Student.objects.all()
     users = User.objects.all()
-   
+
     for user in users:
         student = Student.objects.filter(user_id=user)
         for stu in student:
            studentCv = CvInfoBase.objects.filter(studentID=stu)
            for cv in studentCv:
                for language in request.POST.getlist('lan[]'):
-                programLan = Language.objects.filter(cv=cv).filter(name=language)
+                upperLanguage = language.upper()
+                
+                # programLan = Language.objects.filter(cv=cv).filter(name=language)
+                programLan = Language.objects.filter(cv=cv)
+                
                 for lan in programLan:
-                    if user.email not in email:
+                    upperLan = lan.name.upper()
+                    
+                    if upperLan == upperLanguage:
+                     if user.email not in email:
                         sendEmail(user.email, request.POST.get("jobDescription"))
                         email.append(user.email)
-                    else:
+                     else:
                         continue
 
     
