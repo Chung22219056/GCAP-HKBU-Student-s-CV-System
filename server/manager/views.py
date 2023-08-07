@@ -170,6 +170,7 @@ def create_student_api(request):
 
 @login_required
 def students(request):
+    print(request.user)
     students = [student.toDict() for student in Student.objects.all()]
     return render(request, "manager/students.html",{'students': students})
 

@@ -61,13 +61,14 @@ def basicInfo(request):
 
 
 def checkLogin(request):
-    # cvID = request.GET.get('cvID')
-    cv = CvInfoBase.objects.filter(studentID=Student.objects.get(user_id=request.user)).values()
+    cvID = request.GET.get('cvID')
+    cv = CvInfoBase.objects.filter(studentID=Student.objects.get(user_id=request.user.id)).values()
     isCvEmpty = False
     if(cv.count() == 0):
         isCvEmpty = True
     # print(cv)
     return render(request, 'student/checkLogin.html', {'nav': 'student','cv':cv, "isCvEmpty": isCvEmpty})
+
 
 
 def student_CV_UI(request):

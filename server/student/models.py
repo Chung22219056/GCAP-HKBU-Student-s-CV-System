@@ -7,11 +7,13 @@ from django_base64field.fields import Base64Field
 
 
 class Student(models.Model):
+    
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     nickName = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     aboutMe = models.TextField(max_length=1000, default="")
     student_id = models.CharField(max_length=8, primary_key=True) # 8 digital numbers example 22221111 
+    is_first_login = models.BooleanField(default=True)
     status = models.BooleanField()
 
     def toDict(self):
@@ -42,8 +44,7 @@ class CvInfoBase(models.Model):
     nickName = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    aboutMe = models.TextField(max_length=1000, default="")
-    testa1 = models.CharField(max_length=255, null=True)
+    aboutMe = models.TextField(max_length=1000, default="") 
     # website = models.URLField(blank=True, null=True)
     # github = models.URLField(blank=True, null=True)
 
