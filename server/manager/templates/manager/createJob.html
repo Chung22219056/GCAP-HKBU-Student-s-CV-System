@@ -16,12 +16,11 @@
 
 
         <div class="mb-3">
-            <label for="address">Language</label>
+            <label for="address">Program Language</label>
             <!-- <h1>Dynamic Fields Javascript</h1> -->
             <!-- <div class="wrapper"> -->
             <div id="survey_options">
-                <input type="text" name="survey_options[]" class="survey_options skillBox" size="50"
-                    placeholder="language">
+                <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
 
             </div>
             <div class="controls">
@@ -44,70 +43,70 @@
 
 
 <script>
-var survey_options = document.getElementById('survey_options');
-var add_more_fields = document.getElementById('add_more_fields');
-var remove_fields = document.getElementById('remove_fields');
+    var survey_options = document.getElementById('survey_options');
+    var add_more_fields = document.getElementById('add_more_fields');
+    var remove_fields = document.getElementById('remove_fields');
 
-add_more_fields.onclick = function() {
-    var newField = document.createElement('input');
-    newField.setAttribute('type', 'text');
-    newField.setAttribute('name', 'survey_options[]');
-    newField.setAttribute('class', 'survey_options skillBox');
-    newField.setAttribute('siz', 50);
-    newField.setAttribute('placeholder', 'language');
-    survey_options.appendChild(newField);
-}
-
-remove_fields.onclick = function() {
-    var input_tags = survey_options.getElementsByTagName('input');
-    if (input_tags.length > 1) {
-        survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+    add_more_fields.onclick = function() {
+        var newField = document.createElement('input');
+        newField.setAttribute('type', 'text');
+        newField.setAttribute('name', 'survey_options[]');
+        newField.setAttribute('class', 'survey_options skillBox');
+        newField.setAttribute('siz', 50);
+        newField.setAttribute('placeholder', 'language');
+        survey_options.appendChild(newField);
     }
-}
 
-
-
-
-function createJob() {
-    console.log($("#jobDescription").val());
-
-    var lan = $('input[name^=survey_options]').map(function(idx, elem) {
-        return $(elem).val();
-    }).get();
-    console.log($("#jobDescription").val())
-
-    $.ajax({
-        url: '/manager/create_Job',
-        type: 'POST',
-        data: {
-            'jobDescription': $("#jobDescription").val(),
-            'lan': lan,
-            // csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        datatype: 'html',
-        success: function(result) {
-            //On success
-            console.log(result)
-            if (result.status == true) {
-
-                Swal.fire({
-                    title: 'Create Job Successful',
-                    text: 'Success',
-                    icon: 'success',
-                    showCancelButton: true,
-                    showDenyButton: false,
-                    showCancelButton: false,
-                    confirmButtonText: 'OK'
-                })
-                delayURL("/student/cvRecord")
-            }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText);
+    remove_fields.onclick = function() {
+        var input_tags = survey_options.getElementsByTagName('input');
+        if (input_tags.length > 1) {
+            survey_options.removeChild(input_tags[(input_tags.length) - 1]);
         }
-    });
-}
+    }
+
+
+
+
+    function createJob() {
+        console.log($("#jobDescription").val());
+
+        var lan = $('input[name^=survey_options]').map(function(idx, elem) {
+            return $(elem).val();
+        }).get();
+        console.log($("#jobDescription").val())
+
+        $.ajax({
+            url: '/manager/create_Job',
+            type: 'POST',
+            data: {
+                'jobDescription': $("#jobDescription").val(),
+                'lan': lan,
+                // csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            datatype: 'html',
+            success: function(result) {
+                //On success
+                console.log(result)
+                if (result.status == true) {
+
+                    Swal.fire({
+                        title: 'Create Job Successful',
+                        text: 'Success',
+                        icon: 'success',
+                        showCancelButton: true,
+                        showDenyButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'OK'
+                    })
+                    delayURL("/student/cvRecord")
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText);
+            }
+        });
+    }
 </script>
 
 {% endblock %}

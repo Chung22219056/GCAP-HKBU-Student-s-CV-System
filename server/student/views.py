@@ -111,26 +111,30 @@ def student_CV_UI2(request):
 @login_required
 def student_cvProfile(request):
     
-    cvBasicInfo = CvInfoBase.objects.filter(studentID=Student.objects.get(user_id=request.user)).values()
+    studentProfile = Student.objects.filter(user_id=request.user).values()
+    user = User.objects.filter(id=request.user.id)
     if request.method == 'POST':
         request_JSON = json.loads(request.body)
 
-        student = Student.objects.get(user_id=request.user.id)
-        # print(request_JSON)
-
-        editCvInfoBasic = CvInfoBase.objects.get(studentID=student)
-        editCvInfoBasic.profileIcon = request_JSON["profileIcon"]
-        editCvInfoBasic.fristName = request_JSON["fristName"]
-        editCvInfoBasic.lastName = request_JSON["lastName"]
-        editCvInfoBasic.nickName = request_JSON["nickName"]
-        editCvInfoBasic.phone = request_JSON["phoneNumber"]
-        editCvInfoBasic.email = request_JSON["email"]
-        editCvInfoBasic.aboutMe = request_JSON["aboutMe"]
-        editCvInfoBasic.save()
+    
+        editStudent = Student.objects.get(user_id=request.user.id)
+        # print(editStudent.email)
+        editStudent.profileIcon = request_JSON["profileIcon"]
+        editStudent.nickName = request_JSON["nickName"]
+        editStudent.phone = request_JSON["phoneNumber"]
+        editStudent.aboutMe = request_JSON["aboutMe"]
+        editStudent.save()
         
+
+        editUser = User.objects.get(id=request.user.id)
+        print(editUser.email)
+        editUser.first_name = request_JSON["fristName"]
+        editUser.last_name = request_JSON["lastName"]
+        editUser.email = request_JSON["email"]
+        editUser.save()
         
         return JsonResponse({"status":True})
-    return render(request, 'student/cvProfile.html', {'nav':'student','cvBasicInfo':cvBasicInfo})
+    return render(request, 'student/cvProfile.html', {'nav':'student','studentProfile':studentProfile,'user':user})
 
 @login_required
 def student_cvRecord(request):
