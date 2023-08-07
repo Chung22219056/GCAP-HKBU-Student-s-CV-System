@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" />
+
     <title>Document</title>
 </head>
 
@@ -12,13 +13,21 @@
 
     <div>
         {% csrf_token %}
-        <textarea name="description" id="jobDescription" cols="30" rows="10"></textarea>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Company Name</label>
+            <input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" placeholder="Company Name">
+        </div>
+
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Job Description</label>
+            <textarea class="form-control" id="jobDescription" rows="3"></textarea>
+        </div>
 
 
         <div class="mb-3">
             <label for="address">Program Language</label>
-            <!-- <h1>Dynamic Fields Javascript</h1> -->
-            <!-- <div class="wrapper"> -->
+
             <div id="survey_options">
                 <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
 
@@ -28,14 +37,12 @@
                 <button type="button" id="remove_fields" class="btn btn-danger">Delete</button>
 
             </div>
-            <!-- </div> -->
+
         </div>
 
-        <!--  -->
-
-        <!-- // -->
         <button class="btn btn-success" onclick="createJob()" id="create">Create Job</button>
     </div>
+
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

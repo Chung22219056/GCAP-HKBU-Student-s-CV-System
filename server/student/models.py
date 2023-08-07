@@ -14,7 +14,7 @@ class Student(models.Model):
     phone = models.CharField(max_length=20)
     aboutMe = models.TextField(max_length=1000, blank=True)
     student_id = models.CharField(max_length=8, primary_key=True) # 8 digital numbers example 22221111 
-    is_first_login = models.BooleanField(default=True)
+    # is_first_login = models.BooleanField(default=True)
     status = models.BooleanField()
 
     

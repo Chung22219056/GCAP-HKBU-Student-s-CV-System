@@ -1,12 +1,11 @@
 {% extends 'base.html' %} {% block header %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/student/cvForm.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="https://bootswatch.com/3/paper/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="../../static/student/cvForm.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://bootswatch.com/3/paper/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> {% endblock %} {% block content %}
 
-{% endblock %} {% block content %}
 <body>
     <div class="container">
 
@@ -20,8 +19,7 @@
 
                     <div style="margin: auto;width: 50%;">
                         <div class="col-12 mb-3 d-flex justify-content-center">
-                            <img class="rounded-circle" src="/static/images/default-avatar.png"
-                                style="width: 180px; height: 180px; object-fit:cover" id="icon-preview">
+                            <img class="rounded-circle" src="/static/images/default-avatar.png" style="width: 180px; height: 180px; object-fit:cover" id="icon-preview">
                         </div>
 
                         <div class="col-12 mb-3">
@@ -32,47 +30,40 @@
                     <br> <br> <br>
                     <div class="formbold-mb-5 col-md-12 mb-3">
                         <label for="name" class="formbold-form-label formPadding"> Nick Name </label>
-                        <input type="text" name="name" id="cvName" placeholder="CV Name"
-                            class="formbold-form-input formPadding" />
+                        <input type="text" name="name" id="cvName" placeholder="CV Name" class="formbold-form-input formPadding" />
                     </div>
                     <div class="formbold-mb-5 col-md-6 mb-3">
                         <label for="name" class="formbold-form-label formPadding"> Frist Name </label>
-                        <input type="text" name="name" id="fristName" placeholder="Frist Name"
-                            class="formbold-form-input formPadding" />
+                        <input type="text" name="name" id="fristName" placeholder="Frist Name" class="formbold-form-input formPadding" />
                     </div>
                     <div class="formbold-mb-5 col-md-6 mb-3">
                         <label for="name" class="formbold-form-label formPadding"> Last Name </label>
-                        <input type="text" name="name" id="lastName" placeholder="Last Name"
-                            class="formbold-form-input formPadding" />
+                        <input type="text" name="name" id="lastName" placeholder="Last Name" class="formbold-form-input formPadding" />
                     </div>
 
                     <div class="formbold-mb-5 col-md-12 mb-3">
                         <label for="name" class="formbold-form-label formPadding"> Nick Name </label>
-                        <input type="text" name="name" id="nickName" placeholder="Nick Name"
-                            class="formbold-form-input formPadding" />
+                        <input type="text" name="name" id="nickName" placeholder="Nick Name" class="formbold-form-input formPadding" />
                     </div>
 
 
 
                     <div class="formbold-mb-5 col-md-6 mb-3">
                         <label for="phone" class="formbold-form-label formPadding"> Phone number </label>
-                        <input type="text" name="phone" id="phoneNumber" placeholder="Phone number"
-                            class="formbold-form-input formPadding" />
+                        <input type="text" name="phone" id="phoneNumber" placeholder="Phone number" class="formbold-form-input formPadding" />
                     </div>
 
 
                     <div class="formbold-mb-5 col-md-6 mb-3">
                         <label for="email" class="formbold-form-label formPadding"> Email Address </label>
-                        <input type="email" name="email" id="email" placeholder="Email"
-                            class="formbold-form-input formPadding" />
+                        <input type="email" name="email" id="email" placeholder="Email" class="formbold-form-input formPadding" />
                     </div>
 
 
                     <div class="formbold-mb-5 col-md-12 mb-3">
                         <label for="email" class="formbold-form-label formPadding">About Me </label>
                         <div class="placeholderStyle">
-                            <textarea type="text" class="form-control skillBox " id="aboutMe" rows="5"
-                                placeholder="Description"></textarea>
+                            <textarea type="text" class="form-control skillBox " id="aboutMe" rows="5" placeholder="Description"></textarea>
                         </div>
                     </div>
 
@@ -144,26 +135,22 @@
                             <div class="form-group">
                                 <label for="inputEdu" class="col-lg-2 control-label">School Name</label>
                                 <div class="col-lg-10 inputBox">
-                                    <input type="text" class="form-control" id="schoolName" placeholder="Name"
-                                        data-name="name">
+                                    <input type="text" class="form-control" id="schoolName" placeholder="Name" data-name="name">
                                 </div>
 
                                 <label for="inputEdu" class="col-lg-2 control-label">Major</label>
                                 <div class="col-lg-10 inputBox">
-                                    <input type="text" class="form-control" id="major" placeholder="Major"
-                                        data-name="name">
+                                    <input type="text" class="form-control" id="major" placeholder="Major" data-name="name">
                                 </div>
                                 <!-- </div> -->
                                 <!-- <div class="form-group"> -->
                                 <label for="inputEdu" class="col-lg-2 control-label formPadding">Start Date</label>
                                 <div class="col-lg-10">
-                                    <input type="date" class="form-control" id="schoolStartDate"
-                                        placeholder="Start Date" data-skip-name="true" data-name="description"></input>
+                                    <input type="date" class="form-control" id="schoolStartDate" placeholder="Start Date" data-skip-name="true" data-name="description"></input>
                                 </div>
                                 <label for="inputEdu" class="col-lg-2 control-label formPadding">End Date</label>
                                 <div class="col-lg-10 inputBox">
-                                    <input type="date" class="form-control" id="schoolEndDate" placeholder="End Date"
-                                        data-skip-name="true" data-name="description"></input>
+                                    <input type="date" class="form-control" id="schoolEndDate" placeholder="End Date" data-skip-name="true" data-name="description"></input>
                                 </div>
                                 <!-- <div class="col-lg-10">
                                         <textarea class="form-control" id="description formPadding"
@@ -202,27 +189,21 @@
                             <div class="form-group">
                                 <label for="inputEdu" class="col-lg-2 control-label">Company Name</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="companyName" placeholder="Company Name"
-                                        data-name="name">
+                                    <input type="text" class="form-control" id="companyName" placeholder="Company Name" data-name="name">
                                 </div>
                                 <!-- </div> -->
                                 <!-- <div class="form-group"> -->
                                 <label for="inputWork" class="col-lg-2 control-label formPadding">Start Date</label>
                                 <div class="col-lg-10">
-                                    <input type="date" class="form-control" id="companyStartDate"
-                                        placeholder="Start Date" data-skip-name="true" data-name="description"></input>
+                                    <input type="date" class="form-control" id="companyStartDate" placeholder="Start Date" data-skip-name="true" data-name="description"></input>
                                 </div>
                                 <label for="inputEdu" class="col-lg-2 control-label formPadding">End Date</label>
                                 <div class="col-lg-10">
-                                    <input type="date" class="form-control" id="companyEndDate" placeholder="End Date"
-                                        data-skip-name="true" data-name="description"></input>
+                                    <input type="date" class="form-control" id="companyEndDate" placeholder="End Date" data-skip-name="true" data-name="description"></input>
                                 </div>
                                 <label for="inputWork" class="col-lg-2 control-label formPadding">Description</label>
                                 <div class="col-lg-10">
-                                    <textarea class="form-control" id="Description"
-                                        style="border: none;outline: none;border-bottom: 1px solid black;"
-                                        placeholder="Description" data-skip-name="true" data-name="description" rows="5"
-                                        cols="50"></textarea>
+                                    <textarea class="form-control" id="Description" style="border: none;outline: none;border-bottom: 1px solid black;" placeholder="Description" data-skip-name="true" data-name="description" rows="5" cols="50"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -245,8 +226,7 @@
                     <!-- <h1>Dynamic Fields Javascript</h1> -->
                     <!-- <div class="wrapper"> -->
                     <div id="survey_options">
-                        <input type="text" name="survey_options[]" class="survey_options skillBox" size="50"
-                            placeholder="language">
+                        <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language">
 
                     </div>
                     <div class="controls">
@@ -267,8 +247,7 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="../../static/student/js/repeater.js" type="text/javascript"></script>
 
 
@@ -277,17 +256,17 @@
 
 
 <script>
-    $("#addEdu").click(function () {
+    $("#addEdu").click(function() {
 
-        $('input[name*="wat"]').each(function (e) {
+        $('input[name*="wat"]').each(function(e) {
             console.log($(this).val());
 
         });
     });
 
-    $("#addWork").click(function () {
+    $("#addWork").click(function() {
 
-        $('input[name*="wat"]').each(function (e) {
+        $('input[name*="wat"]').each(function(e) {
             console.log($(this).val());
 
         });
@@ -323,9 +302,9 @@
         let file = $("#profileIcon")[0].files[0]
         const reader = new FileReader()
         reader.readAsDataURL(file)
-        reader.onload = function () {
+        reader.onload = function() {
             const base64String = reader.result
-            // console.log(base64String);
+                // console.log(base64String);
             base64ImgProfileIcon = base64String //global
             $("#icon-preview").attr("src", base64String)
         };
@@ -336,7 +315,7 @@
     var add_more_fields = document.getElementById('add_more_fields');
     var remove_fields = document.getElementById('remove_fields');
 
-    add_more_fields.onclick = function () {
+    add_more_fields.onclick = function() {
         var newField = document.createElement('input');
         newField.setAttribute('type', 'text');
         newField.setAttribute('name', 'survey_options[]');
@@ -346,7 +325,7 @@
         survey_options.appendChild(newField);
     }
 
-    remove_fields.onclick = function () {
+    remove_fields.onclick = function() {
         var input_tags = survey_options.getElementsByTagName('input');
         if (input_tags.length > 1) {
             survey_options.removeChild(input_tags[(input_tags.length) - 1]);
@@ -358,48 +337,48 @@
     function saveCv() {
 
 
-        var schoolNames = $('input[id^=schoolName]').map(function (idx, elem) {
+        var schoolNames = $('input[id^=schoolName]').map(function(idx, elem) {
 
             return $(elem).val();
         }).get();
         // console.log(schoolNames)
 
-        var majors = $('input[id^=major]').map(function (idx, elem) {
+        var majors = $('input[id^=major]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
         // console.log(majors)
 
-        var schoolStartDates = $('input[id^=schoolStartDate]').map(function (idx, elem) {
+        var schoolStartDates = $('input[id^=schoolStartDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
 
-        var schoolEndDates = $('input[id^=schoolEndDate]').map(function (idx, elem) {
+        var schoolEndDates = $('input[id^=schoolEndDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
 
 
-        var companyNames = $('input[id^=companyName]').map(function (idx, elem) {
+        var companyNames = $('input[id^=companyName]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
-        var companyStartDates = $('input[id^=companyStartDate]').map(function (idx, elem) {
+        var companyStartDates = $('input[id^=companyStartDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
         // console.log(companyStartDate)
 
-        var companyEndDates = $('input[id^=companyEndDate]').map(function (idx, elem) {
+        var companyEndDates = $('input[id^=companyEndDate]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
         // console.log(companyEndDate)
-        var description = $('textarea[id^=description]').map(function (idx, elem) {
+        var description = $('textarea[id^=description]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
 
-        var lan = $('input[name^=survey_options]').map(function (idx, elem) {
+        var lan = $('input[name^=survey_options]').map(function(idx, elem) {
             return $(elem).val();
         }).get();
 
@@ -466,11 +445,6 @@
 
         // })
     }
-
-
-
-
-
 </script>
 
 {% endblock %}

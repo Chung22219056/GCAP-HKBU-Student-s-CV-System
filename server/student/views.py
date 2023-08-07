@@ -314,8 +314,48 @@ def delete_CV(request):
             return JsonResponse({"status":False}) 
     return HttpResponseForbidden()
 
+
+@csrf_exempt
+@login_required
 def create_cv_form(request):
+    # print(request.method)
+    # if request.method =="GET":
+    #     studentProfile = Student.objects.filter(user_id=request.user).values()
+    #     # print(studentProfile)
+    #     user = User.objects.filter(id=request.user.id)
+    #     # print(list(studentProfile))
+    #     return JsonResponse(list(studentProfile), safe=False) 
+    
     return render(request, 'student/create_cv.html', {'nav':'student'})
+
+
+def getProfileData(request):
+    #  print(request.method)
+     profileData=[]
+     if request.method =="GET":
+        
+        studentProfile = Student.objects.filter(user_id=request.user).values()
+        for i in studentProfile:
+        #  profileData.append({
+        #      'profileIcon':i.get('profileIcon'),
+        #      'nickName':i.get('nickName'),
+        #      'phone':i.get('phone'),
+        #      'aboutMe':i.get('aboutMe'),
+        #      })
+         profileData.append(i)
+        #  profileData.append(i)
+
+
+       
+
+
+        user = User.objects.filter(id=request.user.id).values()
+        for user in user:
+         profileData.append(user)
+        print(profileData)
+        return JsonResponse(list(profileData), safe=False) 
+
+
 
 @csrf_exempt
 def create_new_cv(request):

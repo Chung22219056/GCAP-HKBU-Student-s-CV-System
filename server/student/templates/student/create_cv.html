@@ -1,17 +1,11 @@
-{% extends 'base.html'%}
-
-{% block header %}
+{% extends 'base.html'%} {% block header %}
 <script src="/static/student/components/create_cv_page/create_cv_page.js"></script>
-{% endblock %}
-
-{% block content %}
-
-{% include 'student/components/create_cv_page/education_modal.html' %}
+{% endblock %} {% block content %} {% include 'student/components/create_cv_page/education_modal.html' %}
 {% include 'student/components/create_cv_page/work_experience_modal.html' %}
 
 <div class="container pt-3" style="margin-top: 100px;">
 
-    
+
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Personal Information</h5>
@@ -29,10 +23,13 @@
     </div>
 
     <br>
-    
+
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Personal Information</h5>
+
+            <button type="button" class="btn btn-primary" onclick="getProfileRecord()">Take Profile Record</button>
+
         </div>
         <div class="card-body">
             <div class="mb-3">
@@ -43,28 +40,29 @@
             <div class="row">
                 <div class="col-6 mb-3">
                     <label for="first-name" class="form-label"><strong>First Name</strong></label>
-                    <input type="text" class="form-control" id="first-name" placeholder="First Name">    
+                    <input type="text" class="form-control" id="first-name" placeholder="First Name">
                 </div>
                 <div class="col-6 mb-3">
                     <label for="last-name" class="form-label"><strong>Last Name</strong></label>
-                    <input type="text" class="form-control" id="last-name" placeholder="Last Name">    
+                    <input type="text" class="form-control" id="last-name" placeholder="Last Name">
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-6 mb-3">
                     <label for="email" class="form-label"><strong>Email Address</strong></label>
-                    <input type="email" class="form-control" id="email" placeholder="example@example.com">    
+                    <input type="email" class="form-control" id="email" placeholder="example@example.com">
                 </div>
                 <div class="col-6 mb-3">
                     <label for="phone" class="form-label"><strong>Phone Number</strong></label>
-                    <input type="text" class="form-control" id="phone" placeholder="input your phone number">    
+                    <input type="text" class="form-control" id="phone" placeholder="input your phone number">
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="bio" class="form-label"><strong>Bio</strong></label>
-                <textarea class="form-control" id="bio" rows="3" placeholder="Share some information about yourself."></textarea>
+                <textarea class="form-control" id="bio" rows="3"
+                    placeholder="Share some information about yourself."></textarea>
             </div>
         </div>
     </div>
@@ -74,10 +72,13 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h5 class="mb-0">Education</h5>
-            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#edcutionModal" >Add new education</button>
+            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#edcutionModal">Add new
+                education</button>
         </div>
         <div class="card-body" id="education-field">
-            <h6 class="text-secondary"><center>There are no eduation data in here.</center></h6>
+            <h6 class="text-secondary">
+                <center>There are no eduation data in here.</center>
+            </h6>
         </div>
     </div>
 
@@ -86,10 +87,13 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h5 class="mb-0">Work Experience</h5>
-            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal" >Add new experience</button>
+            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal"
+                data-bs-target="#workExperienceModal">Add new experience</button>
         </div>
         <div class="card-body" id="workExperience-field">
-            <h6 class="text-secondary"><center>There are no work experience data in here.</center></h6>
+            <h6 class="text-secondary">
+                <center>There are no work experience data in here.</center>
+            </h6>
         </div>
     </div>
 
@@ -100,26 +104,84 @@
     </div>
 
 </div>
-{% endblock %}
+<div id="result"></div>
+{% endblock %} {% block javascript %}
 
-
-
-{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-
-    $(document).ready(()=>{
-        $("#profileIcon").change((e) => {
-            let file = $("#profileIcon")[0].files[0]
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onload = function () {
-                const base64String = reader.result
-                // console.log(base64String);
-                base64ImgProfileIcon = base64String //global
-                $("#icon-preview").attr("src", base64String)
-            };
-        })
+$(document).ready(() => {
+    $("#profileIcon").change((e) => {
+        let file = $("#profileIcon")[0].files[0]
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = function() {
+            const base64String = reader.result
+            // console.log(base64String);
+            base64ImgProfileIcon = base64String //global
+            $("#icon-preview").attr("src", base64String)
+        };
     })
+})
 
+
+function getProfileRecord() {
+
+    // console.log(JSON.parse(localStorage.getItem("studentProfile")));
+    $.ajax({
+        url: '/student/getProfileData',
+        type: 'GET',
+        dataType: 'html',
+        success: function(response) {
+            var json = response;
+            var data = JSON.parse(json);
+            console.log(data[0])
+            $("#phone").val(data[0].phone)
+            $("#email").val(data[1].email)
+            $("#first-name").val(data[1].first_name)
+            $("#last-name").val(data[1].last_name)
+            $("#bio").val(data[0].aboutMe)
+            $("#icon-preview").attr("src", data[0].profileIcon)
+
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+    // console.log(localStorage.getItem("studentProfile"));
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/student/create_cv_form",
+    //     data: {
+    //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
+    //     },
+    //     success: function(data) {
+    //         console.log(data.user);
+    //         $("#cv-name").val(data.cvName);
+    //         $("#first-name").val(data.firstName);
+    //         $("#last-name").val(data.lastName);
+    //         $("#email").val(data.email);
+    //         $("#phone").val(data.phone);
+    //         $("#bio").val(data.aboutMe);
+    //         $("#icon-preview").attr("src", data.profileIcon);
+    //     }
+    // })
+
+
+    // fetch("/student/create_cv_form", {
+    //     method: "GET",
+    //     data: {
+    //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
+    //     },
+    //     success: function(data) {
+
+    //         console.log(data)
+
+    //     }
+    // })
+
+
+
+}
 </script>
 {% endblock %}
