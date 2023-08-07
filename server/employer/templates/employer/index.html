@@ -1,86 +1,42 @@
 {% extends 'base.html' %}
 
+{% block header %}
+<script src="/static/employer/create_job.js"></script>
+{% endblock %}
 {% block content %}
 <div class="container">
     <img src="https://hkbu.questionpro.com/qp_userimages//sub-3/4915150/35a.png">
     <h3>Internship & Graduate Opportunities for HKBU COMP Students</h3>
     <br>
-    <div class="card">
-        <div class="card-header">Company Information</div>
-        <div class="card-body">
-            <form>
-                <div class="mb-3">
-                    <label for="companyName" class="form-label">Name of Company</label>
-                    <input type="text" class="form-control" id="companyName" placeholder="Input your Company name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="contact_person" class="form-label">Contact Person</label>
-                    <input type="text" class="form-control" id="contact_person" placeholder="Contact person" required>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Phone" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email Address" required>
-                </div>
-                <div class="mb-3">
-                    <label for="website" class="form-label">website</label>
-                    <input type="text" class="form-control" id="website" placeholder="Website" required>
-                </div>
 
+    <div class="card">
+        <div class="card-body">
+            <form id="check_company_form">
+                <div class="mb-3">
+                    <label for="company_name" class="form-label">Company Name</label>
+                    <input type="text" class="form-control" id="company_name" placeholder="company name" required>    
+                    <div class="form-text">
+                        If the company name exists in the database, it will redirect you to the job creation page.                    
+                    </div>
+                </div>
+                <button class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
-
-    <br>
-
-    <div class="card">
-        <div class="card-header">
-            Job Information
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="mb-3">
-                    <label for="title" class="form-label">Job Title</label>
-                    <input type="text" class="form-control" id="title" placeholder="title" required>
-                </div>
-                <div class="mb-3">
-                    <label for="start_date" class="form-label">Start Date</label>
-                    <input type="date" class="form-control" id="start_date" required>
-                </div>
-                <div class="mb-3">
-                    <label for="duration" class="form-label">Duration</label>
-                    <input type="text" class="form-control" id="duration" placeholder="day" required>
-                </div>
-                <div class="mb-3">
-                    <label for="salary" class="form-label">Salary</label>
-                    <input type="number" class="form-control" id="salary" required>
-                </div>
-                <div class="mb-3">
-                    <label for="job_requirement" class="form-label">Job Requirement</label>
-                    <textarea type="text" class="form-control" id="job_requirement" row=3 required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="job_description" class="form-label">Job Description</label>
-                    <textarea type="text" class="form-control" id="job_description" row=3 required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="application_method" class="form-label">Application Method</label>
-                    <textarea type="text" class="form-control" id="application_method" row=3 required></textarea>
-                </div>
-                
-            </form>
-        </div>
-    </div>
-
-    <br>
-
-    <button class="btn btn-primary" style="float: right">Submit</button>
-
-    <br><br>
 </div>
 
 
+<script>
+$("#check_company_form").submit((e)=>{
+    e.preventDefault()
+    let company_name = $("#company_name").val()
+    fetch(`/employer/check_company_is_exists?company_name=${company_name}`).then(resp=>resp.json).then((json) => {
+        if(json.exists){
+            //redirect to create job
+        }else{
+            //redirect to company information
+        }
+    })
+})
+</script>
 {% endblock %}

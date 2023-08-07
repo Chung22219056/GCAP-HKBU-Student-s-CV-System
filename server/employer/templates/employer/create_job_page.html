@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <img src="https://hkbu.questionpro.com/qp_userimages//sub-3/4915150/35a.png">
+    <h3>Internship & Graduate Opportunities for HKBU COMP Students</h3>
+    <br>
+
+    {% include 'employer/components/job_information.html' %}
+
+</div>
+
+<script>
+$("#job_form").submit((e)=>{
+    e.preventDefault();
+
+    fetch("/employer/create_job_api",{
+        method: 'POST',
+        headers: {
+            'X-CSRFToken':"{{csrf_token}}"
+        },
+        body: JSON.stringify({
+            'company_name': getCookie('company'),
+            'title': $("#title").val(),
+            'start_date': $("#start_date").val(),
+            'duration': $('#duration').val(),
+            'salary': $('#salary').val(),
+            'job_requirement': $('#job_requirement').val(),
+            'job_description': $('#job_description').val(),
+            'application_method': $('#application_method').val()
+        })
+    }).then(resp=>resp.json())
+    .then((json) => {
+        Swal.fire({
+            title: 'Create job status',
+            text: json.status ? 'create job successfully' : 'Fail to create job',
+            icon: json.status ? 'success' : 'error',
+            showCancelButton: true,
+            showDenyButton: false,
+            showCancelButton: false,
+            confirmButtonText: 'OK'
+        })
+
+        if(json.status){
+            setTimeout(function() {
+                window.location.href = "/employer/";
+            }, 2000);
+        }
+    })
+})
+</script>
+{% endblock %}

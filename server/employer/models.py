@@ -8,6 +8,8 @@ class CompanyInformation(models.Model):
     company_name = models.CharField(max_length=128)
     website =  models.CharField(max_length=128, null=True, blank=True)
 
+    def __str__(self):
+        return self.company_name
 
 class JobType(models.Model):
     type_name = models.CharField(max_length=32)

@@ -1,0 +1,31 @@
+
+<div class="card">
+    <div class="card-header">Company Information</div>
+    <div class="card-body">
+        <form id="company_information_form">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="company_name" class="form-label">Name of Company</label>
+                <input type="text" class="form-control" id="company_name" placeholder="Input your company name" required>
+            </div>
+            <div class="mb-3">
+                <label for="contact_person" class="form-label">Name of Contact Person</label>
+                <input type="text" class="form-control" id="contact_person" placeholder="Contact person" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" placeholder="Phone" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+            </div>
+            <div class="mb-3">
+                <label for="website" class="form-label">website</label>
+                <input type="text" class="form-control" id="website" placeholder="Website" required>
+            </div>
+
+            <button class="btn btn-primary">Send</button>
+        </form>
+    </div>
+</div>

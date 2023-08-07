@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <img src="https://hkbu.questionpro.com/qp_userimages//sub-3/4915150/35a.png">
+    <h3>Internship & Graduate Opportunities for HKBU COMP Students</h3>
+    <br>
+
+    {% include 'employer/components/company_information.html' %}
+
+</div>
+
+<script>
+    $("#company_information_form").submit((e)=>{
+        e.preventDefault()
+
+        fetch("/employer/create_company_api",{
+            method: 'POST',
+            headers: {
+                'X-CSRFToken':"{{csrf_token}}"
+            },
+            body: JSON.stringify({
+                contact_person: $('#contact_person').val(),
+                email: $("#email").val(),
+                phone: $('#phone').val(),
+                company_name: $("#company_name").val(),
+                website:  $('#website').val()
+            })
+        }).then(resp=>resp.json())
+        .then((json) => {
+            Swal.fire({
+                    title: 'Status',
+                    text: json.status ? 'Successfully' : 'Fail',
+                    icon: json.status ? 'success' : 'error',
+                    showCancelButton: true,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'OK'
+            })
+
+            if(json.status){
+                document.cookie = `company=${$("#company_name").val()}`;
+                setTimeout(function() {
+                    window.location.href = "/employer/create_job";
+                }, 2000);
+            }
+        })
+    })
+</script>
+{% endblock %}
