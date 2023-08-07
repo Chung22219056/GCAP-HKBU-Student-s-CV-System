@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 INSTALLED_APPS = [
     'manager.apps.ManagerConfig',
     'student.apps.StudentConfig',
+    'employer.apps.EmployerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,6 +63,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR,'login/templates'),
             os.path.join(BASE_DIR,'manager/templates'),
             os.path.join(BASE_DIR,'student/templates'),
+            os.path.join(BASE_DIR,'employer/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
