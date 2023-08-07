@@ -134,7 +134,7 @@ function getProfileRecord() {
         success: function(response) {
             var json = response;
             var data = JSON.parse(json);
-            console.log(data[0])
+            // console.log(data[0])
             $("#phone").val(data[0].phone)
             $("#email").val(data[1].email)
             $("#first-name").val(data[1].first_name)

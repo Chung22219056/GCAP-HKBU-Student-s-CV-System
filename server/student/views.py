@@ -336,23 +336,11 @@ def getProfileData(request):
         
         studentProfile = Student.objects.filter(user_id=request.user).values()
         for i in studentProfile:
-        #  profileData.append({
-        #      'profileIcon':i.get('profileIcon'),
-        #      'nickName':i.get('nickName'),
-        #      'phone':i.get('phone'),
-        #      'aboutMe':i.get('aboutMe'),
-        #      })
          profileData.append(i)
-        #  profileData.append(i)
-
-
-       
-
 
         user = User.objects.filter(id=request.user.id).values()
         for user in user:
          profileData.append(user)
-        print(profileData)
         return JsonResponse(list(profileData), safe=False) 
 
 
