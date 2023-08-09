@@ -94,12 +94,13 @@ class Skill(models.Model):
         return self.name
 
 class Language(models.Model):
-    cv = models.ManyToManyField(CvInfoBase)
+    # cv = models.ManyToManyField(CvInfoBase)
+    cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
     studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return "{0} {1}".format(self.studentID.user_id,self.name)
+        return "{0} {1}".format(self.studentID,self.name)
 
 
 class WorkExperience(models.Model):

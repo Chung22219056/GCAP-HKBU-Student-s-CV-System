@@ -351,8 +351,11 @@ def create_new_cv(request):
         try:
             json_data = json.loads(request.body)
             student = Student.objects.get(user_id=request.user.id)
+            lan = Language.objects.all()
+            print(lan)  
+            # print(json_data['base64ImgProfileIcon'])
 
-            cv = CvInfoBase(studentID=student, fristName=json_data['firstName'], lastName=json_data['lastName'], email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'], profileIcon=json_data['base64ImgProfileIcon'])       
+            cv = CvInfoBase(studentID=student, cvName=json_data['cvName'],fristName=json_data['firstName'], lastName=json_data['lastName'], nickName=json_data['nickName'],email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'], profileIcon=json_data['base64ImgProfileIcon'])       
             cv.save()
 
             for education in json_data['educations']:
@@ -362,6 +365,10 @@ def create_new_cv(request):
             for workExp in json_data['workExperiences']:
                 exp = WorkExperience(studentID=student, cv=cv, companyName=workExp['companyName'], description=workExp['description'], start_date=workExp['startDate'], end_date=workExp['endDate'])
                 exp.save()
+                
+            for language in json_data['languages']:
+                lan = Language(studentID=student, cv=cv,name=language)
+                lan.save()
             
             return JsonResponse({"status":True})
         except Exception as e:
