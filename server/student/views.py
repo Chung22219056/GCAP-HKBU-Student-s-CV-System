@@ -76,6 +76,7 @@ def student_CV_UI(request):
 
 def student_CV_UI1(request):
     language=[]
+    skill=[]
     education=[]
     experience=[]
     cvBasic=[]
@@ -88,8 +89,10 @@ def student_CV_UI1(request):
          language = [lan for lan in Language.objects.filter(cv=cvID)]
          education = [edu for edu in Education.objects.filter(cv=cvID)]
          experience = [work for work in WorkExperience.objects.filter(cv=cvID)]
+         skill = [skill for skill in Skill.objects.filter(cv=cvID)]
+         print(skill)
     
-    return render(request, 'student/cv-version-1.html', {'nav':'student','cvBasic':cvBasic,'language':language,'education':education,'experience':experience})
+    return render(request, 'student/cv-version-1.html', {'nav':'student','cvBasic':cvBasic,'language':language,'skill':skill,'education':education,'experience':experience})
 
 def student_CV_UI2(request):
     language=[]

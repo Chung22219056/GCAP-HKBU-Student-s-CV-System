@@ -1,195 +1,188 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>Responsive Resume UI Design in HTML and CSS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../../../static/css/cv-version-1.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/cv-version-1.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     {% for cvBasic in cvBasic %}
     <div class="resume_wrapper" id="cv">
-      <div class="resume_wrapper" id="getCVSize">
-        <div class="resume_left">
-          <div class="resume_image">
-            <img src="{{cvBasic.profileIcon}}" alt="Resume_image" />
-          </div>
-          <div class="resume_bottom">
-            <div class="resume_item resume_namerole">
-              <div class="name">{{cvBasic.cvName}}</div>
-              <!-- <div class="role">UI Designer</div> -->
-            </div>
-            <div class="resume_item resume_profile">
-              <div class="resume_title">Profile</div>
-              <div class="resume_info">{{cvBasic.aboutMe}}</div>
-            </div>
-            <div class="resume_item resume_address">
-              <div class="resume_title">Address</div>
-              <div class="resume_info">
-                18th home,<br />
-                woods street,<br />
-                New York City, United States
-              </div>
-            </div>
-            <div class="resume_item resume_contact">
-              <div class="resume_title">Contact</div>
-              <div class="resume_info">
-                <div class="resume_subtitle">Phone</div>
-                <div class="resume_subinfo">+852 {{cvBasic.phone}}</div>
-              </div>
-              <div class="resume_info">
-                <div class="resume_subtitle">Email</div>
-                <div class="resume_subinfo">{{cvBasic.email}}</div>
-              </div>
-            </div>
-            <div class="resume_item resume_skills">
-              <div class="resume_title">Skills</div>
-              <div class="resume_info">
-                {% for lan in language%}
-                <div class="skills_list">
-                  <div class="skills_left">{{lan.name}}</div>
-                  <div class="skills_bar">
-                    <!-- <p>
+        <div class="resume_wrapper" id="getCVSize">
+            <div class="resume_left">
+                <div class="resume_image">
+                    <img src="{{cvBasic.profileIcon}}" alt="Resume_image" />
+                </div>
+                <div class="resume_bottom">
+                    <div class="resume_item resume_namerole">
+                        <div class="name">{{cvBasic.cvName}}</div>
+                        <!-- <div class="role">UI Designer</div> -->
+                    </div>
+                    <div class="resume_item resume_profile">
+                        <div class="resume_title">Profile</div>
+                        <div class="resume_info">{{cvBasic.aboutMe}}</div>
+                    </div>
+                    <!-- <div class="resume_item resume_address">
+                        <div class="resume_title">Address</div>
+                        <div class="resume_info">
+                            18th home,<br /> woods street,<br /> New York City, United States
+                        </div>
+                    </div> -->
+                    <div class="resume_item resume_contact">
+                        <div class="resume_title">Contact</div>
+                        <div class="resume_info">
+                            <div class="resume_subtitle">Phone</div>
+                            <div class="resume_subinfo">+852 {{cvBasic.phone}}</div>
+                        </div>
+                        <div class="resume_info">
+                            <div class="resume_subtitle">Email</div>
+                            <div class="resume_subinfo">{{cvBasic.email}}</div>
+                        </div>
+                    </div>
+                    <div class="resume_item resume_skills">
+                        <div class="resume_title">Lanuage</div>
+                        <div class="resume_info">
+                            {% for lan in language%}
+                            <div class="skills_list">
+                                <div class="skills_left">{{lan.name}}</div>
+                                <div class="skills_bar">
+                                    <!-- <p>
                                     <span style="width: 90%"></span>
                                 </p> -->
-                  </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="resume_item resume_skills">
+                        <div class="resume_title">Skills</div>
+                        <div class="resume_info">
+                            {% for skill in skill%}
+                            <div class="skills_list">
+                                <div class="skills_left">{{skill.name}}</div>
+                                <div class="skills_bar">
+                                    <!-- <p>
+                                  <span style="width: 90%"></span>
+                              </p> -->
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
-              </div>
             </div>
-          </div>
+            <div class="resume_right">
+                <div class="resume_item resume_namerole">
+                    <div class="name">{{cvBasic.cvName}}</div>
+                    <!-- <div class="role">UI Designer</div> -->
+                </div>
+                <div class="resume_item resume_education">
+                    <div class="resume_title">Education</div>
+                    <div class="resume_info">
+                        {% for edu in education %}
+                        <div class="resume_data">
+                            <div class="year">
+                                [{{edu.start_date.year}}/{{edu.start_date.month}} - {{edu.end_date.year}}/{{edu.end_date.month}}]
+                            </div>
+                            <div class="content">
+                                <p>{{edu.shcoolName}}</p>
+                                <p>Major: {{edu.major}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="resume_item resume_experience">
+                    <div class="resume_title">Experience</div>
+                    <div class="resume_info">
+                        {% for exp in experience %}
+                        <div class="resume_data">
+                            <div class="year">
+                                [{{exp.start_date.year}}/{{exp.start_date.month}} - {{exp.end_date.year}}/{{exp.end_date.month}}]
+                            </div>
+                            <div class="content">
+                                <p>{{exp.companyName}}</p>
+                                <p>{{exp.description}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="resume_item resmue_interests">
+                    <div class="resume_title">Interests</div>
+                    <div class="resume_info">
+                        <div class="interests">
+                            <div class="int_icon">
+                                <i class="fas fa-volleyball-ball"></i>
+                            </div>
+                            <div class="int_data">Volleyball</div>
+                        </div>
+                        <div class="interests">
+                            <div class="int_icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="int_data">Reading</div>
+                        </div>
+                        <div class="interests">
+                            <div class="int_icon">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <div class="int_data">Movies</div>
+                        </div>
+                        <div class="interests">
+                            <div class="int_icon">
+                                <i class="fas fa-biking"></i>
+                            </div>
+                            <div class="int_data">Riding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="resume_right">
-          <div class="resume_item resume_namerole">
-            <div class="name">{{cvBasic.cvName}}</div>
-            <!-- <div class="role">UI Designer</div> -->
-          </div>
-          <div class="resume_item resume_education">
-            <div class="resume_title">Education</div>
-            <div class="resume_info">
-              {% for edu in education %}
-              <div class="resume_data">
-                <div class="year">
-                  [{{edu.start_date.year}}/{{edu.start_date.month}} -
-                  {{edu.end_date.year}}/{{edu.end_date.month}}]
-                </div>
-                <div class="content">
-                  <p>{{edu.shcoolName}}</p>
-                  <p>Major: {{edu.major}}</p>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="resume_item resume_experience">
-            <div class="resume_title">Experience</div>
-            <div class="resume_info">
-              {% for exp in experience %}
-              <div class="resume_data">
-                <div class="year">
-                  [{{exp.start_date.year}}/{{exp.start_date.month}} -
-                  {{exp.end_date.year}}/{{exp.end_date.month}}]
-                </div>
-                <div class="content">
-                  <p>{{exp.companyName}}</p>
-                  <p>{{exp.description}}</p>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="resume_item resmue_interests">
-            <div class="resume_title">Interests</div>
-            <div class="resume_info">
-              <div class="interests">
-                <div class="int_icon">
-                  <i class="fas fa-volleyball-ball"></i>
-                </div>
-                <div class="int_data">Volleyball</div>
-              </div>
-              <div class="interests">
-                <div class="int_icon">
-                  <i class="fas fa-book-open"></i>
-                </div>
-                <div class="int_data">Reading</div>
-              </div>
-              <div class="interests">
-                <div class="int_icon">
-                  <i class="fas fa-film"></i>
-                </div>
-                <div class="int_data">Movies</div>
-              </div>
-              <div class="interests">
-                <div class="int_icon">
-                  <i class="fas fa-biking"></i>
-                </div>
-                <div class="int_data">Riding</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <button
-      id="download"
-      class="btn btn-dark"
-      role="button"
-      style="display: block; margin-left: auto; margin-right: auto"
-      data-toggle="modal"
-      data-target="#exampleModal"
-    >
+    <button id="download" class="btn btn-dark" role="button" style="display: block; margin-left: auto; margin-right: auto" data-toggle="modal" data-target="#exampleModal">
       Download CV
     </button>
-  </body>
+</body>
 
-  <script>
+<script>
     console.log(document.getElementById("getCVSize").offsetHeight);
-    window.onload = function () {
-      document
-        .getElementById("download")
+    window.onload = function() {
+        document
+            .getElementById("download")
 
         .addEventListener("click", () => {
-          const cv = this.document.getElementById("cv");
-          console.log(cv);
-          console.log(window);
-          var opt = {
-            margin: 1,
-            filename: "myfile.pdf",
-            html2canvas: {
-              scale: 1,
-            },
-            jsPDF: {
-              //unit: "in",
-              // format: 'letter',
-              // orientation: 'landscape',
-              // orientation: 'p',
-              // unit: 'in',
+            const cv = this.document.getElementById("cv");
+            console.log(cv);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: "myfile.pdf",
+                html2canvas: {
+                    scale: 1,
+                },
+                jsPDF: {
+                    //unit: "in",
+                    // format: 'letter',
+                    // orientation: 'landscape',
+                    // orientation: 'p',
+                    // unit: 'in',
 
-              format: [230, 350],
-            },
-          };
-          html2pdf().from(cv).set(opt).save();
+                    format: [230, 350],
+                },
+            };
+            html2pdf().from(cv).set(opt).save();
         });
     };
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"
-  ></script>
-  {% endfor %}
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endfor %}
+
 </html>
