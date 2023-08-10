@@ -2,6 +2,7 @@ var educations = []
 var workExperiences = []
 var base64ImgProfileIcon = ''
 var languages = []
+var skills = []
 
 function handleSaveEducationData() {
     let institution = $("#institution").val()
@@ -120,6 +121,14 @@ function fetchRequsetCreateCV() {
         return $(elem).val();
     }).get();
 
+
+    $('input[name^=skill]').map(function (idx, elem) {
+        skills.push($(elem).val())
+        return $(elem).val();
+    }).get();
+
+    // console.log(languages)
+
     if (base64ImgProfileIcon == '') {
         base64ImgProfileIcon = $('#icon-preview').attr('src');
     }
@@ -138,7 +147,8 @@ function fetchRequsetCreateCV() {
             bio: $("#bio").val(),
             educations: educations,
             workExperiences: workExperiences,
-            languages: languages
+            languages: languages,
+            skills: skills
         })
     }).then(response => response.json()).then((json) => {
         Swal.fire({

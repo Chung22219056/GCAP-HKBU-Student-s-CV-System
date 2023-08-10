@@ -1,6 +1,8 @@
 {% extends 'base.html'%} {% block header %}
 <script src="/static/student/components/create_cv_page/create_cv_page.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" /> {% endblock %} {% block content %} {% include 'student/components/create_cv_page/education_modal.html' %} {% include 'student/components/create_cv_page/work_experience_modal.html' %}
+<link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" /> {% endblock %} {% block content %}
+{% include 'student/components/create_cv_page/education_modal.html' %}
+{% include 'student/components/create_cv_page/work_experience_modal.html' %}
 
 <div class="container pt-3" style="margin-top: 100px;">
 
@@ -11,7 +13,8 @@
         </div>
         <div class="card-body">
             <div class="col-12 mb-3 d-flex justify-content-center">
-                <img class="rounded-circle" src="/static/images/default-avatar.png" style="width: 100px; height: 100px; object-fit:cover" id="icon-preview">
+                <img class="rounded-circle" src="/static/images/default-avatar.png"
+                    style="width: 100px; height: 100px; object-fit:cover" id="icon-preview">
             </div>
             <div class="col-12 mb-3">
                 <label class="form-label" for="profileIcon">Upload your portrait</label>
@@ -63,7 +66,8 @@
 
             <div class="mb-3">
                 <label for="bio" class="form-label"><strong>Bio</strong></label>
-                <textarea class="form-control" id="bio" rows="3" placeholder="Share some information about yourself."></textarea>
+                <textarea class="form-control" id="bio" rows="3"
+                    placeholder="Share some information about yourself."></textarea>
             </div>
         </div>
     </div>
@@ -88,7 +92,8 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h5 class="mb-0">Work Experience</h5>
-            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal">Add new experience</button>
+            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal"
+                data-bs-target="#workExperienceModal">Add new experience</button>
         </div>
         <div class="card-body" id="workExperience-field">
             <h6 class="text-secondary">
@@ -104,7 +109,7 @@
         <!-- <h1>Dynamic Fields Javascript</h1> -->
         <!-- <div class="wrapper"> -->
         <div id="survey_options">
-            <input type="text" name="lanuage[]" class="survey_options skillBox" size="50" placeholder="language">
+            <input type="text" name="lanuage[]" class="survey_options skillBox" size="50" placeholder="Language">
 
         </div>
         <div class="controls">
@@ -114,6 +119,24 @@
         </div>
         <!-- </div> -->
     </div>
+
+
+    <div class="mb-3">
+        <label for="address">Skill</label>
+        <!-- <h1>Dynamic Fields Javascript</h1> -->
+        <!-- <div class="wrapper"> -->
+        <div id="skill_options">
+            <input type="text" name="skill[]" class="survey_options skillBox" size="50" placeholder="Skill">
+
+        </div>
+        <div class="controls">
+            <button type="button" id="add_skill_fields" class="btn btn-primary">Add More</button>
+            <button type="button" id="remove_skill_fields" class="btn btn-danger">Delete</button>
+
+        </div>
+        <!-- </div> -->
+    </div>
+
 
     <div class="d-flex flex-row-reverse mb-3">
         <button class="btn btn-primary" onclick="fetchRequsetCreateCV()">Create</button>
@@ -125,109 +148,128 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-    $(document).ready(() => {
-        $("#profileIcon").change((e) => {
-            let file = $("#profileIcon")[0].files[0]
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onload = function() {
-                const base64String = reader.result
-                    // console.log(base64String);
-                base64ImgProfileIcon = base64String //global
-                $("#icon-preview").attr("src", base64String)
-            };
-        })
+$(document).ready(() => {
+    $("#profileIcon").change((e) => {
+        let file = $("#profileIcon")[0].files[0]
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = function() {
+            const base64String = reader.result
+            // console.log(base64String);
+            base64ImgProfileIcon = base64String //global
+            $("#icon-preview").attr("src", base64String)
+        };
     })
+})
 
-    var survey_options = document.getElementById('survey_options');
-    var add_more_fields = document.getElementById('add_more_fields');
-    var remove_fields = document.getElementById('remove_fields');
+var survey_options = document.getElementById('survey_options');
+var add_more_fields = document.getElementById('add_more_fields');
+var remove_fields = document.getElementById('remove_fields');
 
-    add_more_fields.onclick = function() {
-        var newField = document.createElement('input');
-        newField.setAttribute('type', 'text');
-        newField.setAttribute('name', 'lanuage[]');
-        newField.setAttribute('class', 'survey_options skillBox');
-        newField.setAttribute('siz', 50);
-        newField.setAttribute('placeholder', 'language');
-        survey_options.appendChild(newField);
+add_more_fields.onclick = function() {
+    var newField = document.createElement('input');
+    newField.setAttribute('type', 'text');
+    newField.setAttribute('name', 'lanuage[]');
+    newField.setAttribute('class', 'survey_options skillBox');
+    newField.setAttribute('siz', 50);
+    newField.setAttribute('placeholder', 'language');
+    survey_options.appendChild(newField);
+}
+
+remove_fields.onclick = function() {
+    var input_tags = survey_options.getElementsByTagName('input');
+    if (input_tags.length > 1) {
+        survey_options.removeChild(input_tags[(input_tags.length) - 1]);
     }
+}
 
-    remove_fields.onclick = function() {
-        var input_tags = survey_options.getElementsByTagName('input');
-        if (input_tags.length > 1) {
-            survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+
+var skill_options = document.getElementById('skill_options');
+add_skill_fields.onclick = function() {
+    var newField = document.createElement('input');
+    newField.setAttribute('type', 'text');
+    newField.setAttribute('name', 'skill[]');
+    newField.setAttribute('class', 'skill_options skillBox');
+    newField.setAttribute('siz', 50);
+    newField.setAttribute('placeholder', 'skill');
+    skill_options.appendChild(newField);
+}
+
+remove_skill_fields.onclick = function() {
+    var input_tags = skill_options.getElementsByTagName('input');
+    if (input_tags.length > 1) {
+        skill_options.removeChild(input_tags[(input_tags.length) - 1]);
+    }
+}
+
+
+
+
+function getProfileRecord() {
+
+    var lans = $('input[name^=lanuage]').map(function(idx, elem) {
+        return $(elem).val();
+    }).get();
+
+    console.log(lans)
+
+    // console.log(JSON.parse(localStorage.getItem("studentProfile")));
+    $.ajax({
+        url: '/student/getProfileData',
+        type: 'GET',
+        dataType: 'html',
+        success: function(response) {
+            var json = response;
+            var data = JSON.parse(json);
+            // console.log(data[0])
+            $("#phone").val(data[0].phone)
+            $("#email").val(data[1].email)
+            $("#first-name").val(data[1].first_name)
+            $("#last-name").val(data[1].last_name)
+            $("#bio").val(data[0].aboutMe)
+            $("#icon-preview").attr("src", data[0].profileIcon)
+            $("#nick-name").val(data[0].nickName)
+
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
         }
-    }
+    });
+    // console.log(localStorage.getItem("studentProfile"));
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/student/create_cv_form",
+    //     data: {
+    //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
+    //     },
+    //     success: function(data) {
+    //         console.log(data.user);
+    //         $("#cv-name").val(data.cvName);
+    //         $("#first-name").val(data.firstName);
+    //         $("#last-name").val(data.lastName);
+    //         $("#email").val(data.email);
+    //         $("#phone").val(data.phone);
+    //         $("#bio").val(data.aboutMe);
+    //         $("#icon-preview").attr("src", data.profileIcon);
+    //     }
+    // })
+
+
+    // fetch("/student/create_cv_form", {
+    //     method: "GET",
+    //     data: {
+    //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
+    //     },
+    //     success: function(data) {
+
+    //         console.log(data)
+
+    //     }
+    // })
 
 
 
-
-    function getProfileRecord() {
-
-        var lans = $('input[name^=lanuage]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        console.log(lans)
-
-        // console.log(JSON.parse(localStorage.getItem("studentProfile")));
-        $.ajax({
-            url: '/student/getProfileData',
-            type: 'GET',
-            dataType: 'html',
-            success: function(response) {
-                var json = response;
-                var data = JSON.parse(json);
-                // console.log(data[0])
-                $("#phone").val(data[0].phone)
-                $("#email").val(data[1].email)
-                $("#first-name").val(data[1].first_name)
-                $("#last-name").val(data[1].last_name)
-                $("#bio").val(data[0].aboutMe)
-                $("#icon-preview").attr("src", data[0].profileIcon)
-                $("#nick-name").val(data[0].nickName)
-
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
-        // console.log(localStorage.getItem("studentProfile"));
-
-        // $.ajax({
-        //     type: "GET",
-        //     url: "/student/create_cv_form",
-        //     data: {
-        //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
-        //     },
-        //     success: function(data) {
-        //         console.log(data.user);
-        //         $("#cv-name").val(data.cvName);
-        //         $("#first-name").val(data.firstName);
-        //         $("#last-name").val(data.lastName);
-        //         $("#email").val(data.email);
-        //         $("#phone").val(data.phone);
-        //         $("#bio").val(data.aboutMe);
-        //         $("#icon-preview").attr("src", data.profileIcon);
-        //     }
-        // })
-
-
-        // fetch("/student/create_cv_form", {
-        //     method: "GET",
-        //     data: {
-        //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
-        //     },
-        //     success: function(data) {
-
-        //         console.log(data)
-
-        //     }
-        // })
-
-
-
-    }
+}
 </script>
 {% endblock %}

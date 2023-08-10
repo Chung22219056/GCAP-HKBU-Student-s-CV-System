@@ -370,6 +370,10 @@ def create_new_cv(request):
                 lan = Language(studentID=student, cv=cv,name=language)
                 lan.save()
             
+            for skill in json_data['skills']:
+                skill = Skill(cv=cv,studentID=student,name=skill)
+                skill.save()
+            
             return JsonResponse({"status":True})
         except Exception as e:
             print(e)

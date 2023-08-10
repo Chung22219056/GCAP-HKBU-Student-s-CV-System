@@ -87,7 +87,8 @@ class EducationType(models.Model):
 
 
 class Skill(models.Model):
-    cv = models.ManyToManyField(CvInfoBase)
+    cv = models.ForeignKey(CvInfoBase, on_delete=models.CASCADE)
+    studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):

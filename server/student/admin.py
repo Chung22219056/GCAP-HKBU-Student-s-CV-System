@@ -7,7 +7,7 @@ from . import models
 # admin.site.register(models.CVLanguage)
 # admin.site.register(models.CVSkill)
 
-# admin.site.register(models.Skill)
+admin.site.register(models.Skill)
 
 
 admin.site.register(models.Student)
