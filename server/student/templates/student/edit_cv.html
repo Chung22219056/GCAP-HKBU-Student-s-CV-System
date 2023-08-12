@@ -1,17 +1,21 @@
 {% extends 'base.html'%} {% block header %}
-<script src="/static/student/components/create_cv_page/create_cv_page.js"></script>
+<script src="/static/student/components/edit_cv_page/edit_cv_page.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" /> {% endblock %} {% block content %} {% include 'student/components/create_cv_page/education_modal.html' %} {% include 'student/components/create_cv_page/work_experience_modal.html' %}
 
 <div class="container pt-3" style="margin-top: 100px;">
 
 
+
+
+
+    {% for cvBasicInfo in cvBasic %}
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Personal Information</h5>
+            <h5 class="mb-0">Edit CV</h5>
         </div>
         <div class="card-body">
             <div class="col-12 mb-3 d-flex justify-content-center">
-                <img class="rounded-circle" src="/static/images/default-avatar.png" style="width: 100px; height: 100px; object-fit:cover" id="icon-preview">
+                <img class="rounded-circle" src="{{cvBasicInfo.profileIcon}}" style="width: 100px; height: 100px; object-fit:cover" id="icon-preview">
             </div>
             <div class="col-12 mb-3">
                 <label class="form-label" for="profileIcon">Upload your portrait</label>
@@ -24,50 +28,47 @@
 
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Personal Information</h5>
-
-            <button type="button" class="btn btn-primary" onclick="getProfileRecord()">Take Profile Record</button>
-
+            <h5 class="mb-0">Edit Cv</h5>
         </div>
         <div class="card-body">
             <div class="mb-3">
                 <label for="cv-name" class="form-label"><strong>Your CV Name</strong></label>
-                <input type="email" class="form-control" id="cv-name" placeholder="Input your CV name here">
+                <input type="email" class="form-control" id="cv-name" placeholder="Input your CV name here" value="{{cvBasicInfo.cvName}}">
             </div>
 
             <div class="row">
                 <div class="col-6 mb-3">
                     <label for="first-name" class="form-label"><strong>First Name</strong></label>
-                    <input type="text" class="form-control" id="first-name" placeholder="First Name">
+                    <input type="text" class="form-control" id="first-name" placeholder="First Name" value="{{cvBasicInfo.fristName}}">
                 </div>
                 <div class="col-6 mb-3">
                     <label for="last-name" class="form-label"><strong>Last Name</strong></label>
-                    <input type="text" class="form-control" id="last-name" placeholder="Last Name">
+                    <input type="text" class="form-control" id="last-name" placeholder="Last Name" value="{{cvBasicInfo.lastName}}">
                 </div>
                 <div class="col-6 mb-3">
                     <label for="last-name" class="form-label"><strong>Last Name</strong></label>
-                    <input type="text" class="form-control" id="nick-name" placeholder="nick Name">
+                    <input type="text" class="form-control" id="nick-name" placeholder="nick Name" value="{{cvBasicInfo.nickName}}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-6 mb-3">
                     <label for="email" class="form-label"><strong>Email Address</strong></label>
-                    <input type="email" class="form-control" id="email" placeholder="example@example.com">
+                    <input type="email" class="form-control" id="email" placeholder="example@example.com" value="{{cvBasicInfo.email}}">
                 </div>
                 <div class="col-6 mb-3">
                     <label for="phone" class="form-label"><strong>Phone Number</strong></label>
-                    <input type="text" class="form-control" id="phone" placeholder="input your phone number">
+                    <input type="text" class="form-control" id="phone" placeholder="input your phone number" value="{{cvBasicInfo.phone}}">
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="bio" class="form-label"><strong>Bio</strong></label>
-                <textarea class="form-control" id="bio" rows="3" placeholder="Share some information about yourself."></textarea>
+                <textarea class="form-control" id="bio" rows="3" placeholder="Share some information about yourself.">{{cvBasicInfo.aboutMe}}</textarea>
             </div>
         </div>
     </div>
-
+    {% endfor %}
     <br />
 
     <div class="card">
@@ -78,6 +79,25 @@
         </div>
         <div class="card-body" id="education-field">
             <h6 class="text-secondary">
+                <!--  -->
+                {% for education in educations %}
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-9">
+                            <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> {{education.shcoolName}}</h5>
+                            <h6 class="text-secondary"><strong>{{education.major}}</strong></h6>
+                            <h6 class="text-secondary">{{education.startDate}} to {{education.endDate}}</h6>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-danger float-end" onClick="handleDeleteEducationRecord(${index})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+                <!--  -->
                 <center>There are no eduation data in here.</center>
             </h6>
         </div>
@@ -104,8 +124,8 @@
         <!-- <h1>Dynamic Fields Javascript</h1> -->
         <!-- <div class="wrapper"> -->
         <div id="survey_options">
-            <input type="text" name="lanuage[]" class="survey_options skillBox" size="50" placeholder="Language">
-
+            {% for language in languages %}
+            <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language" value="{{language}}" /> {% endfor %}
         </div>
         <div class="controls">
             <button type="button" id="add_more_fields" class="btn btn-primary">Add More</button>
@@ -137,13 +157,16 @@
         <button class="btn btn-primary" onclick="fetchRequsetCreateCV()">Create</button>
     </div>
 
+
+
 </div>
 
 {% endblock %} {% block javascript %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <script>
     $(document).ready(() => {
+      
         $("#profileIcon").change((e) => {
             let file = $("#profileIcon")[0].files[0]
             const reader = new FileReader()
@@ -200,71 +223,73 @@
 
 
 
-    function getProfileRecord() {
-
-        var lans = $('input[name^=lanuage]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
 
 
+    var lans = $('input[name^=lanuage]').map(function(idx, elem) {
+        return $(elem).val();
+    }).get();
 
-        // console.log(JSON.parse(localStorage.getItem("studentProfile")));
-        $.ajax({
-            url: '/student/getProfileData',
-            type: 'GET',
-            dataType: 'html',
-            success: function(response) {
-                var json = response;
-                var data = JSON.parse(json);
-                // console.log(data[0])
-                $("#phone").val(data[0].phone)
-                $("#email").val(data[1].email)
-                $("#first-name").val(data[1].first_name)
-                $("#last-name").val(data[1].last_name)
-                $("#bio").val(data[0].aboutMe)
-                $("#icon-preview").attr("src", data[0].profileIcon)
-                $("#nick-name").val(data[0].nickName)
+    var edus = {{education | safe}}
+    var exps = {{experience | safe}}
+    console.log(exps)
 
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
-        // console.log(localStorage.getItem("studentProfile"));
-
-        // $.ajax({
-        //     type: "GET",
-        //     url: "/student/create_cv_form",
-        //     data: {
-        //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
-        //     },
-        //     success: function(data) {
-        //         console.log(data.user);
-        //         $("#cv-name").val(data.cvName);
-        //         $("#first-name").val(data.firstName);
-        //         $("#last-name").val(data.lastName);
-        //         $("#email").val(data.email);
-        //         $("#phone").val(data.phone);
-        //         $("#bio").val(data.aboutMe);
-        //         $("#icon-preview").attr("src", data.profileIcon);
-        //     }
-        // })
-
-
-        // fetch("/student/create_cv_form", {
-        //     method: "GET",
-        //     data: {
-        //         studentProfile: JSON.parse(localStorage.getItem("studentProfile")),
-        //     },
-        //     success: function(data) {
-
-        //         console.log(data)
-
-        //     }
-        // })
-
-
-
+    for (let i = 0; i < edus.length; i++) {
+        educations.push({ "institution": edus[i].schoolName, "program": edus[i].major, "startDate": edus[i].start_date, "endDate": edus[i].end_date })
     }
+
+    for (let i = 0; i < exps.length; i++) {
+        workExperiences.push({ "companyName": exps[i].companyName, "description": exps[i].description, "startDate": exps[i].start_date, "endDate": exps[i].end_date })
+    }
+    // console.log(edus)
+
+    educations.forEach((education, index) => {
+            $("#education-field").append(
+                `
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
+                                <h6 class="text-secondary"><strong>${education.program}</strong></h6>
+                                <h6 class="text-secondary">${education.startDate} to ${education.endDate}</h6>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-danger float-end" onClick="handleDeleteEducationRecord(${index})"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                `
+            )
+        })
+   
+  
+
+        workExperiences.forEach((workExperience, index) => {
+            console.log(workExperience)
+            $("#workExperience-field").append(`
+            <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <h5 class="card-title"><i class="fa-solid fa-building"></i> ${workExperience.companyName}</h5>
+                                <h6 class="text-secondary"><strong style="white-space: pre-wrap;line-break: auto;">${workExperience.description}</strong></h6>
+                                <h6 class="text-secondary">${workExperience.startDate} to ${workExperience.endDate}</h6>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-danger float-end" onClick="handleDeleteWorkExperience(${index})"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            
+            `)
+        })
+    
+   
+   
+        // console.log(JSON.parse(localStorage.getItem("studentProfile")));
 </script>
 {% endblock %}

@@ -4,6 +4,9 @@ var base64ImgProfileIcon = ''
 var languages = []
 var skills = []
 
+
+
+
 function handleSaveEducationData() {
     let institution = $("#institution").val()
     let program = $("#program").val()
@@ -23,6 +26,8 @@ function handleSaveEducationData() {
     renderDataInEducationField()
 }
 
+
+
 function renderDataInEducationField() {
     $("#education-field").empty()
 
@@ -37,7 +42,7 @@ function renderDataInEducationField() {
                         <div class="row">
                             <div class="col-9">
                                 <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
-                                <h6 class="text-secondary"><strong>${education.program}</strong></h6>
+                                <h6 class="text-secondary"><strong style="white-space: pre-wrap;line-break: auto;">${education.program}</strong></h6>
                                 <h6 class="text-secondary">${education.startDate} to ${education.endDate}</h6>
                             </div>
                             <div class="col-3">
@@ -134,7 +139,7 @@ function fetchRequsetCreateCV() {
     }
     // console.log(base64ImgProfileIcon)
 
-    fetch("/student/create_new_cv", {
+    fetch("/student/edit_Cv", {
         method: "POST",
         body: JSON.stringify({
             base64ImgProfileIcon: base64ImgProfileIcon,

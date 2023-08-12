@@ -208,7 +208,7 @@ def create_cvProfile(request):
 @csrf_exempt
 @login_required
 def edit_cvProfile(request):
-
+    # print(request.POST.get('cv_id'))
     if request.method == "POST":
         cvID = request.POST.get('cv_id')
 
@@ -355,7 +355,7 @@ def create_new_cv(request):
             json_data = json.loads(request.body)
             student = Student.objects.get(user_id=request.user.id)
             lan = Language.objects.all()
-            print(lan)  
+            print(json_data)  
             # print(json_data['base64ImgProfileIcon'])
 
             cv = CvInfoBase(studentID=student, cvName=json_data['cvName'],fristName=json_data['firstName'], lastName=json_data['lastName'], nickName=json_data['nickName'],email=json_data['email'], phone=json_data['phone'], aboutMe=json_data['bio'], profileIcon=json_data['base64ImgProfileIcon'])       
@@ -383,3 +383,41 @@ def create_new_cv(request):
             return JsonResponse({"status":False})
     
     return HttpResponseForbidden()
+
+
+def edit_Cv(request):
+    
+    cvID = request.GET.get('cvID')
+    # language=[]
+    # education=[]
+    # experience=[]
+    cvBasic=[]
+    cvBasic=CvInfoBase.objects.filter(cvId=cvID).values()
+
+    # print(cvBasic)
+    for cv in CvInfoBase.objects.filter(cvId=cvID):
+        language = [lan.name for lan in Language.objects.filter(cv=cv)]
+        #  education = [edu for edu in Education.objects.filter(cv=cvID)]
+        education =  Education.objects.filter(cv=cv).all()
+        experience = [work for work in WorkExperience.objects.filter(cv=cv)]
+    
+
+    educations = [edu.to_dict() for edu in list(education)]
+    experiences = [exp.to_dict() for exp in experience]
+    
+  
+    
+    #     return JsonResponse({"status":True})
+    # return render(request, 'student/edit_cv.html', {'nav':'student','cvID':request.GET.get('cvID'),'cvBasic':cvBasic,'languages':language,'educations':educations,'experiences':experiences})
+    return render(request, 'student/edit_cv.html',{'nav':'student','cvBasic':cvBasic,'languages':language,'education':educations,'experience':experiences})
+
+
+@csrf_exempt
+@login_required
+def getCvData(reqest):
+    print(reqest.method)
+    if reqest.method =="POST":
+        print(reqest.POST)
+        return JsonResponse(list(reqest), safe=False) 
+        # return jsonify(reqest)
+
