@@ -3,7 +3,7 @@ var workExperiences = []
 var base64ImgProfileIcon = ''
 var languages = []
 var skills = []
-
+var cvID = ''
 
 
 
@@ -120,7 +120,8 @@ function renderDataInWorkExperienceField() {
 }
 
 function fetchRequsetCreateCV() {
-    console.log("fetchRequsetCreateCV")
+    cvID = $("#cv-id").val()
+    console.log(cvID)
     $('input[name^=lanuage]').map(function (idx, elem) {
         languages.push($(elem).val())
         return $(elem).val();
@@ -139,7 +140,7 @@ function fetchRequsetCreateCV() {
     }
     // console.log(base64ImgProfileIcon)
 
-    fetch("/student/edit_Cv", {
+    fetch("/student/edit_Cv?cvID="+cvID, {
         method: "POST",
         body: JSON.stringify({
             base64ImgProfileIcon: base64ImgProfileIcon,
@@ -158,7 +159,7 @@ function fetchRequsetCreateCV() {
     }).then(response => response.json()).then((json) => {
         Swal.fire({
             title: 'CV Status',
-            text: json.status ? 'Create CV Successfully' : 'Fail to create CV',
+            text: json.status ? 'Edit CV Successfully' : 'Fail to Edit CV',
             icon: json.status ? 'success' : 'error',
             showCancelButton: true,
             showDenyButton: false,

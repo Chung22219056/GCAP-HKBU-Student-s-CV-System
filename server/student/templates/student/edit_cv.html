@@ -1,295 +1,396 @@
 {% extends 'base.html'%} {% block header %}
 <script src="/static/student/components/edit_cv_page/edit_cv_page.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" /> {% endblock %} {% block content %} {% include 'student/components/create_cv_page/education_modal.html' %} {% include 'student/components/create_cv_page/work_experience_modal.html' %}
+<link rel="stylesheet" type="text/css" href="/static/css/dynamic-fields.css" />
+{% endblock %} {% block content %} {% include
+'student/components/create_cv_page/education_modal.html' %} {% include
+'student/components/create_cv_page/work_experience_modal.html' %}
 
-<div class="container pt-3" style="margin-top: 100px;">
-
-
-
-
-
-    {% for cvBasicInfo in cvBasic %}
-    <div class="card">
-        <div class="card-header">
-            <h5 class="mb-0">Edit CV</h5>
-        </div>
-        <div class="card-body">
-            <div class="col-12 mb-3 d-flex justify-content-center">
-                <img class="rounded-circle" src="{{cvBasicInfo.profileIcon}}" style="width: 100px; height: 100px; object-fit:cover" id="icon-preview">
-            </div>
-            <div class="col-12 mb-3">
-                <label class="form-label" for="profileIcon">Upload your portrait</label>
-                <input type="file" class="form-control" id="profileIcon" />
-            </div>
-        </div>
+<div class="container pt-3" style="margin-top: 100px">
+  {% for cvBasicInfo in cvBasic %}
+  <input type="hidden" id="cv-id" value="{{cvBasicInfo.id}}" />
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Edit CV</h5>
     </div>
+    <div class="card-body">
+      <div class="col-12 mb-3 d-flex justify-content-center">
+        <img
+          class="rounded-circle"
+          src="{{cvBasicInfo.profileIcon}}"
+          style="width: 100px; height: 100px; object-fit: cover"
+          id="icon-preview"
+        />
+      </div>
+      <div class="col-12 mb-3">
+        <label class="form-label" for="profileIcon">Upload your portrait</label>
+        <input type="file" class="form-control" id="profileIcon" />
+      </div>
+    </div>
+  </div>
 
-    <br>
+  <br />
 
-    <div class="card">
-        <div class="card-header">
-            <h5 class="mb-0">Edit Cv</h5>
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Edit Cv</h5>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="cv-name" class="form-label"
+          ><strong>Your CV Name</strong></label
+        >
+        <input
+          type="email"
+          class="form-control"
+          id="cv-name"
+          placeholder="Input your CV name here"
+          value="{{cvBasicInfo.cvName}}"
+        />
+      </div>
+
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label for="first-name" class="form-label"
+            ><strong>First Name</strong></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="first-name"
+            placeholder="First Name"
+            value="{{cvBasicInfo.fristName}}"
+          />
         </div>
-        <div class="card-body">
-            <div class="mb-3">
-                <label for="cv-name" class="form-label"><strong>Your CV Name</strong></label>
-                <input type="email" class="form-control" id="cv-name" placeholder="Input your CV name here" value="{{cvBasicInfo.cvName}}">
-            </div>
+        <div class="col-6 mb-3">
+          <label for="last-name" class="form-label"
+            ><strong>Last Name</strong></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="last-name"
+            placeholder="Last Name"
+            value="{{cvBasicInfo.lastName}}"
+          />
+        </div>
+        <div class="col-6 mb-3">
+          <label for="last-name" class="form-label"
+            ><strong>Last Name</strong></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="nick-name"
+            placeholder="nick Name"
+            value="{{cvBasicInfo.nickName}}"
+          />
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label for="email" class="form-label"
+            ><strong>Email Address</strong></label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="example@example.com"
+            value="{{cvBasicInfo.email}}"
+          />
+        </div>
+        <div class="col-6 mb-3">
+          <label for="phone" class="form-label"
+            ><strong>Phone Number</strong></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            placeholder="input your phone number"
+            value="{{cvBasicInfo.phone}}"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="bio" class="form-label"><strong>Bio</strong></label>
+        <textarea
+          class="form-control"
+          id="bio"
+          rows="3"
+          placeholder="Share some information about yourself."
+        >
+{{cvBasicInfo.aboutMe}}</textarea
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <br />
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h5 class="mb-0">Education</h5>
+      <button
+        class="btn btn-sm btn-secondary mt-0"
+        data-bs-toggle="modal"
+        data-bs-target="#edcutionModal"
+      >
+        Add new education
+      </button>
+    </div>
+    <div class="card-body" id="education-field">
+      <h6 class="text-secondary">
+        <!--  -->
+        {% for education in educations %}
+        <div class="card bg-light mb-3">
+          <div class="card-body">
             <div class="row">
-                <div class="col-6 mb-3">
-                    <label for="first-name" class="form-label"><strong>First Name</strong></label>
-                    <input type="text" class="form-control" id="first-name" placeholder="First Name" value="{{cvBasicInfo.fristName}}">
-                </div>
-                <div class="col-6 mb-3">
-                    <label for="last-name" class="form-label"><strong>Last Name</strong></label>
-                    <input type="text" class="form-control" id="last-name" placeholder="Last Name" value="{{cvBasicInfo.lastName}}">
-                </div>
-                <div class="col-6 mb-3">
-                    <label for="last-name" class="form-label"><strong>Last Name</strong></label>
-                    <input type="text" class="form-control" id="nick-name" placeholder="nick Name" value="{{cvBasicInfo.nickName}}">
-                </div>
+              <div class="col-9">
+                <h5 class="card-title">
+                  <i class="fa-solid fa-building-columns"></i>
+                  {{education.shcoolName}}
+                </h5>
+                <h6 class="text-secondary">
+                  <strong>{{education.major}}</strong>
+                </h6>
+                <h6 class="text-secondary">
+                  {{education.startDate}} to {{education.endDate}}
+                </h6>
+              </div>
+              <div class="col-3">
+                <button
+                  class="btn btn-danger float-end"
+                  onClick="handleDeleteEducationRecord(${index})"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
             </div>
-
-            <div class="row">
-                <div class="col-6 mb-3">
-                    <label for="email" class="form-label"><strong>Email Address</strong></label>
-                    <input type="email" class="form-control" id="email" placeholder="example@example.com" value="{{cvBasicInfo.email}}">
-                </div>
-                <div class="col-6 mb-3">
-                    <label for="phone" class="form-label"><strong>Phone Number</strong></label>
-                    <input type="text" class="form-control" id="phone" placeholder="input your phone number" value="{{cvBasicInfo.phone}}">
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="bio" class="form-label"><strong>Bio</strong></label>
-                <textarea class="form-control" id="bio" rows="3" placeholder="Share some information about yourself.">{{cvBasicInfo.aboutMe}}</textarea>
-            </div>
+          </div>
         </div>
+        {% endfor %}
+        <!--  -->
+        <center>There are no eduation data in here.</center>
+      </h6>
     </div>
-    {% endfor %}
-    <br />
+  </div>
 
-    <div class="card">
-        <div class="card-header d-flex justify-content-between">
-            <h5 class="mb-0">Education</h5>
-            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#edcutionModal">Add new
-                education</button>
-        </div>
-        <div class="card-body" id="education-field">
-            <h6 class="text-secondary">
-                <!--  -->
-                {% for education in educations %}
-            <div class="card bg-light mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> {{education.shcoolName}}</h5>
-                            <h6 class="text-secondary"><strong>{{education.major}}</strong></h6>
-                            <h6 class="text-secondary">{{education.startDate}} to {{education.endDate}}</h6>
-                        </div>
-                        <div class="col-3">
-                            <button class="btn btn-danger float-end" onClick="handleDeleteEducationRecord(${index})"><i class="fa-solid fa-trash"></i></button>
-                        </div>
+  <br />
 
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-                <!--  -->
-                <center>There are no eduation data in here.</center>
-            </h6>
-        </div>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h5 class="mb-0">Work Experience</h5>
+      <button
+        class="btn btn-sm btn-secondary mt-0"
+        data-bs-toggle="modal"
+        data-bs-target="#workExperienceModal"
+      >
+        Add new experience
+      </button>
     </div>
-
-    <br />
-
-    <div class="card">
-        <div class="card-header d-flex justify-content-between">
-            <h5 class="mb-0">Work Experience</h5>
-            <button class="btn btn-sm btn-secondary mt-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal">Add new experience</button>
-        </div>
-        <div class="card-body" id="workExperience-field">
-            <h6 class="text-secondary">
-                <center>There are no work experience data in here.</center>
-            </h6>
-        </div>
+    <div class="card-body" id="workExperience-field">
+      <h6 class="text-secondary">
+        <center>There are no work experience data in here.</center>
+      </h6>
     </div>
+  </div>
 
-    <br>
+  <br />
 
-    <div class="mb-3">
-        <label for="address">Language</label>
-        <!-- <h1>Dynamic Fields Javascript</h1> -->
-        <!-- <div class="wrapper"> -->
-        <div id="survey_options">
-            {% for language in languages %}
-            <input type="text" name="survey_options[]" class="survey_options skillBox" size="50" placeholder="language" value="{{language}}" /> {% endfor %}
-        </div>
-        <div class="controls">
-            <button type="button" id="add_more_fields" class="btn btn-primary">Add More</button>
-            <button type="button" id="remove_fields" class="btn btn-danger">Delete</button>
-
-        </div>
-        <!-- </div> -->
+  <div class="mb-3">
+    <label for="address">Language</label>
+    <!-- <h1>Dynamic Fields Javascript</h1> -->
+    <!-- <div class="wrapper"> -->
+    <div id="survey_options">
+      {% for language in languages %}
+      <input
+        type="text"
+        name="survey_options[]"
+        class="survey_options skillBox"
+        size="50"
+        placeholder="language"
+        value="{{language}}"
+      />
+      {% endfor %}
     </div>
-
-
-    <div class="mb-3">
-        <label for="address">Skill</label>
-        <!-- <h1>Dynamic Fields Javascript</h1> -->
-        <!-- <div class="wrapper"> -->
-        <div id="skill_options">
-            <input type="text" name="skill[]" class="survey_options skillBox" size="50" placeholder="Skill">
-
-        </div>
-        <div class="controls">
-            <button type="button" id="add_skill_fields" class="btn btn-primary">Add More</button>
-            <button type="button" id="remove_skill_fields" class="btn btn-danger">Delete</button>
-
-        </div>
-        <!-- </div> -->
+    <div class="controls">
+      <button type="button" id="add_more_fields" class="btn btn-primary">
+        Add More
+      </button>
+      <button type="button" id="remove_fields" class="btn btn-danger">
+        Delete
+      </button>
     </div>
+    <!-- </div> -->
+  </div>
 
-
-    <div class="d-flex flex-row-reverse mb-3">
-        <button class="btn btn-primary" onclick="fetchRequsetCreateCV()">Create</button>
+  <div class="mb-3">
+    <label for="address">Skill</label>
+    <!-- <h1>Dynamic Fields Javascript</h1> -->
+    <!-- <div class="wrapper"> -->
+    <div id="skill_options">
+      {% for skill in skills %}
+      <input
+        type="text"
+        name="skill[]"
+        class="survey_options skillBox"
+        size="50"
+        placeholder="Skill"
+        value="{{skill}}"
+      />
+      {% endfor %}
     </div>
+    <div class="controls">
+      <button type="button" id="add_skill_fields" class="btn btn-primary">
+        Add More
+      </button>
+      <button type="button" id="remove_skill_fields" class="btn btn-danger">
+        Delete
+      </button>
+    </div>
+    <!-- </div> -->
+  </div>
 
-
-
+  <div class="d-flex flex-row-reverse mb-3">
+    <button class="btn btn-primary" onclick="fetchRequsetCreateCV()">
+      Create
+    </button>
+  </div>
 </div>
 
 {% endblock %} {% block javascript %}
 
-
 <script>
-    $(document).ready(() => {
-      
-        $("#profileIcon").change((e) => {
-            let file = $("#profileIcon")[0].files[0]
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onload = function() {
-                const base64String = reader.result
-                    // console.log(base64String);
-                base64ImgProfileIcon = base64String //global
-                $("#icon-preview").attr("src", base64String)
-            };
-        })
-    })
+  $(document).ready(() => {
 
-    var survey_options = document.getElementById('survey_options');
-    var add_more_fields = document.getElementById('add_more_fields');
-    var remove_fields = document.getElementById('remove_fields');
+      $("#profileIcon").change((e) => {
+          let file = $("#profileIcon")[0].files[0]
+          const reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = function() {
+              const base64String = reader.result
+                  // console.log(base64String);
+              base64ImgProfileIcon = base64String //global
+              $("#icon-preview").attr("src", base64String)
+          };
+      })
+  })
 
-    add_more_fields.onclick = function() {
-        var newField = document.createElement('input');
-        newField.setAttribute('type', 'text');
-        newField.setAttribute('name', 'lanuage[]');
-        newField.setAttribute('class', 'survey_options skillBox');
-        newField.setAttribute('siz', 50);
-        newField.setAttribute('placeholder', 'language');
-        survey_options.appendChild(newField);
-    }
+  var survey_options = document.getElementById('survey_options');
+  var add_more_fields = document.getElementById('add_more_fields');
+  var remove_fields = document.getElementById('remove_fields');
 
-    remove_fields.onclick = function() {
-        var input_tags = survey_options.getElementsByTagName('input');
-        if (input_tags.length > 1) {
-            survey_options.removeChild(input_tags[(input_tags.length) - 1]);
-        }
-    }
+  add_more_fields.onclick = function() {
+      var newField = document.createElement('input');
+      newField.setAttribute('type', 'text');
+      newField.setAttribute('name', 'lanuage[]');
+      newField.setAttribute('class', 'survey_options skillBox');
+      newField.setAttribute('siz', 50);
+      newField.setAttribute('placeholder', 'language');
+      survey_options.appendChild(newField);
+  }
 
-
-    var skill_options = document.getElementById('skill_options');
-    add_skill_fields.onclick = function() {
-        var newField = document.createElement('input');
-        newField.setAttribute('type', 'text');
-        newField.setAttribute('name', 'skill[]');
-        newField.setAttribute('class', 'skill_options skillBox');
-        newField.setAttribute('siz', 50);
-        newField.setAttribute('placeholder', 'skill');
-        skill_options.appendChild(newField);
-    }
-
-    remove_skill_fields.onclick = function() {
-        var input_tags = skill_options.getElementsByTagName('input');
-        if (input_tags.length > 1) {
-            skill_options.removeChild(input_tags[(input_tags.length) - 1]);
-        }
-    }
+  remove_fields.onclick = function() {
+      var input_tags = survey_options.getElementsByTagName('input');
+      if (input_tags.length > 1) {
+          survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+      }
+  }
 
 
+  var skill_options = document.getElementById('skill_options');
+  add_skill_fields.onclick = function() {
+      var newField = document.createElement('input');
+      newField.setAttribute('type', 'text');
+      newField.setAttribute('name', 'skill[]');
+      newField.setAttribute('class', 'skill_options skillBox');
+      newField.setAttribute('siz', 50);
+      newField.setAttribute('placeholder', 'skill');
+      skill_options.appendChild(newField);
+  }
+
+  remove_skill_fields.onclick = function() {
+      var input_tags = skill_options.getElementsByTagName('input');
+      if (input_tags.length > 1) {
+          skill_options.removeChild(input_tags[(input_tags.length) - 1]);
+      }
+  }
 
 
 
 
-    var lans = $('input[name^=lanuage]').map(function(idx, elem) {
-        return $(elem).val();
-    }).get();
 
-    var edus = {{education | safe}}
-    var exps = {{experience | safe}}
-    console.log(exps)
 
-    for (let i = 0; i < edus.length; i++) {
-        educations.push({ "institution": edus[i].schoolName, "program": edus[i].major, "startDate": edus[i].start_date, "endDate": edus[i].end_date })
-    }
+  var lans = $('input[name^=lanuage]').map(function(idx, elem) {
+      return $(elem).val();
+  }).get();
 
-    for (let i = 0; i < exps.length; i++) {
-        workExperiences.push({ "companyName": exps[i].companyName, "description": exps[i].description, "startDate": exps[i].start_date, "endDate": exps[i].end_date })
-    }
-    // console.log(edus)
+ 
 
-    educations.forEach((education, index) => {
-            $("#education-field").append(
-                `
-                <div class="card bg-light mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-9">
-                                <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
-                                <h6 class="text-secondary"><strong>${education.program}</strong></h6>
-                                <h6 class="text-secondary">${education.startDate} to ${education.endDate}</h6>
-                            </div>
-                            <div class="col-3">
-                                <button class="btn btn-danger float-end" onClick="handleDeleteEducationRecord(${index})"><i class="fa-solid fa-trash"></i></button>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
-                `
-            )
-        })
-   
-  
+  var edus = {{education | safe}}
+  var exps = {{experience | safe}}
+  console.log(exps)
 
-        workExperiences.forEach((workExperience, index) => {
-            console.log(workExperience)
-            $("#workExperience-field").append(`
-            <div class="card bg-light mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-9">
-                                <h5 class="card-title"><i class="fa-solid fa-building"></i> ${workExperience.companyName}</h5>
-                                <h6 class="text-secondary"><strong style="white-space: pre-wrap;line-break: auto;">${workExperience.description}</strong></h6>
-                                <h6 class="text-secondary">${workExperience.startDate} to ${workExperience.endDate}</h6>
-                            </div>
-                            <div class="col-3">
-                                <button class="btn btn-danger float-end" onClick="handleDeleteWorkExperience(${index})"><i class="fa-solid fa-trash"></i></button>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
-            
-            `)
-        })
-    
-   
-   
-        // console.log(JSON.parse(localStorage.getItem("studentProfile")));
+  for (let i = 0; i < edus.length; i++) {
+      educations.push({ "institution": edus[i].schoolName, "program": edus[i].major, "startDate": edus[i].start_date, "endDate": edus[i].end_date })
+  }
+
+  for (let i = 0; i < exps.length; i++) {
+      workExperiences.push({ "companyName": exps[i].companyName, "description": exps[i].description, "startDate": exps[i].start_date, "endDate": exps[i].end_date })
+  }
+  // console.log(edus)
+
+  educations.forEach((education, index) => {
+          $("#education-field").append(
+              `
+              <div class="card bg-light mb-3">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-9">
+                              <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
+                              <h6 class="text-secondary"><strong>${education.program}</strong></h6>
+                              <h6 class="text-secondary">${education.startDate} to ${education.endDate}</h6>
+                          </div>
+                          <div class="col-3">
+                              <button class="btn btn-danger float-end" onClick="handleDeleteEducationRecord(${index})"><i class="fa-solid fa-trash"></i></button>
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+              `
+          )
+      })
+
+
+
+      workExperiences.forEach((workExperience, index) => {
+          console.log(workExperience)
+          $("#workExperience-field").append(`
+          <div class="card bg-light mb-3">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-9">
+                              <h5 class="card-title"><i class="fa-solid fa-building"></i> ${workExperience.companyName}</h5>
+                              <h6 class="text-secondary"><strong style="white-space: pre-wrap;line-break: auto;">${workExperience.description}</strong></h6>
+                              <h6 class="text-secondary">${workExperience.startDate} to ${workExperience.endDate}</h6>
+                          </div>
+                          <div class="col-3">
+                              <button class="btn btn-danger float-end" onClick="handleDeleteWorkExperience(${index})"><i class="fa-solid fa-trash"></i></button>
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+
+          `)
+      })
+
+
+
+      // console.log(JSON.parse(localStorage.getItem("studentProfile")));
 </script>
 {% endblock %}

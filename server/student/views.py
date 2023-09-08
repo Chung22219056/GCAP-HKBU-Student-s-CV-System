@@ -385,31 +385,57 @@ def create_new_cv(request):
     return HttpResponseForbidden()
 
 
+@csrf_exempt
+@login_required
 def edit_Cv(request):
-    
     cvID = request.GET.get('cvID')
-    # language=[]
-    # education=[]
-    # experience=[]
+    # print(cvID)
+    language=[]
+    education=[]
+    experience=[]
+    skill=[]
     cvBasic=[]
     cvBasic=CvInfoBase.objects.filter(cvId=cvID).values()
 
-    # print(cvBasic)
+   
     for cv in CvInfoBase.objects.filter(cvId=cvID):
         language = [lan.name for lan in Language.objects.filter(cv=cv)]
-        #  education = [edu for edu in Education.objects.filter(cv=cvID)]
-        education =  Education.objects.filter(cv=cv).all()
+        skill = [skill for skill in Skill.objects.filter(cv=cv)]
+        education = [edu for edu in Education.objects.filter(cv=cv)]
+        # education =  Education.objects.filter(cv=cv).all()
         experience = [work for work in WorkExperience.objects.filter(cv=cv)]
-    
 
-    educations = [edu.to_dict() for edu in list(education)]
+    educations = [edu.to_dict() for edu in education]
+ 
     experiences = [exp.to_dict() for exp in experience]
     
+
+    if request.method == 'POST':
+        try:
+            cvID = request.POST.get('cvID')
+            print(request.POST.cvID)
+            json_data = json.loads(request.body)
+            cv = CvInfoBase.objects.filter(cvId=cvID).values()
+            # print(cv)
+            # cv.profileIcon = json_data['base64ImgProfileIcon']      
+            # cv.cvName = json_data['cvName']
+            # cv.fristName = json_data['firstName']
+            # cv.lastName = json_data['lastName']
+            # cv.nickName = json_data['nickName']
+            # cv.email = json_data['email']
+            # cv.aboutMe = json_data['bio']
+            # cv.phone = json_data['phone']
+            # cv.save()
+            # return JsonResponse({"status":True})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"status":False})
+      
   
     
     #     return JsonResponse({"status":True})
     # return render(request, 'student/edit_cv.html', {'nav':'student','cvID':request.GET.get('cvID'),'cvBasic':cvBasic,'languages':language,'educations':educations,'experiences':experiences})
-    return render(request, 'student/edit_cv.html',{'nav':'student','cvBasic':cvBasic,'languages':language,'education':educations,'experience':experiences})
+    return render(request, 'student/edit_cv.html',{'nav':'student','cvBasic':cvBasic,'skills':skill,'languages':language,'education':educations,'experience':experiences})
 
 
 @csrf_exempt
