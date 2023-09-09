@@ -74,6 +74,7 @@ class Education(models.Model):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'studentID': self.studentID.student_id,
             'schoolName': self.shcoolName,
             'major': self.major,

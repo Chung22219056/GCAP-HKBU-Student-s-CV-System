@@ -412,29 +412,57 @@ def edit_Cv(request):
 
     if request.method == 'POST':
         try:
-            cvID = request.POST.get('cvID')
-            print(request.POST.cvID)
             json_data = json.loads(request.body)
-            cv = CvInfoBase.objects.filter(cvId=cvID).values()
-            # print(cv)
-            # cv.profileIcon = json_data['base64ImgProfileIcon']      
-            # cv.cvName = json_data['cvName']
-            # cv.fristName = json_data['firstName']
-            # cv.lastName = json_data['lastName']
-            # cv.nickName = json_data['nickName']
-            # cv.email = json_data['email']
-            # cv.aboutMe = json_data['bio']
-            # cv.phone = json_data['phone']
+            cv = CvInfoBase.objects.get(cvId=json_data.get('cvID'))
+     
+            
+            # Cv Basic
+            cv.profileIcon = json_data['base64ImgProfileIcon']      
+            cv.cvName = json_data['cvName']
+            cv.fristName = json_data['firstName']
+            cv.lastName = json_data['lastName']
+            cv.nickName = json_data['nickName']
+            cv.email = json_data['email']
+            cv.aboutMe = json_data['bio']
+            cv.phone = json_data['phone']
             # cv.save()
+            
+            #Education
+            education = Education.objects.filter(cv=cv).all()
+            getRequestEdu = json_data['educations']
+
+         
+            for edu in range(len(getRequestEdu)):
+                # print(getRequestEdu[edu]['eduID'])
+                # print(education[edu].id)
+                # try:
+                #  if getRequestEdu[edu]['eduID'] not in education[edu].id:
+                #     # print(getRequestEdu[edu]['eduID'])
+                #     print("yes")
+                #     # education[edu].delete()
+                # except:
+                #     print("no")
+                #     education = Education(studentID=cv.studentID, cv=cv, shcoolName=getRequestEdu[edu]['institution'], major=getRequestEdu[edu]['program'], start_date=getRequestEdu[edu]['startDate'], end_date=getRequestEdu[edu]['endDate'])      
+                #     # education.save()
+                try:
+                    
+                    if getRequestEdu[edu]['institution'] in education[edu].shcoolName:
+                            education[edu].shcoolName =getRequestEdu[edu]['institution']
+                            education[edu].major = getRequestEdu[edu]['program']
+                            education[edu].start_date = getRequestEdu[edu]['startDate']
+                            education[edu].end_date = getRequestEdu[edu]['endDate']
+                            # education[edu].save()
+                except:
+                    education = Education(studentID=cv.studentID, cv=cv, shcoolName=getRequestEdu[edu]['institution'], major=getRequestEdu[edu]['program'], start_date=getRequestEdu[edu]['startDate'], end_date=getRequestEdu[edu]['endDate'])      
+                    # education.save()
+
             # return JsonResponse({"status":True})
         except Exception as e:
             print(e)
             return JsonResponse({"status":False})
       
   
-    
-    #     return JsonResponse({"status":True})
-    # return render(request, 'student/edit_cv.html', {'nav':'student','cvID':request.GET.get('cvID'),'cvBasic':cvBasic,'languages':language,'educations':educations,'experiences':experiences})
+
     return render(request, 'student/edit_cv.html',{'nav':'student','cvBasic':cvBasic,'skills':skill,'languages':language,'education':educations,'experience':experiences})
 
 

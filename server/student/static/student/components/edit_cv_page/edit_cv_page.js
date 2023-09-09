@@ -8,14 +8,16 @@ var cvID = ''
 
 
 function handleSaveEducationData() {
+    let eduID = $("#eduID").val()
     let institution = $("#institution").val()
     let program = $("#program").val()
     let startDate = $("#startDate").val()
     let endDate = $("#endDate").val()
 
-    educations.push({ "institution": institution, "program": program, "startDate": startDate, "endDate": endDate })
+    educations.push({ "eduID":eduID,"institution": institution, "program": program, "startDate": startDate, "endDate": endDate })
 
     //clear input fields
+    $("#eduID").val('')
     $("#institution").val('')
     $("#program").val('')
     $("#startDate").val('')
@@ -41,6 +43,7 @@ function renderDataInEducationField() {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-9">
+                                <div hidden="hidden">${education.eduID}</div>
                                 <h5 class="card-title"><i class="fa-solid fa-building-columns"></i> ${education.institution}</h5>
                                 <h6 class="text-secondary"><strong style="white-space: pre-wrap;line-break: auto;">${education.program}</strong></h6>
                                 <h6 class="text-secondary">${education.startDate} to ${education.endDate}</h6>
@@ -140,10 +143,11 @@ function fetchRequsetCreateCV() {
     }
     // console.log(base64ImgProfileIcon)
 
-    fetch("/student/edit_Cv?cvID="+cvID, {
+    fetch("/student/edit_Cv?cvID=" + cvID, {
         method: "POST",
         body: JSON.stringify({
             base64ImgProfileIcon: base64ImgProfileIcon,
+            cvID: $("#cv-id").val(),
             cvName: $("#cv-name").val(),
             firstName: $("#first-name").val(),
             lastName: $("#last-name").val(),
