@@ -13,9 +13,15 @@ body {
     height: auto;
 }
 
+.experienceDescription {
+    white-space: pre-wrap;
+    line-break: auto;
+}
+
 .resume-box {
+    display: flex;
     width: 800px;
-    height: 1100px;
+    /* height: 1100px; */
     margin: 0 auto;
     background-color: white;
     box-shadow: 5px 5px 5px 5px #00000024;
@@ -29,7 +35,7 @@ body {
     background-color: #242426;
     width: 36%;
     float: left;
-    height: 1100px;
+    /* height: 1100px; */
 }
 
 .phead {

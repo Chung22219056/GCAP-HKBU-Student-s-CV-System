@@ -106,9 +106,10 @@ def student_CV_UI2(request):
 
     for cvID in CvInfoBase.objects.filter(cvId=cvID):
          language = [lan for lan in Language.objects.filter(cv=cvID)]
+         skill = [skill for skill in Skill.objects.filter(cv=cvID)]
          education = [edu for edu in Education.objects.filter(cv=cvID)]
          experience = [work for work in WorkExperience.objects.filter(cv=cvID)]
-    return render(request, 'student/cv-version-2.html', {'nav':'student','cvBasic':cvBasic,'language':language,'education':education,'experience':experience})
+    return render(request, 'student/cv-version-2.html', {'nav':'student','cvBasic':cvBasic,'language':language,'skills':skill,'education':education,'experience':experience})
 
 @csrf_exempt
 @login_required
