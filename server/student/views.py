@@ -410,6 +410,7 @@ def edit_Cv(request):
     experiences = [exp.to_dict() for exp in experience]
     
 
+
     if request.method == 'POST':
         try:
             json_data = json.loads(request.body)
@@ -425,38 +426,46 @@ def edit_Cv(request):
             cv.email = json_data['email']
             cv.aboutMe = json_data['bio']
             cv.phone = json_data['phone']
-            # cv.save()
+            cv.save()
             
             #Education
             education = Education.objects.filter(cv=cv).all()
             getRequestEdu = json_data['educations']
+    
+            deleteEdu = []
+            # for edu in education:
+            #     deleteEdu.append(edu.id)
+            # for edu in range(len(getRequestEdu)):
+            #     if getRequestEdu[edu]['eduID'] in deleteEdu:
+            #         print("remove ",getRequestEdu[edu]['eduID'])
+            #         deleteEdu.remove(getRequestEdu[edu]['eduID'])
+            # print(deleteEdu)
+            # for edu in deleteEdu:
+            #     deleteEduData =Education.objects.get(id=edu).delete()
+            #     print("delete ",deleteEduData)
+            
 
-         
+            
+            # Push exit ID to list
+            exitID = []
+            for edu in education:
+                exitID.append(edu.id)
+            #Add education
             for edu in range(len(getRequestEdu)):
-                # print(getRequestEdu[edu]['eduID'])
-                # print(education[edu].id)
-                # try:
-                #  if getRequestEdu[edu]['eduID'] not in education[edu].id:
-                #     # print(getRequestEdu[edu]['eduID'])
-                #     print("yes")
-                #     # education[edu].delete()
-                # except:
-                #     print("no")
-                #     education = Education(studentID=cv.studentID, cv=cv, shcoolName=getRequestEdu[edu]['institution'], major=getRequestEdu[edu]['program'], start_date=getRequestEdu[edu]['startDate'], end_date=getRequestEdu[edu]['endDate'])      
-                #     # education.save()
                 try:
-                    
-                    if getRequestEdu[edu]['institution'] in education[edu].shcoolName:
+                    if getRequestEdu[edu]['eduID'] in exitID:
+                            print("old")
                             education[edu].shcoolName =getRequestEdu[edu]['institution']
                             education[edu].major = getRequestEdu[edu]['program']
                             education[edu].start_date = getRequestEdu[edu]['startDate']
                             education[edu].end_date = getRequestEdu[edu]['endDate']
-                            # education[edu].save()
+                            education[edu].save()
                 except:
+                    print("new")
                     education = Education(studentID=cv.studentID, cv=cv, shcoolName=getRequestEdu[edu]['institution'], major=getRequestEdu[edu]['program'], start_date=getRequestEdu[edu]['startDate'], end_date=getRequestEdu[edu]['endDate'])      
-                    # education.save()
+                    education.save()
 
-            # return JsonResponse({"status":True})
+            return JsonResponse({"status":True})
         except Exception as e:
             print(e)
             return JsonResponse({"status":False})
