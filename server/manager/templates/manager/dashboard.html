@@ -1,159 +1,38 @@
 {% extends 'manager/manager_base.html' %}
 
-{% block javascript %}
-<script>
-const data1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [{
-    label: 'Looping tension',
-    data: [65, 59, 80, 81, 26, 55, 40],
-    fill: false,
-    borderColor: 'rgb(75, 192, 192)',
-  }]
-};
+{% block manager_content_block %}
+<div class="row">
 
-const config1 = {
-  type: 'line',
-  data: data1,
-  options: {
-    animations: {
-      tension: {
-        duration: 1000,
-        easing: 'linear',
-        from: 1,
-        to: 0,
-        loop: true
-      }
-    },
-    scales: {
-      y: { // defining min and max so hiding the dataset does not change scale range
-        min: 0,
-        max: 100
-      }
-    }
-  }
-};
-
-var chart1 = new Chart(document.getElementById("canvas1"), config1)
+    <div class="col-lg-6 col-md-6 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <i class='bx bxs-user' style="font-size: 32px"></i>
+              </div>
+              <div class="dropdown">
+                <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="bx bx-dots-vertical-rounded"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                </div>
+              </div>
+            </div>
+            <span class="fw-medium d-block mb-1">Total number of account</span>
+            <h3 class="card-title mb-2">12,678</h3>
+            <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+          </div>
+        </div>
+    </div>
 
 
-
-const DATA_COUNT = 5;
-const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
-
-const data2 = {
-  labels: [
-    'Red',
-    'Blue',
-    'Yellow'
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)'
-    ],
-    hoverOffset: 4
-  }]
-};
-
-const config2 = {
-  type: 'doughnut',
-  data: data2,
-};
-
-var chart2 = new Chart(document.getElementById("canvas2"), config2)
-
-$(document).ready(()=>{
-  $("#offcanvasExample").html()
-})
-
-</script>
+</div>
 {% endblock %}
 
-{% block manager_content %}
-<div class="row gy-3">
-          <div class="col-12 h-100">
-            <div class="row gy-3">
 
-              <div class="col-6 col-md-6 col-lg-3">
-                <div class="card border-0 shadow">
-                  <div class="card-body">
-                      <div class="float-end">
-                        <h4><i class="fa-solid fa-users"></i></h4>
-                      </div>
-                      <h6 class="text-muted fw-normal mt-0">Students</h6>
-                      <h3 class="mt-3 mb-3">{{numOfStudent}}</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6 col-md-6 col-lg-3">
-                <div class="card border-0 shadow">
-                  <div class="card-body">
-                      <div class="float-end">
-                        <h4><i class="fa-solid fa-file"></i></h4>
-                      </div>
-                      <h6 class="text-muted fw-normal mt-0">Number of CV</h6>
-                      <h3 class="mt-3 mb-3">{{numOfCv}}</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6 col-md-6 col-lg-3">
-                <div class="card border-0 shadow">
-                  <div class="card-body">
-                      <div class="float-end">
-                        <h4><i class="fa-solid fa-users"></i></h4>
-                      </div>
-                      <h6 class="text-muted fw-normal mt-0">Students</h6>
-                      <h3 class="mt-3 mb-3">36,254</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6 col-md-6 col-lg-3">
-                <div class="card border-0 shadow">
-                  <div class="card-body">
-                      <div class="float-end">
-                        <h4><i class="fa-solid fa-file"></i></h4>
-                      </div>
-                      <h6 class="text-muted fw-normal mt-0">Number of CV</h6>
-                      <h3 class="mt-3 mb-3">56,108</h3>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="col-12">
-            <div class="row gy-3">
-
-              <div class="col-12 col-lg-7">
-                <div class="card border-0 shadow h-100">
-                  <div class="card-body">
-                    <h6 class="text-muted">Number Of School</h6>
-                    <canvas id="canvas1"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12 col-lg-5">
-                <div class="card border-0 shadow h-100">
-                  <div class="card-body">
-                    <h6 class="text-muted">Number Of School</h6>
-                    <canvas id="canvas2"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
+{% block scripts %}
+<script>
+    var page = "dashboard";
+</script>
 {% endblock %}
