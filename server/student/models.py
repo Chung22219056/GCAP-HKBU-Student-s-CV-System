@@ -22,7 +22,8 @@ class Student(models.Model):
         return {
             'student_id': self.student_id,
             'student_name': self.user_id.username,
-            'email': self.user_id.email
+            'email': self.user_id.email,
+            'status': self.status,
         }
     
     def getName(self):
