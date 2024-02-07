@@ -403,7 +403,6 @@ def edit_Cv(request):
         language = [lan.name for lan in Language.objects.filter(cv=cv)]
         skill = [skill for skill in Skill.objects.filter(cv=cv)]
         education = [edu for edu in Education.objects.filter(cv=cv)]
-        # education =  Education.objects.filter(cv=cv).all()
         experience = [work for work in WorkExperience.objects.filter(cv=cv)]
 
     educations = [edu.to_dict() for edu in education]
@@ -432,39 +431,46 @@ def edit_Cv(request):
             #Education
             education = Education.objects.filter(cv=cv).all()
             getRequestEdu = json_data['educations']
+            getRequestWork = json_data['workExperiences']
+            getRequestLan = json_data['languages']
+            getRequestSkill = json_data['skills']
     
-            deleteEdu = []
-            # for edu in education:
-            #     deleteEdu.append(edu.id)
-            # for edu in range(len(getRequestEdu)):
-            #     if getRequestEdu[edu]['eduID'] in deleteEdu:
-            #         print("remove ",getRequestEdu[edu]['eduID'])
-            #         deleteEdu.remove(getRequestEdu[edu]['eduID'])
-            # print(deleteEdu)
-            # for edu in deleteEdu:
-            #     deleteEduData =Education.objects.get(id=edu).delete()
-            #     print("delete ",deleteEduData)
-            
-
-            
-            # Push exit ID to list
-            exitID = []
+            #  remove education records
+            # add new education records
             for edu in education:
-                exitID.append(edu.id)
-            #Add education
+                edu.delete()
+      
             for edu in range(len(getRequestEdu)):
-                try:
-                    if getRequestEdu[edu]['eduID'] in exitID:
-                            print("old")
-                            education[edu].shcoolName =getRequestEdu[edu]['institution']
-                            education[edu].major = getRequestEdu[edu]['program']
-                            education[edu].start_date = getRequestEdu[edu]['startDate']
-                            education[edu].end_date = getRequestEdu[edu]['endDate']
-                            education[edu].save()
-                except:
-                    print("new")
-                    education = Education(studentID=cv.studentID, cv=cv, shcoolName=getRequestEdu[edu]['institution'], major=getRequestEdu[edu]['program'], start_date=getRequestEdu[edu]['startDate'], end_date=getRequestEdu[edu]['endDate'])      
-                    education.save()
+                education = Education(studentID=cv.studentID, cv=cv, shcoolName=getRequestEdu[edu]['institution'], major=getRequestEdu[edu]['program'], start_date=getRequestEdu[edu]['startDate'], end_date=getRequestEdu[edu]['endDate'])      
+                education.save()
+                
+            # Edit WorkExperience
+            for work in WorkExperience.objects.filter(cv=cv).all():
+                work.delete()
+                
+            for work in range(len(getRequestWork)):
+                workExperience = WorkExperience(studentID=cv.studentID, cv=cv, companyName=getRequestWork[work]['companyName'], description=getRequestWork[work]['description'], start_date=getRequestWork[work]['startDate'], end_date=getRequestWork[work]['endDate'])
+                workExperience.save()
+                
+            #Edit Language
+            for lan in Language.objects.filter(cv=cv).all():
+                lan.delete()
+                
+            for lan in getRequestLan:
+                print(lan)
+                lan = Language(studentID=cv.studentID, cv=cv,name=lan)
+                lan.save()
+                
+            
+            #Edit Skill 
+            for skill in Skill.objects.filter(cv=cv).all():
+                skill.delete()
+                
+            for skill in getRequestSkill:
+                skill = Skill(cv=cv,studentID=cv.studentID,name=skill)
+                skill.save()
+            
+        
 
             return JsonResponse({"status":True})
         except Exception as e:
