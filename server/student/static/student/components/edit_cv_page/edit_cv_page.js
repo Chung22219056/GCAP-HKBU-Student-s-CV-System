@@ -14,7 +14,7 @@ function handleSaveEducationData() {
     let startDate = $("#startDate").val()
     let endDate = $("#endDate").val()
 
-    educations.push({ "eduID":eduID,"institution": institution, "program": program, "startDate": startDate, "endDate": endDate })
+    educations.push({ "eduID": eduID, "institution": institution, "program": program, "startDate": startDate, "endDate": endDate })
 
     //clear input fields
     $("#eduID").val('')
@@ -127,12 +127,14 @@ function fetchRequsetCreateCV() {
     console.log(cvID)
     $('input[name^=lanuage]').map(function (idx, elem) {
         languages.push($(elem).val())
+        console.log($(elem).val())
         return $(elem).val();
     }).get();
 
 
     $('input[name^=skill]').map(function (idx, elem) {
         skills.push($(elem).val())
+        console.log($(elem).val())
         return $(elem).val();
     }).get();
 
@@ -142,7 +144,8 @@ function fetchRequsetCreateCV() {
         base64ImgProfileIcon = $('#icon-preview').attr('src');
     }
     // console.log(base64ImgProfileIcon)
-
+    // console.log(languages)
+    // console.log(skills)
     fetch("/student/edit_Cv?cvID=" + cvID, {
         method: "POST",
         body: JSON.stringify({
